@@ -866,91 +866,123 @@
             
             // Check if searching by name - if so, use simplified grouping
             if (name) {
-                // Group by location, then status when searching by name
+                // Group by location, then status, then athlete when searching by name
                 const locationGroups = {};
                 
                 data.forEach(record => {
                     const location = record.Location ? record.Location.split(',').pop().trim() : 'Unknown Location';
                     const status = record.Status || 'Unknown Status';
+                    const athleteKey = `${record.Name || 'Unknown'}_${location}`;
                     
                     if (!locationGroups[location]) {
                         locationGroups[location] = {};
                     }
                     if (!locationGroups[location][status]) {
-                        locationGroups[location][status] = [];
+                        locationGroups[location][status] = {};
                     }
-                    locationGroups[location][status].push(record);
+                    if (!locationGroups[location][status][athleteKey]) {
+                        locationGroups[location][status][athleteKey] = [];
+                    }
+                    locationGroups[location][status][athleteKey].push(record);
                 });
                 
                 const locationHTML = Object.entries(locationGroups)
                     .sort(([a], [b]) => a.localeCompare(b))
                     .map(([location, statusGroups]) => {
-                        const locationRecordCount = Object.values(statusGroups).flat().length;
+                        const locationRecordCount = Object.values(statusGroups)
+                            .flatMap(athletes => Object.values(athletes))
+                            .flat().length;
                         
                         const statusHTML = Object.entries(statusGroups)
                             .sort(([a], [b]) => a.localeCompare(b))
-                            .map(([status, records]) => {
-                                // Sort records by division, then event, then date
-                                records.sort((a, b) => {
-                                    const divisionA = a.Division || 'ZZZ';
-                                    const divisionB = b.Division || 'ZZZ';
-                                    if (divisionA !== divisionB) {
-                                        return divisionA.localeCompare(divisionB);
-                                    }
-                                    
-                                    const eventA = a.Event || 'ZZZ';
-                                    const eventB = b.Event || 'ZZZ';
-                                    if (eventA !== eventB) {
-                                        return eventA.localeCompare(eventB);
-                                    }
-                                    
-                                    const dateA = a.Date ? new Date(a.Date) : new Date(0);
-                                    const dateB = b.Date ? new Date(b.Date) : new Date(0);
-                                    return dateB - dateA;
-                                });
+                            .map(([status, athletes]) => {
+                                const statusRecordCount = Object.values(athletes).flat().length;
                                 
-                                const recordItems = records.map(record => {
-                                    const statusClass = record.Status && record.Status.toLowerCase().includes('current') ? 'status-current' : 'status-superseded';
-                                    const statusText = record.Status || 'N/A';
-                                    
-                                    return `
-                                        <div class="record-item">
-                                            <div class="record-stats">
-                                                <div class="record-stat-row">
-                                                    <span class="status-badge ${statusClass}">${statusText}</span>
+                                const athleteHTML = Object.entries(athletes)
+                                    .sort(([a], [b]) => {
+                                        const nameA = a.split('_')[0];
+                                        const nameB = b.split('_')[0];
+                                        return nameA.localeCompare(nameB);
+                                    })
+                                    .map(([athleteKey, records]) => {
+                                        const athleteName = records[0].Name || 'Unknown';
+                                        const athleteLocation = records[0].Location || 'Unknown';
+                                        
+                                        // Sort records by division, then event, then date
+                                        records.sort((a, b) => {
+                                            const divisionA = a.Division || 'ZZZ';
+                                            const divisionB = b.Division || 'ZZZ';
+                                            if (divisionA !== divisionB) {
+                                                return divisionA.localeCompare(divisionB);
+                                            }
+                                            
+                                            const eventA = a.Event || 'ZZZ';
+                                            const eventB = b.Event || 'ZZZ';
+                                            if (eventA !== eventB) {
+                                                return eventA.localeCompare(eventB);
+                                            }
+                                            
+                                            const dateA = a.Date ? new Date(a.Date) : new Date(0);
+                                            const dateB = b.Date ? new Date(b.Date) : new Date(0);
+                                            return dateB - dateA;
+                                        });
+                                        
+                                        const recordItems = records.map(record => {
+                                            const statusClass = record.Status && record.Status.toLowerCase().includes('current') ? 'status-current' : 'status-superseded';
+                                            const statusText = record.Status || 'N/A';
+                                            
+                                            return `
+                                                <div class="record-item">
+                                                    <div class="record-stats">
+                                                        <div class="record-stat-row">
+                                                            <span class="status-badge ${statusClass}">${statusText}</span>
+                                                        </div>
+                                                        <div class="record-stat-row">
+                                                            <span class="record-stat-value lift">${record.Lift || 'N/A'}</span>
+                                                        </div>
+                                                        <div class="record-stat-row">
+                                                            <span class="record-stat-value">${record.Division || 'N/A'}</span>
+                                                        </div>
+                                                        <div class="record-stat-row">
+                                                            <span class="record-stat-value">${record['Weight Class'] || 'N/A'}</span>
+                                                        </div>
+                                                        <div class="record-stat-row">
+                                                            <span class="record-stat-value weight">
+                                                                ${record.Kilos ? record.Kilos + ' kg' : 'N/A'}
+                                                                ${record.Pounds ? '<span class="weight-lbs">(' + record.Pounds + ' lbs)</span>' : ''}
+                                                            </span>
+                                                        </div>
+                                                        <div class="record-stat-row">
+                                                            <span class="record-stat-value">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="record-stat-row">
-                                                    <span class="record-stat-value lift">${record.Lift || 'N/A'}</span>
+                                            `;
+                                        }).join('');
+                                        
+                                        return `
+                                            <div class="athlete-group">
+                                                <div class="athlete-header">
+                                                    <div class="athlete-info">
+                                                        <h3 class="athlete-name">${athleteName}</h3>
+                                                        <p class="athlete-location">${athleteLocation}</p>
+                                                    </div>
+                                                    <div class="record-count">${records.length} record${records.length !== 1 ? 's' : ''}</div>
                                                 </div>
-                                                <div class="record-stat-row">
-                                                    <span class="record-stat-value">${record.Division || 'N/A'}</span>
-                                                </div>
-                                                <div class="record-stat-row">
-                                                    <span class="record-stat-value">${record['Weight Class'] || 'N/A'}</span>
-                                                </div>
-                                                <div class="record-stat-row">
-                                                    <span class="record-stat-value weight">
-                                                        ${record.Kilos ? record.Kilos + ' kg' : 'N/A'}
-                                                        ${record.Pounds ? '<span class="weight-lbs">(' + record.Pounds + ' lbs)</span>' : ''}
-                                                    </span>
-                                                </div>
-                                                <div class="record-stat-row">
-                                                    <span class="record-stat-value">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
+                                                <div class="athlete-records">
+                                                    ${recordItems}
                                                 </div>
                                             </div>
-                                        </div>
-                                    `;
-                                }).join('');
+                                        `;
+                                    }).join('');
                                 
                                 return `
                                     <div class="status-group">
                                         <div class="status-header">
                                             <h3>${status}</h3>
-                                            <div class="status-subtitle">${records.length} record${records.length !== 1 ? 's' : ''}</div>
+                                            <div class="status-subtitle">${statusRecordCount} record${statusRecordCount !== 1 ? 's' : ''}</div>
                                         </div>
-                                        <div class="athlete-records" style="padding: 20px 30px 30px;">
-                                            ${recordItems}
-                                        </div>
+                                        ${athleteHTML}
                                     </div>
                                 `;
                             }).join('');
