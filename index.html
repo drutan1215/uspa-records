@@ -22,7 +22,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
             border-radius: 20px;
@@ -449,99 +449,43 @@
                 inset 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
         
-        .record-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .record-lift-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .lift-name {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .event-badge {
-            background: linear-gradient(135deg, #4b5563, #374151);
-            color: #d1d5db;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .record-weight-class {
-            background: linear-gradient(135deg, #dc2626, #991b1b);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .record-item-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .weight-display {
+        .record-stats {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            gap: 8px;
         }
         
-        .weight-kg {
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: #dc2626;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .weight-lbs {
-            font-size: 12px;
-            color: #9ca3af;
-            font-weight: 500;
-            margin-top: 2px;
-        }
-        
-        .record-meta {
+        .record-stat-row {
             display: flex;
+            justify-content: flex-start;
             align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
+            padding: 4px 0;
         }
         
-        .record-division {
-            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
-            color: #f1f5f9;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 11px;
+        .record-stat-value {
+            font-size: 14px;
+            color: #ffffff;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid #333;
         }
         
-        .record-date {
-            color: #9ca3af;
+        .record-stat-value.lift {
+            font-size: 18px;
+            color: #dc2626;
+            font-weight: 800;
+        }
+        
+        .record-stat-value.weight {
+            font-size: 16px;
+            color: #dc2626;
+            font-weight: 700;
+        }
+        
+        .record-stat-value .weight-lbs {
             font-size: 12px;
+            color: #9ca3af;
             font-weight: 500;
+            display: block;
+            margin-top: 2px;
         }
         
         .status-badge {
@@ -668,6 +612,26 @@
             
             .athlete-info h3 {
                 font-size: 1.4rem;
+            }
+            
+            .record-stats {
+                gap: 6px;
+            }
+            
+            .record-stat-row {
+                padding: 2px 0;
+            }
+            
+            .record-stat-value {
+                font-size: 12px;
+            }
+            
+            .record-stat-value.lift {
+                font-size: 16px;
+            }
+            
+            .record-stat-value.weight {
+                font-size: 14px;
             }
         }
     </style>
@@ -951,22 +915,27 @@
                                     
                                     return `
                                         <div class="record-item">
-                                            <div class="record-item-header">
-                                                <div class="record-lift-info">
-                                                    <span class="lift-name">${record.Lift || 'N/A'}</span>
-                                                    <span class="event-badge">${record.Event || 'N/A'}</span>
-                                                </div>
-                                                <div class="record-weight-class">${record['Weight Class'] || 'N/A'}</div>
-                                            </div>
-                                            <div class="record-item-details">
-                                                <div class="weight-display">
-                                                    <span class="weight-kg">${record.Kilos ? record.Kilos + ' kg' : 'N/A'}</span>
-                                                    <span class="weight-lbs">${record.Pounds ? '(' + record.Pounds + ' lbs)' : ''}</span>
-                                                </div>
-                                                <div class="record-meta">
-                                                    <span class="record-division">${record.Division || 'N/A'}</span>
-                                                    <span class="record-date">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
+                                            <div class="record-stats">
+                                                <div class="record-stat-row">
                                                     <span class="status-badge ${statusClass}">${statusText}</span>
+                                                </div>
+                                                <div class="record-stat-row">
+                                                    <span class="record-stat-value lift">${record.Lift || 'N/A'}</span>
+                                                </div>
+                                                <div class="record-stat-row">
+                                                    <span class="record-stat-value">${record.Division || 'N/A'}</span>
+                                                </div>
+                                                <div class="record-stat-row">
+                                                    <span class="record-stat-value">${record['Weight Class'] || 'N/A'}</span>
+                                                </div>
+                                                <div class="record-stat-row">
+                                                    <span class="record-stat-value weight">
+                                                        ${record.Kilos ? record.Kilos + ' kg' : 'N/A'}
+                                                        ${record.Pounds ? '<span class="weight-lbs">(' + record.Pounds + ' lbs)</span>' : ''}
+                                                    </span>
+                                                </div>
+                                                <div class="record-stat-row">
+                                                    <span class="record-stat-value">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1083,22 +1052,27 @@
                                                         
                                                         return `
                                                             <div class="record-item">
-                                                                <div class="record-item-header">
-                                                                    <div class="record-lift-info">
-                                                                        <span class="lift-name">${record.Lift || 'N/A'}</span>
-                                                                        <span class="event-badge">${record.Event || 'N/A'}</span>
-                                                                    </div>
-                                                                    <div class="record-weight-class">${record['Weight Class'] || 'N/A'}</div>
-                                                                </div>
-                                                                <div class="record-item-details">
-                                                                    <div class="weight-display">
-                                                                        <span class="weight-kg">${record.Kilos ? record.Kilos + ' kg' : 'N/A'}</span>
-                                                                        <span class="weight-lbs">${record.Pounds ? '(' + record.Pounds + ' lbs)' : ''}</span>
-                                                                    </div>
-                                                                    <div class="record-meta">
-                                                                        <span class="record-division">${record.Division || 'N/A'}</span>
-                                                                        <span class="record-date">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
+                                                                <div class="record-stats">
+                                                                    <div class="record-stat-row">
                                                                         <span class="status-badge ${statusClass}">${statusText}</span>
+                                                                    </div>
+                                                                    <div class="record-stat-row">
+                                                                        <span class="record-stat-value lift">${record.Lift || 'N/A'}</span>
+                                                                    </div>
+                                                                    <div class="record-stat-row">
+                                                                        <span class="record-stat-value">${record.Division || 'N/A'}</span>
+                                                                    </div>
+                                                                    <div class="record-stat-row">
+                                                                        <span class="record-stat-value">${record['Weight Class'] || 'N/A'}</span>
+                                                                    </div>
+                                                                    <div class="record-stat-row">
+                                                                        <span class="record-stat-value weight">
+                                                                            ${record.Kilos ? record.Kilos + ' kg' : 'N/A'}
+                                                                            ${record.Pounds ? '<span class="weight-lbs">(' + record.Pounds + ' lbs)</span>' : ''}
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="record-stat-row">
+                                                                        <span class="record-stat-value">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
