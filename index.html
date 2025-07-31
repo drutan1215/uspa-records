@@ -15,49 +15,75 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #000000 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #ffffff;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow: hidden;
+            border: 1px solid #333;
         }
         
         .header {
-            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            background: linear-gradient(135deg, #dc2626, #991b1b, #7f1d1d);
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
         }
         
         .header h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            position: relative;
+            background: linear-gradient(45deg, #ffffff, #f1f5f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
+            opacity: 0.95;
+            position: relative;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
         
         .search-section {
-            padding: 40px;
-            background: white;
+            padding: 50px;
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
         }
         
         .search-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
         }
         
         .search-field {
@@ -66,104 +92,149 @@
         }
         
         .search-field label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #333;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #f1f5f9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
         }
         
         .search-field input, .search-field select {
-            padding: 12px 16px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
+            padding: 16px 20px;
+            border: 2px solid #404040;
+            border-radius: 12px;
             font-size: 16px;
             transition: all 0.3s ease;
-            background: white;
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            color: #ffffff;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .search-field input::placeholder {
+            color: #9ca3af;
         }
         
         .search-field input:focus, .search-field select:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #dc2626;
+            box-shadow: 
+                0 0 0 3px rgba(220, 38, 38, 0.2),
+                inset 2px 2px 5px rgba(0, 0, 0, 0.5);
             transform: translateY(-2px);
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+        }
+        
+        .search-field select option {
+            background: #1a1a1a;
+            color: #ffffff;
         }
         
         .search-buttons {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         
         .btn {
-            padding: 15px 30px;
+            padding: 18px 40px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #dc2626, #991b1b);
             color: white;
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 
+                0 10px 25px rgba(220, 38, 38, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid #7f1d1d;
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 
+                0 15px 35px rgba(220, 38, 38, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         
         .btn-secondary {
-            background: #f8f9fa;
-            color: #666;
-            border: 2px solid #e1e5e9;
+            background: linear-gradient(145deg, #374151, #4b5563);
+            color: #f9fafb;
+            border: 1px solid #6b7280;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .btn-secondary:hover {
-            background: #e9ecef;
+            background: linear-gradient(145deg, #4b5563, #374151);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
         
         .results-section {
-            padding: 0 40px 40px;
+            padding: 0 50px 50px;
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
         }
         
         .results-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f1f3f4;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid #404040;
         }
         
         .results-count {
-            font-size: 18px;
-            color: #666;
-            font-weight: 600;
+            font-size: 20px;
+            color: #f1f5f9;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .loading {
             text-align: center;
-            padding: 40px;
-            color: #666;
-            font-size: 18px;
+            padding: 60px;
+            color: #9ca3af;
+            font-size: 20px;
+            font-weight: 600;
         }
         
         .loading::after {
             content: '';
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #404040;
+            border-top: 3px solid #dc2626;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-left: 10px;
+            margin-left: 15px;
         }
         
         @keyframes spin {
@@ -171,135 +242,432 @@
             100% { transform: rotate(360deg); }
         }
         
-        .records-grid {
-            display: grid;
-            gap: 20px;
+        .location-group {
+            background: linear-gradient(145deg, #333, #2a2a2a);
+            border: 1px solid #555;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
         
-        .record-card {
-            background: white;
-            border: 2px solid #f1f3f4;
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
+        .location-header {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 20px 30px;
+            border-bottom: 1px solid #555;
+        }
+        
+        .location-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .location-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .status-group {
+            background: linear-gradient(145deg, #2d2d2d, #2a2a2a);
+            border-top: 1px solid #404040;
+            margin: 0;
+        }
+        
+        .status-group:first-child {
+            border-top: none;
+        }
+        
+        .status-header {
+            background: linear-gradient(135deg, #4b5563, #374151);
+            color: #f1f5f9;
+            padding: 15px 30px;
+            border-bottom: 1px solid #404040;
+        }
+        
+        .status-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .status-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .division-group {
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+            border-top: 1px solid #333;
+            margin: 0;
+        }
+        
+        .division-group:first-child {
+            border-top: none;
+        }
+        
+        .division-header {
+            background: linear-gradient(145deg, #374151, #4b5563);
+            color: #e5e7eb;
+            padding: 12px 30px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .division-header h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 3px 0;
+        }
+        
+        .division-subtitle {
+            font-size: 11px;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+        
+        .event-group {
+            background: linear-gradient(145deg, #1a1a1a, #1e1e1e);
+            border-top: 1px solid #2a2a2a;
+            margin: 0;
+        }
+        
+        .event-group:first-child {
+            border-top: none;
+        }
+        
+        .event-header {
+            background: linear-gradient(145deg, #2a2a2a, #333);
+            color: #d1d5db;
+            padding: 10px 30px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .event-header h5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0 0 2px 0;
+        }
+        
+        .event-subtitle {
+            font-size: 10px;
+            opacity: 0.6;
+            font-weight: 500;
+        }
+        
+        .athlete-group {
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+            border: none;
+            border-top: 1px solid #404040;
+            border-radius: 0;
+            padding: 0;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: none;
+            margin-bottom: 0;
         }
         
-        .record-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+        .athlete-group:first-child {
+            border-top: none;
         }
         
-        .record-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            border-color: #667eea;
+        .athlete-group:hover {
+            transform: translateX(10px);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border-color: #dc2626;
         }
         
-        .record-header {
+        .athlete-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
+            align-items: center;
+            padding: 25px 30px;
+            border-bottom: 1px solid #404040;
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
         }
         
-        .record-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 5px;
+        .athlete-info h3 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0 0 5px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
         
-        .record-location {
-            color: #666;
+        .athlete-info p {
+            color: #9ca3af;
             font-size: 14px;
+            font-weight: 500;
+            margin: 0;
         }
         
-        .record-weight {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        .record-count {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
         }
         
-        .record-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        .athlete-records {
+            padding: 20px 30px 30px;
+        }
+        
+        .record-item {
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .record-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .record-item:hover {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border-color: #555;
+            transform: translateX(10px);
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.4),
+                inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .record-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .record-lift-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .lift-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .event-badge {
+            background: linear-gradient(135deg, #4b5563, #374151);
+            color: #d1d5db;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .record-weight-class {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .record-item-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 15px;
         }
         
-        .detail-item {
-            text-align: center;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+        .weight-display {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
         
-        .detail-item:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
+        .weight-kg {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #dc2626;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
         
-        .detail-label {
+        .weight-lbs {
             font-size: 12px;
-            color: #666;
+            color: #9ca3af;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        
+        .record-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .record-division {
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            color: #f1f5f9;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 5px;
-            font-weight: 600;
+            border: 1px solid #333;
         }
         
-        .detail-value {
-            font-size: 16px;
+        .record-date {
+            color: #9ca3af;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 700;
-            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .status-current {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+        }
+        
+        .status-superseded {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: #d1d5db;
         }
         
         .no-results {
             text-align: center;
-            padding: 60px 20px;
-            color: #666;
+            padding: 80px 20px;
+            color: #9ca3af;
         }
         
         .no-results h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #333;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+        
+        .no-results p {
+            font-size: 16px;
+            opacity: 0.8;
         }
         
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
             .search-section, .results-section {
-                padding: 20px;
+                padding: 30px 20px;
             }
             
             .search-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .search-buttons {
                 flex-direction: column;
+                align-items: center;
             }
             
-            .record-header {
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .location-header, .status-header, .division-header, .event-header {
+                padding: 15px 20px;
+            }
+            
+            .location-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .status-header h3 {
+                font-size: 1.3rem;
+            }
+            
+            .division-header h4 {
+                font-size: 1.1rem;
+            }
+            
+            .event-header h5 {
+                font-size: 1rem;
+            }
+            
+            .athlete-header {
+                padding: 20px;
                 flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .athlete-records {
+                padding: 15px 20px 20px;
+            }
+            
+            .record-item {
+                padding: 15px;
+            }
+            
+            .record-item-header {
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 10px;
             }
             
-            .record-details {
-                grid-template-columns: repeat(2, 1fr);
+            .record-lift-info {
+                flex-wrap: wrap;
+            }
+            
+            .record-item-details {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .record-meta {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            
+            .lift-name {
+                font-size: 1.1rem;
+            }
+            
+            .athlete-info h3 {
+                font-size: 1.4rem;
             }
         }
     </style>
@@ -307,8 +675,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏋️ USPA Records</h1>
-            <p>Search through thousands of powerlifting records</p>
+            <h1>USPA RECORDS</h1>
+            <p>Searchable Database for All USPA Records</p>
         </div>
         
         <div class="search-section">
@@ -505,51 +873,286 @@
                 return;
             }
             
-            // Show results count
-            resultsCount.textContent = `Found ${data.length} record${data.length !== 1 ? 's' : ''}`;
+            // Count total records
+            const totalRecords = data.length;
+            const name = document.getElementById('name').value.trim();
+            
+            if (name) {
+                resultsCount.textContent = `Found ${totalRecords} record${totalRecords !== 1 ? 's' : ''} for "${name}"`;
+            } else {
+                const uniqueAthletes = [...new Set(data.map(record => 
+                    `${record.Name || 'Unknown'}_${record.Location ? record.Location.split(',').pop().trim() : 'Unknown'}`
+                ))].length;
+                resultsCount.textContent = `Found ${totalRecords} record${totalRecords !== 1 ? 's' : ''} from ${uniqueAthletes} athlete${uniqueAthletes !== 1 ? 's' : ''}`;
+            }
             resultsHeader.style.display = 'flex';
             
-            // Generate HTML for each record
-            const recordsHTML = data.map(record => `
-                <div class="record-card">
-                    <div class="record-header">
-                        <div>
-                            <div class="record-name">${record.Name || 'Unknown'}</div>
-                            <div class="record-location">${record.Location || 'Unknown Location'}</div>
-                        </div>
-                        <div class="record-weight">${record['Weight Class'] || 'N/A'}</div>
-                    </div>
+            // Check if searching by name - if so, use simplified grouping
+            if (name) {
+                // Group by location, then status when searching by name
+                const locationGroups = {};
+                
+                data.forEach(record => {
+                    const location = record.Location ? record.Location.split(',').pop().trim() : 'Unknown Location';
+                    const status = record.Status || 'Unknown Status';
                     
-                    <div class="record-details">
-                        <div class="detail-item">
-                            <div class="detail-label">Division</div>
-                            <div class="detail-value">${record.Division || 'N/A'}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Event</div>
-                            <div class="detail-value">${record.Event || 'N/A'}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Lift</div>
-                            <div class="detail-value">${record.Lift || 'N/A'}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Kilos</div>
-                            <div class="detail-value">${record.Kilos ? record.Kilos + ' kg' : 'N/A'}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Pounds</div>
-                            <div class="detail-value">${record.Pounds ? record.Pounds + ' lbs' : 'N/A'}</div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-label">Date</div>
-                            <div class="detail-value">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+                    if (!locationGroups[location]) {
+                        locationGroups[location] = {};
+                    }
+                    if (!locationGroups[location][status]) {
+                        locationGroups[location][status] = [];
+                    }
+                    locationGroups[location][status].push(record);
+                });
+                
+                const locationHTML = Object.entries(locationGroups)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([location, statusGroups]) => {
+                        const locationRecordCount = Object.values(statusGroups).flat().length;
+                        
+                        const statusHTML = Object.entries(statusGroups)
+                            .sort(([a], [b]) => a.localeCompare(b))
+                            .map(([status, records]) => {
+                                // Sort records by division, then event, then date
+                                records.sort((a, b) => {
+                                    const divisionA = a.Division || 'ZZZ';
+                                    const divisionB = b.Division || 'ZZZ';
+                                    if (divisionA !== divisionB) {
+                                        return divisionA.localeCompare(divisionB);
+                                    }
+                                    
+                                    const eventA = a.Event || 'ZZZ';
+                                    const eventB = b.Event || 'ZZZ';
+                                    if (eventA !== eventB) {
+                                        return eventA.localeCompare(eventB);
+                                    }
+                                    
+                                    const dateA = a.Date ? new Date(a.Date) : new Date(0);
+                                    const dateB = b.Date ? new Date(b.Date) : new Date(0);
+                                    return dateB - dateA;
+                                });
+                                
+                                const recordItems = records.map(record => {
+                                    const statusClass = record.Status && record.Status.toLowerCase().includes('current') ? 'status-current' : 'status-superseded';
+                                    const statusText = record.Status || 'N/A';
+                                    
+                                    return `
+                                        <div class="record-item">
+                                            <div class="record-item-header">
+                                                <div class="record-lift-info">
+                                                    <span class="lift-name">${record.Lift || 'N/A'}</span>
+                                                    <span class="event-badge">${record.Event || 'N/A'}</span>
+                                                </div>
+                                                <div class="record-weight-class">${record['Weight Class'] || 'N/A'}</div>
+                                            </div>
+                                            <div class="record-item-details">
+                                                <div class="weight-display">
+                                                    <span class="weight-kg">${record.Kilos ? record.Kilos + ' kg' : 'N/A'}</span>
+                                                    <span class="weight-lbs">${record.Pounds ? '(' + record.Pounds + ' lbs)' : ''}</span>
+                                                </div>
+                                                <div class="record-meta">
+                                                    <span class="record-division">${record.Division || 'N/A'}</span>
+                                                    <span class="record-date">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
+                                                    <span class="status-badge ${statusClass}">${statusText}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('');
+                                
+                                return `
+                                    <div class="status-group">
+                                        <div class="status-header">
+                                            <h3>${status}</h3>
+                                            <div class="status-subtitle">${records.length} record${records.length !== 1 ? 's' : ''}</div>
+                                        </div>
+                                        <div class="athlete-records" style="padding: 20px 30px 30px;">
+                                            ${recordItems}
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('');
+                        
+                        return `
+                            <div class="location-group">
+                                <div class="location-header">
+                                    <h2>${location}</h2>
+                                    <div class="location-subtitle">${locationRecordCount} record${locationRecordCount !== 1 ? 's' : ''}</div>
+                                </div>
+                                ${statusHTML}
+                            </div>
+                        `;
+                    }).join('');
+                
+                results.innerHTML = locationHTML;
+                return;
+            }
             
-            results.innerHTML = recordsHTML;
+            // Create hierarchical grouping: Location -> Status -> Division -> Event -> Athletes
+            const locationGroups = {};
+            
+            data.forEach(record => {
+                const location = record.Location ? record.Location.split(',').pop().trim() : 'Unknown Location';
+                const status = record.Status || 'Unknown Status';
+                const division = record.Division || 'Unknown Division';
+                const event = record.Event || 'Unknown Event';
+                const athleteKey = `${record.Name || 'Unknown'}_${location}`;
+                
+                if (!locationGroups[location]) {
+                    locationGroups[location] = {};
+                }
+                if (!locationGroups[location][status]) {
+                    locationGroups[location][status] = {};
+                }
+                if (!locationGroups[location][status][division]) {
+                    locationGroups[location][status][division] = {};
+                }
+                if (!locationGroups[location][status][division][event]) {
+                    locationGroups[location][status][division][event] = {};
+                }
+                if (!locationGroups[location][status][division][event][athleteKey]) {
+                    locationGroups[location][status][division][event][athleteKey] = [];
+                }
+                
+                locationGroups[location][status][division][event][athleteKey].push(record);
+            });
+            
+            // Generate HTML
+            const locationHTML = Object.entries(locationGroups)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([location, statusGroups]) => {
+                    const locationRecordCount = Object.values(statusGroups)
+                        .flatMap(divisionGroups => Object.values(divisionGroups))
+                        .flatMap(eventGroups => Object.values(eventGroups))
+                        .flatMap(athletes => Object.values(athletes))
+                        .flat().length;
+                    
+                    const statusHTML = Object.entries(statusGroups)
+                        .sort(([a], [b]) => a.localeCompare(b))
+                        .map(([status, divisionGroups]) => {
+                            const statusRecordCount = Object.values(divisionGroups)
+                                .flatMap(eventGroups => Object.values(eventGroups))
+                                .flatMap(athletes => Object.values(athletes))
+                                .flat().length;
+                            
+                            const divisionHTML = Object.entries(divisionGroups)
+                                .sort(([a], [b]) => a.localeCompare(b))
+                                .map(([division, eventGroups]) => {
+                                    const divisionRecordCount = Object.values(eventGroups)
+                                        .flatMap(athletes => Object.values(athletes))
+                                        .flat().length;
+                                    
+                                    const eventHTML = Object.entries(eventGroups)
+                                        .sort(([a], [b]) => a.localeCompare(b))
+                                        .map(([event, athletes]) => {
+                                            const eventRecordCount = Object.values(athletes).flat().length;
+                                            
+                                            const athleteHTML = Object.entries(athletes)
+                                                .sort(([a], [b]) => {
+                                                    const nameA = a.split('_')[0];
+                                                    const nameB = b.split('_')[0];
+                                                    return nameA.localeCompare(nameB);
+                                                })
+                                                .map(([athleteKey, records]) => {
+                                                    const athleteName = records[0].Name || 'Unknown';
+                                                    const athleteLocation = records[0].Location || 'Unknown';
+                                                    
+                                                    // Sort records by date (newest first)
+                                                    records.sort((a, b) => {
+                                                        const dateA = a.Date ? new Date(a.Date) : new Date(0);
+                                                        const dateB = b.Date ? new Date(b.Date) : new Date(0);
+                                                        return dateB - dateA;
+                                                    });
+                                                    
+                                                    const recordItems = records.map(record => {
+                                                        const statusClass = record.Status && record.Status.toLowerCase().includes('current') ? 'status-current' : 'status-superseded';
+                                                        const statusText = record.Status || 'N/A';
+                                                        
+                                                        return `
+                                                            <div class="record-item">
+                                                                <div class="record-item-header">
+                                                                    <div class="record-lift-info">
+                                                                        <span class="lift-name">${record.Lift || 'N/A'}</span>
+                                                                        <span class="event-badge">${record.Event || 'N/A'}</span>
+                                                                    </div>
+                                                                    <div class="record-weight-class">${record['Weight Class'] || 'N/A'}</div>
+                                                                </div>
+                                                                <div class="record-item-details">
+                                                                    <div class="weight-display">
+                                                                        <span class="weight-kg">${record.Kilos ? record.Kilos + ' kg' : 'N/A'}</span>
+                                                                        <span class="weight-lbs">${record.Pounds ? '(' + record.Pounds + ' lbs)' : ''}</span>
+                                                                    </div>
+                                                                    <div class="record-meta">
+                                                                        <span class="record-division">${record.Division || 'N/A'}</span>
+                                                                        <span class="record-date">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
+                                                                        <span class="status-badge ${statusClass}">${statusText}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        `;
+                                                    }).join('');
+                                                    
+                                                    return `
+                                                        <div class="athlete-group">
+                                                            <div class="athlete-header">
+                                                                <div class="athlete-info">
+                                                                    <h3 class="athlete-name">${athleteName}</h3>
+                                                                    <p class="athlete-location">${athleteLocation}</p>
+                                                                </div>
+                                                                <div class="record-count">${records.length} record${records.length !== 1 ? 's' : ''}</div>
+                                                            </div>
+                                                            <div class="athlete-records">
+                                                                ${recordItems}
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                                }).join('');
+                                            
+                                            return `
+                                                <div class="event-group">
+                                                    <div class="event-header">
+                                                        <h5>${event}</h5>
+                                                        <div class="event-subtitle">${eventRecordCount} record${eventRecordCount !== 1 ? 's' : ''}</div>
+                                                    </div>
+                                                    ${athleteHTML}
+                                                </div>
+                                            `;
+                                        }).join('');
+                                    
+                                    return `
+                                        <div class="division-group">
+                                            <div class="division-header">
+                                                <h4>${division}</h4>
+                                                <div class="division-subtitle">${divisionRecordCount} record${divisionRecordCount !== 1 ? 's' : ''}</div>
+                                            </div>
+                                            ${eventHTML}
+                                        </div>
+                                    `;
+                                }).join('');
+                            
+                            return `
+                                <div class="status-group">
+                                    <div class="status-header">
+                                        <h3>${status}</h3>
+                                        <div class="status-subtitle">${statusRecordCount} record${statusRecordCount !== 1 ? 's' : ''}</div>
+                                    </div>
+                                    ${divisionHTML}
+                                </div>
+                            `;
+                        }).join('');
+                    
+                    return `
+                        <div class="location-group">
+                            <div class="location-header">
+                                <h2>${location}</h2>
+                                <div class="location-subtitle">${locationRecordCount} record${locationRecordCount !== 1 ? 's' : ''}</div>
+                            </div>
+                            ${statusHTML}
+                        </div>
+                    `;
+                }).join('');
+            
+            results.innerHTML = locationHTML;
         }
         
         function clearSearch() {
