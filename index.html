@@ -850,6 +850,19 @@
                 // Show results
                 displayResults(data);
                 
+                // Scroll to first result if results exist
+                if (data.length > 0) {
+                    setTimeout(() => {
+                        const resultsSection = document.getElementById('resultsHeader');
+                        if (resultsSection) {
+                            resultsSection.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }, 100);
+                }
+                
             } catch (error) {
                 loading.style.display = 'none';
                 console.error('Search error:', error);
