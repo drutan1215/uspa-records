@@ -1,23 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <a href="https://amzn.to/4fiKdaU" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: inline-block; text-align: center; width: 250px;">
-  <img src="https://m.media-amazon.com/images/I/71ewN1ivjCL._AC_SX466_.jpg" alt="WOLF TACTICAL Weight Lifting Belt" style="width: 100%; border-radius: 8px;">
-  <div style="margin-top: 8px; font-weight: bold; font-size: 16px;">WOLF TACTICAL Weight Lifting Belt</div>
-  <div style="color: #B12704; font-size: 15px; margin-top: 4px;">$41.99</div>
-</a>
-
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1221042435234029"
      crossorigin="anonymous"></script>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MNKCP2SQT4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-MNKCP2SQT4');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNKCP2SQT4"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USPA Records Search</title>
@@ -44,6 +31,8 @@
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow: hidden;
             border: 1px solid #333;
+            margin-left: 240px; /* Add this line */
+
         }
         
         .header {
@@ -412,7 +401,50 @@
             color: #f1f5f9;
             font-weight: 700;
         }
-        
+                    .ad-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(30, 30, 30, 0.95);
+    border-radius: 12px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid #333;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.ad-container a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    text-align: center;
+    width: 180px;
+}
+
+.ad-container img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.ad-container:hover img {
+    transform: scale(1.05);
+}
+
+.ad-container .ad-title {
+    margin-top: 8px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.ad-container .ad-price {
+    color: #B12704;
+    font-size: 14px;
+    margin-top: 4px;
+    font-weight: bold;
+}
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.5rem;
@@ -442,10 +474,21 @@
                 width: 100%;
                 max-width: 300px;
             }
+
         }
     </style>
 </head>
 <body>
+    <div class="ad-container">
+        <a href="https://amzn.to/4fiKdaU" target="_blank" rel="noopener noreferrer">
+            <img src="https://m.media-amazon.com/images/I/71ewN1ivjCL._AC_SX466_.jpg" alt="WOLF TACTICAL Weight Lifting Belt">
+            <div class="ad-title">WOLF TACTICAL Weight Lifting Belt</div>
+            <div class="ad-price">$41.99</div>
+        </a>
+    </div>
+    <div style="color: #B12704; font-size: 15px; margin-top: 4px;">$41.99</div>
+</a>
+
     <div class="container">
         <div class="header">
             <h1>USPA RECORDS</h1>
@@ -627,6 +670,12 @@
     </div>
 
     <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-MNKCP2SQT4');
+
         const SUPABASE_URL = 'https://xiqvvbqrojjuwkndsrgf.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpcXZ2YnFyb2pqdXdrbmRzcmdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM5MDA1MjYsImV4cCI6MjA2OTQ3NjUyNn0.T1r1MrN3wb9fh0lXqdHVfhCj7L03G8p9ItxGmH71TjI';
         
