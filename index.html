@@ -97,6 +97,13 @@
             color: #9ca3af;
         }
         
+        .search-field input:focus, .search-field select:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2), inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
         .search-field select option {
             background: #1a1a1a;
             color: #ffffff;
@@ -110,13 +117,6 @@
             background-size: 16px;
             padding-right: 40px;
             appearance: none;
-        }
-        
-        .search-field input:focus, .search-field select:focus {
-            outline: none;
-            border-color: #dc2626;
-            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2), inset 2px 2px 5px rgba(0, 0, 0, 0.5);
-            transform: translateY(-2px);
         }
         
         .checkbox-group {
@@ -637,10 +637,9 @@
         const SUPABASE_URL = 'https://xiqvvbqrojjuwkndsrgf.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpcXZ2YnFyb2pqdXdrbmRzcmdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM5MDA1MjYsImV4cCI6MjA2OTQ3NjUyNn0.T1r1MrN3wb9fh0lXqdHVfhCj7L03G8p9ItxGmH71TjI';
         
+        // Only essential JavaScript - no dropdown manipulation
         document.addEventListener('DOMContentLoaded', function() {
-            loadDropdownOptions();
             setupStatusCheckboxes();
-            setupEventLiftFilter();
         });
         
         function setupStatusCheckboxes() {
@@ -665,160 +664,6 @@
                 if (this.checked) {
                     statusAll.checked = false;
                 }
-            });
-        }
-        
-        function setupEventLiftFilter() {
-            const eventSelect = document.getElementById('event');
-            const liftSelect = document.getElementById('lift');
-            
-            eventSelect.addEventListener('change', function() {
-                const selectedEvent = this.value.toLowerCase();
-                
-                if (!liftSelect.dataset.originalOptions) {
-                    liftSelect.dataset.originalOptions = liftSelect.innerHTML;
-                }
-                
-                liftSelect.innerHTML = liftSelect.dataset.originalOptions;
-                
-                if (selectedEvent === 'raw bench' || selectedEvent === 'single ply-bench' || 
-                    selectedEvent === 'b' || selectedEvent.includes('bench')) {
-                    const benchOption = Array.from(liftSelect.options).find(option => 
-                        option.value.toLowerCase() === 'bench'
-                    );
-                    
-                    if (benchOption) {
-                        liftSelect.innerHTML = '<option value="">All Lifts</option>';
-                        liftSelect.appendChild(benchOption.cloneNode(true));
-                        liftSelect.value = benchOption.value;
-                    }
-                } else if (selectedEvent === 'raw deadlift' || selectedEvent === 'single ply-deadlift' || 
-                          selectedEvent === 'd' || selectedEvent.includes('deadlift')) {
-                    const deadliftOption = Array.from(liftSelect.options).find(option => 
-                        option.value.toLowerCase() === 'deadlift'
-                    );
-                    
-                    if (deadliftOption) {
-                        liftSelect.innerHTML = '<option value="">All Lifts</option>';
-                        liftSelect.appendChild(deadliftOption.cloneNode(true));
-                        liftSelect.value = deadliftOption.value;
-                    }
-                } else if (selectedEvent === 's' || selectedEvent.includes('squat')) {
-                    const squatOption = Array.from(liftSelect.options).find(option => 
-                        option.value.toLowerCase() === 'squat'
-                    );
-                    
-                    if (squatOption) {
-                        liftSelect.innerHTML = '<option value="">All Lifts</option>';
-                        liftSelect.appendChild(squatOption.cloneNode(true));
-                        liftSelect.value = squatOption.value;
-                    }
-                }
-            });
-        }
-        
-        async function loadDropdownOptions() {
-            try {
-                console.log('Loading dropdown options...');
-                const divisions = await fetchUniqueValues('Division');
-                const weightClasses = await fetchUniqueValues('Weight Class');
-                const events = await fetchUniqueValues('Event');
-                const lifts = await fetchUniqueValues('Lift');
-                const locations = await fetchUniqueStates();
-                
-                console.log('Events found:', events);
-                console.log('Lifts found:', lifts);
-                console.log('Locations found:', locations);
-                
-                populateDropdown('division', divisions);
-                populateDropdown('weightClass', weightClasses);
-                populateDropdown('event', events);
-                populateDropdown('lift', lifts);
-                populateLocationDropdown(locations);
-            } catch (error) {
-                console.error('Error loading dropdown options:', error);
-                // Show error in console for debugging
-                console.log('Failed to load from database, check network/API');
-            }
-        }
-        
-        async function fetchUniqueStates() {
-            try {
-                const url = `${SUPABASE_URL}/rest/v1/USPA%20Records?select=Location&apikey=${SUPABASE_KEY}`;
-                console.log('Fetching locations from:', url);
-                
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                // Extract states from location strings (usually format: "City, State" or just "State")
-                const states = [...new Set(data.map(item => {
-                    if (!item.Location) return null;
-                    const locationParts = item.Location.split(',');
-                    // Get the last part (state) and trim whitespace
-                    return locationParts[locationParts.length - 1].trim();
-                }).filter(state => state && state !== ''))];
-                
-                console.log('Unique states:', states);
-                return states.sort();
-            } catch (error) {
-                console.error('Error fetching locations:', error);
-                return [];
-            }
-        }
-        
-        function populateLocationDropdown(states) {
-            const select = document.getElementById('location');
-            
-            // Add National Records as first option
-            const nationalOption = document.createElement('option');
-            nationalOption.value = 'National Records';
-            nationalOption.textContent = 'National Records';
-            select.appendChild(nationalOption);
-            
-            // Add all states
-            states.forEach(state => {
-                const optionElement = document.createElement('option');
-                optionElement.value = state;
-                optionElement.textContent = state;
-                select.appendChild(optionElement);
-            });
-        }
-        
-        async function fetchUniqueValues(column) {
-            try {
-                const encodedColumn = encodeURIComponent(column);
-                const url = `${SUPABASE_URL}/rest/v1/USPA%20Records?select=${encodedColumn}&apikey=${SUPABASE_KEY}`;
-                console.log(`Fetching ${column} from:`, url);
-                
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                console.log(`Raw ${column} data:`, data.slice(0, 5)); // Show first 5 for debugging
-                
-                const uniqueValues = [...new Set(data.map(item => item[column]).filter(val => val && val.trim() !== ''))];
-                console.log(`Unique ${column} values:`, uniqueValues);
-                
-                return uniqueValues.sort();
-            } catch (error) {
-                console.error(`Error fetching ${column}:`, error);
-                return [];
-            }
-        }
-        
-        function populateDropdown(elementId, options) {
-            const select = document.getElementById(elementId);
-            options.forEach(option => {
-                const optionElement = document.createElement('option');
-                optionElement.value = option;
-                optionElement.textContent = option;
-                select.appendChild(optionElement);
             });
         }
         
@@ -865,10 +710,8 @@
                 
                 const location = document.getElementById('location').value;
                 if (location === 'National Records') {
-                    // For National Records, search for records with location "National"
                     params.append('Location', 'eq.National');
                 } else if (location && location !== '') {
-                    // For state searches, replace spaces with hyphens for multi-word states
                     const queryLocation = location.replace(/\s+/g, '-');
                     params.append('Location', `ilike.*${queryLocation}*`);
                 }
