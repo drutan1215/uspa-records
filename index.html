@@ -26,9 +26,7 @@
             margin: 0 auto;
             background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
             border-radius: 20px;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.8),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             overflow: hidden;
             border: 1px solid #333;
         }
@@ -42,28 +40,12 @@
             overflow: hidden;
         }
         
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
-        }
-        
         .header h1 {
             font-size: 3.5rem;
             font-weight: 900;
             margin-bottom: 15px;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
             position: relative;
-            background: linear-gradient(45deg, #ffffff, #f1f5f9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
         .header p {
@@ -115,19 +97,56 @@
             color: #9ca3af;
         }
         
-        .search-field input:focus, .search-field select:focus {
-            outline: none;
-            border-color: #dc2626;
-            box-shadow: 
-                0 0 0 3px rgba(220, 38, 38, 0.2),
-                inset 2px 2px 5px rgba(0, 0, 0, 0.5);
-            transform: translateY(-2px);
-            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
-        }
-        
         .search-field select option {
             background: #1a1a1a;
             color: #ffffff;
+            padding: 8px;
+        }
+        
+        .search-field select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+            appearance: none;
+        }
+        
+        .search-field input:focus, .search-field select:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2), inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #dc2626;
+            cursor: pointer;
+        }
+        
+        .checkbox-option label {
+            color: #f1f5f9;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: none;
+            letter-spacing: normal;
+            margin: 0;
         }
         
         .search-buttons {
@@ -147,50 +166,25 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .btn:hover::before {
-            left: 100%;
         }
         
         .btn-primary {
             background: linear-gradient(135deg, #dc2626, #991b1b);
             color: white;
-            box-shadow: 
-                0 10px 25px rgba(220, 38, 38, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border: 1px solid #7f1d1d;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
         }
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 
-                0 15px 35px rgba(220, 38, 38, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.6);
         }
         
         .btn-secondary {
             background: linear-gradient(145deg, #374151, #4b5563);
             color: #f9fafb;
-            border: 1px solid #6b7280;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .btn-secondary:hover {
-            background: linear-gradient(145deg, #4b5563, #374151);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
@@ -225,46 +219,25 @@
             font-weight: 600;
         }
         
-        .loading::after {
-            content: '';
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid #404040;
-            border-top: 3px solid #dc2626;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 15px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
         .location-group {
             background: linear-gradient(145deg, #333, #2a2a2a);
             border: 1px solid #555;
             border-radius: 16px;
             margin-bottom: 30px;
             overflow: hidden;
-            box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
         
         .location-header {
             background: linear-gradient(135deg, #dc2626, #991b1b);
             color: white;
             padding: 20px 30px;
-            border-bottom: 1px solid #555;
         }
         
         .location-header h2 {
             font-size: 1.8rem;
             font-weight: 800;
             margin: 0 0 8px 0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
         
         .location-subtitle {
@@ -276,25 +249,18 @@
         .status-group {
             background: linear-gradient(145deg, #2d2d2d, #2a2a2a);
             border-top: 1px solid #404040;
-            margin: 0;
-        }
-        
-        .status-group:first-child {
-            border-top: none;
         }
         
         .status-header {
             background: linear-gradient(135deg, #4b5563, #374151);
             color: #f1f5f9;
             padding: 15px 30px;
-            border-bottom: 1px solid #404040;
         }
         
         .status-header h3 {
             font-size: 1.4rem;
             font-weight: 700;
             margin: 0 0 5px 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         .status-subtitle {
@@ -303,87 +269,10 @@
             font-weight: 500;
         }
         
-        .division-group {
-            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
-            border-top: 1px solid #333;
-            margin: 0;
-        }
-        
-        .division-group:first-child {
-            border-top: none;
-        }
-        
-        .division-header {
-            background: linear-gradient(145deg, #374151, #4b5563);
-            color: #e5e7eb;
-            padding: 12px 30px;
-            border-bottom: 1px solid #333;
-        }
-        
-        .division-header h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin: 0 0 3px 0;
-        }
-        
-        .division-subtitle {
-            font-size: 11px;
-            opacity: 0.7;
-            font-weight: 500;
-        }
-        
-        .event-group {
-            background: linear-gradient(145deg, #1a1a1a, #1e1e1e);
-            border-top: 1px solid #2a2a2a;
-            margin: 0;
-        }
-        
-        .event-group:first-child {
-            border-top: none;
-        }
-        
-        .event-header {
-            background: linear-gradient(145deg, #2a2a2a, #333);
-            color: #d1d5db;
-            padding: 10px 30px;
-            border-bottom: 1px solid #2a2a2a;
-        }
-        
-        .event-header h5 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 0 0 2px 0;
-        }
-        
-        .event-subtitle {
-            font-size: 10px;
-            opacity: 0.6;
-            font-weight: 500;
-        }
-        
         .athlete-group {
             background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
-            border: none;
             border-top: 1px solid #404040;
-            border-radius: 0;
-            padding: 0;
             transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: none;
-            margin-bottom: 0;
-        }
-        
-        .athlete-group:first-child {
-            border-top: none;
-        }
-        
-        .athlete-group:hover {
-            transform: translateX(10px);
-            box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            border-color: #dc2626;
         }
         
         .athlete-header {
@@ -392,7 +281,6 @@
             align-items: center;
             padding: 25px 30px;
             border-bottom: 1px solid #404040;
-            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
         }
         
         .athlete-info h3 {
@@ -400,7 +288,6 @@
             font-weight: 900;
             color: #ffffff;
             margin: 0 0 5px 0;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
         
         .athlete-info p {
@@ -419,7 +306,6 @@
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
         }
         
         .athlete-records {
@@ -433,20 +319,11 @@
             padding: 20px;
             margin-bottom: 15px;
             transition: all 0.3s ease;
-            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
-        }
-        
-        .record-item:last-child {
-            margin-bottom: 0;
         }
         
         .record-item:hover {
-            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
-            border-color: #555;
             transform: translateX(10px);
-            box-shadow: 
-                0 4px 15px rgba(0, 0, 0, 0.4),
-                inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+            border-color: #555;
         }
         
         .record-stats {
@@ -480,7 +357,7 @@
             font-weight: 700;
         }
         
-        .record-stat-value .weight-lbs {
+        .weight-lbs {
             font-size: 12px;
             color: #9ca3af;
             font-weight: 500;
@@ -521,11 +398,6 @@
             font-weight: 700;
         }
         
-        .no-results p {
-            font-size: 16px;
-            opacity: 0.8;
-        }
-        
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.5rem;
@@ -540,6 +412,12 @@
                 gap: 20px;
             }
             
+            .checkbox-group {
+                flex-direction: row;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+            
             .search-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -548,90 +426,6 @@
             .btn {
                 width: 100%;
                 max-width: 300px;
-            }
-            
-            .location-header, .status-header, .division-header, .event-header {
-                padding: 15px 20px;
-            }
-            
-            .location-header h2 {
-                font-size: 1.5rem;
-            }
-            
-            .status-header h3 {
-                font-size: 1.3rem;
-            }
-            
-            .division-header h4 {
-                font-size: 1.1rem;
-            }
-            
-            .event-header h5 {
-                font-size: 1rem;
-            }
-            
-            .athlete-header {
-                padding: 20px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .athlete-records {
-                padding: 15px 20px 20px;
-            }
-            
-            .record-item {
-                padding: 15px;
-            }
-            
-            .record-item-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .record-lift-info {
-                flex-wrap: wrap;
-            }
-            
-            .record-item-details {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-            
-            .record-meta {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            
-            .lift-name {
-                font-size: 1.1rem;
-            }
-            
-            .athlete-info h3 {
-                font-size: 1.4rem;
-            }
-            
-            .record-stats {
-                gap: 6px;
-            }
-            
-            .record-stat-row {
-                padding: 2px 0;
-            }
-            
-            .record-stat-value {
-                font-size: 12px;
-            }
-            
-            .record-stat-value.lift {
-                font-size: 16px;
-            }
-            
-            .record-stat-value.weight {
-                font-size: 14px;
             }
         }
     </style>
@@ -654,6 +448,42 @@
                     <label for="division">Division</label>
                     <select id="division">
                         <option value="">All Divisions</option>
+                        <option value="OPEN MEN">OPEN MEN</option>
+                        <option value="JUNIOR MEN 10 TO 12">JUNIOR MEN 10 TO 12</option>
+                        <option value="JUNIOR MEN 13 TO 15">JUNIOR MEN 13 TO 15</option>
+                        <option value="JUNIOR MEN 15 TO 19">JUNIOR MEN 15 TO 19</option>
+                        <option value="JUNIOR MEN 16 TO 17">JUNIOR MEN 16 TO 17</option>
+                        <option value="JUNIOR MEN 18 TO 19">JUNIOR MEN 18 TO 19</option>
+                        <option value="JUNIOR MEN 20 TO 23">JUNIOR MEN 20 TO 23</option>
+                        <option value="SUBMASTER MEN 35 TO 39">SUBMASTER MEN 35 TO 39</option>
+                        <option value="MASTER MEN 40 TO 44">MASTER MEN 40 TO 44</option>
+                        <option value="MASTER MEN 45 TO 49">MASTER MEN 45 TO 49</option>
+                        <option value="MASTER MEN 50 TO 54">MASTER MEN 50 TO 54</option>
+                        <option value="MASTER MEN 55 TO 59">MASTER MEN 55 TO 59</option>
+                        <option value="MASTER MEN 60 TO 64">MASTER MEN 60 TO 64</option>
+                        <option value="MASTER MEN 65 TO 69">MASTER MEN 65 TO 69</option>
+                        <option value="MASTER MEN 70 TO 74">MASTER MEN 70 TO 74</option>
+                        <option value="MASTER MEN 75 TO 79">MASTER MEN 75 TO 79</option>
+                        <option value="MASTER MEN 80 TO 84">MASTER MEN 80 TO 84</option>
+                        <option value="MASTER MEN 85+">MASTER MEN 85+</option>
+                        <option value="OPEN WOMEN">OPEN WOMEN</option>
+                        <option value="JUNIOR WOMEN 10 TO 12">JUNIOR WOMEN 10 TO 12</option>
+                        <option value="JUNIOR WOMEN 13 TO 15">JUNIOR WOMEN 13 TO 15</option>
+                        <option value="JUNIOR WOMEN 15 TO 19">JUNIOR WOMEN 15 TO 19</option>
+                        <option value="JUNIOR WOMEN 16 TO 17">JUNIOR WOMEN 16 TO 17</option>
+                        <option value="JUNIOR WOMEN 18 TO 19">JUNIOR WOMEN 18 TO 19</option>
+                        <option value="JUNIOR WOMEN 20 TO 23">JUNIOR WOMEN 20 TO 23</option>
+                        <option value="SUBMASTER WOMEN 35 TO 39">SUBMASTER WOMEN 35 TO 39</option>
+                        <option value="MASTER WOMEN 40 TO 44">MASTER WOMEN 40 TO 44</option>
+                        <option value="MASTER WOMEN 45 TO 49">MASTER WOMEN 45 TO 49</option>
+                        <option value="MASTER WOMEN 50 TO 54">MASTER WOMEN 50 TO 54</option>
+                        <option value="MASTER WOMEN 55 TO 59">MASTER WOMEN 55 TO 59</option>
+                        <option value="MASTER WOMEN 60 TO 64">MASTER WOMEN 60 TO 64</option>
+                        <option value="MASTER WOMEN 65 TO 69">MASTER WOMEN 65 TO 69</option>
+                        <option value="MASTER WOMEN 70 TO 74">MASTER WOMEN 70 TO 74</option>
+                        <option value="MASTER WOMEN 75 TO 79">MASTER WOMEN 75 TO 79</option>
+                        <option value="MASTER WOMEN 80 TO 84">MASTER WOMEN 80 TO 84</option>
+                        <option value="MASTER WOMEN 85+">MASTER WOMEN 85+</option>
                     </select>
                 </div>
                 
@@ -661,6 +491,22 @@
                     <label for="weightClass">Weight Class</label>
                     <select id="weightClass">
                         <option value="">All Weight Classes</option>
+                        <option value="47kg">47kg</option>
+                        <option value="52kg">52kg</option>
+                        <option value="57kg">57kg</option>
+                        <option value="59kg">59kg</option>
+                        <option value="63kg">63kg</option>
+                        <option value="66kg">66kg</option>
+                        <option value="69kg">69kg</option>
+                        <option value="74kg">74kg</option>
+                        <option value="76kg">76kg</option>
+                        <option value="83kg">83kg</option>
+                        <option value="84kg">84kg</option>
+                        <option value="84+kg">84+kg</option>
+                        <option value="93kg">93kg</option>
+                        <option value="105kg">105kg</option>
+                        <option value="120kg">120kg</option>
+                        <option value="120+kg">120+kg</option>
                     </select>
                 </div>
                 
@@ -668,6 +514,16 @@
                     <label for="event">Event</label>
                     <select id="event">
                         <option value="">All Events</option>
+                        <option value="Raw Full Power">Raw Full Power</option>
+                        <option value="Classic Raw Full Power">Classic Raw Full Power</option>
+                        <option value="Raw Bench">Raw Bench</option>
+                        <option value="Raw Deadlift">Raw Deadlift</option>
+                        <option value="Single-Ply Full Power">Single-Ply Full Power</option>
+                        <option value="Single-Ply Bench">Single-Ply Bench</option>
+                        <option value="Single-Ply Deadlift">Single-Ply Deadlift</option>
+                        <option value="Multi-Ply Full Power">Multi-Ply Full Power</option>
+                        <option value="Multi-Ply Deadlift-only">Multi-Ply Deadlift-only</option>
+                        <option value="Multi-Ply Bench-only">Multi-Ply Bench-only</option>
                     </select>
                 </div>
                 
@@ -675,12 +531,86 @@
                     <label for="lift">Lift</label>
                     <select id="lift">
                         <option value="">All Lifts</option>
+                        <option value="Squat">Squat</option>
+                        <option value="Bench">Bench</option>
+                        <option value="Deadlift">Deadlift</option>
                     </select>
                 </div>
                 
                 <div class="search-field">
                     <label for="location">Location</label>
-                    <input type="text" id="location" placeholder="Enter location...">
+                    <select id="location">
+                        <option value="">All Locations</option>
+                        <option value="National Records">National Records</option>
+                        <option value="Alabama">Alabama</option>
+                        <option value="Alaska">Alaska</option>
+                        <option value="Arizona">Arizona</option>
+                        <option value="Arkansas">Arkansas</option>
+                        <option value="California">California</option>
+                        <option value="Colorado">Colorado</option>
+                        <option value="Connecticut">Connecticut</option>
+                        <option value="Delaware">Delaware</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Hawaii">Hawaii</option>
+                        <option value="Idaho">Idaho</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="Indiana">Indiana</option>
+                        <option value="Iowa">Iowa</option>
+                        <option value="Kansas">Kansas</option>
+                        <option value="Kentucky">Kentucky</option>
+                        <option value="Louisiana">Louisiana</option>
+                        <option value="Maine">Maine</option>
+                        <option value="Maryland">Maryland</option>
+                        <option value="Massachusetts">Massachusetts</option>
+                        <option value="Michigan">Michigan</option>
+                        <option value="Minnesota">Minnesota</option>
+                        <option value="Mississippi">Mississippi</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="Montana">Montana</option>
+                        <option value="Nebraska">Nebraska</option>
+                        <option value="Nevada">Nevada</option>
+                        <option value="New Hampshire">New Hampshire</option>
+                        <option value="New Jersey">New Jersey</option>
+                        <option value="New Mexico">New Mexico</option>
+                        <option value="New York">New York</option>
+                        <option value="North Carolina">North Carolina</option>
+                        <option value="North Dakota">North Dakota</option>
+                        <option value="Ohio">Ohio</option>
+                        <option value="Oklahoma">Oklahoma</option>
+                        <option value="Oregon">Oregon</option>
+                        <option value="Pennsylvania">Pennsylvania</option>
+                        <option value="Rhode Island">Rhode Island</option>
+                        <option value="South Carolina">South Carolina</option>
+                        <option value="South Dakota">South Dakota</option>
+                        <option value="Tennessee">Tennessee</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Utah">Utah</option>
+                        <option value="Vermont">Vermont</option>
+                        <option value="Virginia">Virginia</option>
+                        <option value="Washington">Washington</option>
+                        <option value="West Virginia">West Virginia</option>
+                        <option value="Wisconsin">Wisconsin</option>
+                        <option value="Wyoming">Wyoming</option>
+                    </select>
+                </div>
+                
+                <div class="search-field">
+                    <label>Status</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="statusAll" value="all" checked>
+                            <label for="statusAll">All</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="statusTested" value="tested">
+                            <label for="statusTested">Tested</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="statusNonTested" value="non-tested">
+                            <label for="statusNonTested">Non Tested</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -707,41 +637,179 @@
         const SUPABASE_URL = 'https://xiqvvbqrojjuwkndsrgf.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpcXZ2YnFyb2pqdXdrbmRzcmdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM5MDA1MjYsImV4cCI6MjA2OTQ3NjUyNn0.T1r1MrN3wb9fh0lXqdHVfhCj7L03G8p9ItxGmH71TjI';
         
-        // Load dropdown options on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadDropdownOptions();
+            setupStatusCheckboxes();
+            setupEventLiftFilter();
         });
+        
+        function setupStatusCheckboxes() {
+            const statusAll = document.getElementById('statusAll');
+            const statusTested = document.getElementById('statusTested');
+            const statusNonTested = document.getElementById('statusNonTested');
+            
+            statusAll.addEventListener('change', function() {
+                if (this.checked) {
+                    statusTested.checked = false;
+                    statusNonTested.checked = false;
+                }
+            });
+            
+            statusTested.addEventListener('change', function() {
+                if (this.checked) {
+                    statusAll.checked = false;
+                }
+            });
+            
+            statusNonTested.addEventListener('change', function() {
+                if (this.checked) {
+                    statusAll.checked = false;
+                }
+            });
+        }
+        
+        function setupEventLiftFilter() {
+            const eventSelect = document.getElementById('event');
+            const liftSelect = document.getElementById('lift');
+            
+            eventSelect.addEventListener('change', function() {
+                const selectedEvent = this.value.toLowerCase();
+                
+                if (!liftSelect.dataset.originalOptions) {
+                    liftSelect.dataset.originalOptions = liftSelect.innerHTML;
+                }
+                
+                liftSelect.innerHTML = liftSelect.dataset.originalOptions;
+                
+                if (selectedEvent === 'raw bench' || selectedEvent === 'single ply-bench' || 
+                    selectedEvent === 'b' || selectedEvent.includes('bench')) {
+                    const benchOption = Array.from(liftSelect.options).find(option => 
+                        option.value.toLowerCase() === 'bench'
+                    );
+                    
+                    if (benchOption) {
+                        liftSelect.innerHTML = '<option value="">All Lifts</option>';
+                        liftSelect.appendChild(benchOption.cloneNode(true));
+                        liftSelect.value = benchOption.value;
+                    }
+                } else if (selectedEvent === 'raw deadlift' || selectedEvent === 'single ply-deadlift' || 
+                          selectedEvent === 'd' || selectedEvent.includes('deadlift')) {
+                    const deadliftOption = Array.from(liftSelect.options).find(option => 
+                        option.value.toLowerCase() === 'deadlift'
+                    );
+                    
+                    if (deadliftOption) {
+                        liftSelect.innerHTML = '<option value="">All Lifts</option>';
+                        liftSelect.appendChild(deadliftOption.cloneNode(true));
+                        liftSelect.value = deadliftOption.value;
+                    }
+                } else if (selectedEvent === 's' || selectedEvent.includes('squat')) {
+                    const squatOption = Array.from(liftSelect.options).find(option => 
+                        option.value.toLowerCase() === 'squat'
+                    );
+                    
+                    if (squatOption) {
+                        liftSelect.innerHTML = '<option value="">All Lifts</option>';
+                        liftSelect.appendChild(squatOption.cloneNode(true));
+                        liftSelect.value = squatOption.value;
+                    }
+                }
+            });
+        }
         
         async function loadDropdownOptions() {
             try {
-                // Load unique values for dropdowns
+                console.log('Loading dropdown options...');
                 const divisions = await fetchUniqueValues('Division');
                 const weightClasses = await fetchUniqueValues('Weight Class');
                 const events = await fetchUniqueValues('Event');
                 const lifts = await fetchUniqueValues('Lift');
+                const locations = await fetchUniqueStates();
+                
+                console.log('Events found:', events);
+                console.log('Lifts found:', lifts);
+                console.log('Locations found:', locations);
                 
                 populateDropdown('division', divisions);
                 populateDropdown('weightClass', weightClasses);
                 populateDropdown('event', events);
                 populateDropdown('lift', lifts);
+                populateLocationDropdown(locations);
             } catch (error) {
                 console.error('Error loading dropdown options:', error);
-                // Add some common values as fallback
-                populateDropdown('division', ['Open', 'Masters', 'Junior', 'Sub-Junior']);
-                populateDropdown('weightClass', ['74kg', '83kg', '93kg', '105kg', '120kg', '120+kg']);
-                populateDropdown('event', ['SBD', 'BD', 'B', 'D', 'S']);
-                populateDropdown('lift', ['Squat', 'Bench', 'Deadlift']);
+                // Show error in console for debugging
+                console.log('Failed to load from database, check network/API');
             }
         }
         
-        async function fetchUniqueValues(column) {
-            const encodedColumn = encodeURIComponent(column);
-            const url = `${SUPABASE_URL}/rest/v1/USPA%20Records?select=${encodedColumn}&apikey=${SUPABASE_KEY}`;
-            const response = await fetch(url);
-            const data = await response.json();
+        async function fetchUniqueStates() {
+            try {
+                const url = `${SUPABASE_URL}/rest/v1/USPA%20Records?select=Location&apikey=${SUPABASE_KEY}`;
+                console.log('Fetching locations from:', url);
+                
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Extract states from location strings (usually format: "City, State" or just "State")
+                const states = [...new Set(data.map(item => {
+                    if (!item.Location) return null;
+                    const locationParts = item.Location.split(',');
+                    // Get the last part (state) and trim whitespace
+                    return locationParts[locationParts.length - 1].trim();
+                }).filter(state => state && state !== ''))];
+                
+                console.log('Unique states:', states);
+                return states.sort();
+            } catch (error) {
+                console.error('Error fetching locations:', error);
+                return [];
+            }
+        }
+        
+        function populateLocationDropdown(states) {
+            const select = document.getElementById('location');
             
-            const uniqueValues = [...new Set(data.map(item => item[column]).filter(val => val))];
-            return uniqueValues.sort();
+            // Add National Records as first option
+            const nationalOption = document.createElement('option');
+            nationalOption.value = 'National Records';
+            nationalOption.textContent = 'National Records';
+            select.appendChild(nationalOption);
+            
+            // Add all states
+            states.forEach(state => {
+                const optionElement = document.createElement('option');
+                optionElement.value = state;
+                optionElement.textContent = state;
+                select.appendChild(optionElement);
+            });
+        }
+        
+        async function fetchUniqueValues(column) {
+            try {
+                const encodedColumn = encodeURIComponent(column);
+                const url = `${SUPABASE_URL}/rest/v1/USPA%20Records?select=${encodedColumn}&apikey=${SUPABASE_KEY}`;
+                console.log(`Fetching ${column} from:`, url);
+                
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log(`Raw ${column} data:`, data.slice(0, 5)); // Show first 5 for debugging
+                
+                const uniqueValues = [...new Set(data.map(item => item[column]).filter(val => val && val.trim() !== ''))];
+                console.log(`Unique ${column} values:`, uniqueValues);
+                
+                return uniqueValues.sort();
+            } catch (error) {
+                console.error(`Error fetching ${column}:`, error);
+                return [];
+            }
         }
         
         function populateDropdown(elementId, options) {
@@ -760,19 +828,16 @@
             const resultsHeader = document.getElementById('resultsHeader');
             const resultsCount = document.getElementById('resultsCount');
             
-            // Show loading
             loading.style.display = 'block';
             results.innerHTML = '';
             resultsHeader.style.display = 'none';
             
             try {
-                // Build query parameters
                 const params = new URLSearchParams();
                 params.append('apikey', SUPABASE_KEY);
                 params.append('select', '*');
-                params.append('limit', '100'); // Limit results for performance
+                params.append('limit', '100');
                 
-                // Add filters
                 const name = document.getElementById('name').value.trim();
                 if (name) {
                     params.append('Name', `ilike.*${name}*`);
@@ -798,23 +863,40 @@
                     params.append('Lift', `eq.${lift}`);
                 }
                 
-                const location = document.getElementById('location').value.trim();
-                if (location) {
-                    params.append('Location', `ilike.*${location}*`);
+                const location = document.getElementById('location').value;
+                if (location === 'National Records') {
+                    // For National Records, search for records with location "National"
+                    params.append('Location', 'eq.National');
+                } else if (location && location !== '') {
+                    // For state searches, replace spaces with hyphens for multi-word states
+                    const queryLocation = location.replace(/\s+/g, '-');
+                    params.append('Location', `ilike.*${queryLocation}*`);
                 }
                 
-                // Fetch data
+                const statusAll = document.getElementById('statusAll').checked;
+                const statusTested = document.getElementById('statusTested').checked;
+                const statusNonTested = document.getElementById('statusNonTested').checked;
+                
+                if (!statusAll && (statusTested || statusNonTested)) {
+                    const statusFilters = [];
+                    if (statusTested) {
+                        statusFilters.push('Tested');
+                    }
+                    if (statusNonTested) {
+                        statusFilters.push('Non Tested');
+                    }
+                    if (statusFilters.length > 0) {
+                        params.append('Status', `in.(${statusFilters.join(',')})`);
+                    }
+                }
+                
                 const url = `${SUPABASE_URL}/rest/v1/USPA%20Records?${params.toString()}`;
                 const response = await fetch(url);
                 const data = await response.json();
                 
-                // Hide loading
                 loading.style.display = 'none';
-                
-                // Show results
                 displayResults(data);
                 
-                // Scroll to first result if results exist
                 if (data.length > 0) {
                     setTimeout(() => {
                         const resultsSection = document.getElementById('resultsHeader');
@@ -840,17 +922,11 @@
             const resultsCount = document.getElementById('resultsCount');
             
             if (data.length === 0) {
-                results.innerHTML = `
-                    <div class="no-results">
-                        <h3>No records found</h3>
-                        <p>Try adjusting your search criteria</p>
-                    </div>
-                `;
+                results.innerHTML = '<div class="no-results"><h3>No records found</h3><p>Try adjusting your search criteria</p></div>';
                 resultsHeader.style.display = 'none';
                 return;
             }
             
-            // Count total records
             const totalRecords = data.length;
             const name = document.getElementById('name').value.trim();
             
@@ -864,9 +940,7 @@
             }
             resultsHeader.style.display = 'flex';
             
-            // Check if searching by name - if so, use simplified grouping
             if (name) {
-                // Group by location, then status, then athlete when searching by name
                 const locationGroups = {};
                 
                 data.forEach(record => {
@@ -908,7 +982,6 @@
                                         const athleteName = records[0].Name || 'Unknown';
                                         const athleteLocation = records[0].Location || 'Unknown';
                                         
-                                        // Sort records by division, then event, then date
                                         records.sort((a, b) => {
                                             const divisionA = a.Division || 'ZZZ';
                                             const divisionB = b.Division || 'ZZZ';
@@ -999,179 +1072,7 @@
                     }).join('');
                 
                 results.innerHTML = locationHTML;
-                return;
             }
-            
-            // Create hierarchical grouping: Location -> Status -> Division -> Event -> Athletes
-            const locationGroups = {};
-            
-            data.forEach(record => {
-                const location = record.Location ? record.Location.split(',').pop().trim() : 'Unknown Location';
-                const status = record.Status || 'Unknown Status';
-                const division = record.Division || 'Unknown Division';
-                const event = record.Event || 'Unknown Event';
-                const athleteKey = `${record.Name || 'Unknown'}_${location}`;
-                
-                if (!locationGroups[location]) {
-                    locationGroups[location] = {};
-                }
-                if (!locationGroups[location][status]) {
-                    locationGroups[location][status] = {};
-                }
-                if (!locationGroups[location][status][division]) {
-                    locationGroups[location][status][division] = {};
-                }
-                if (!locationGroups[location][status][division][event]) {
-                    locationGroups[location][status][division][event] = {};
-                }
-                if (!locationGroups[location][status][division][event][athleteKey]) {
-                    locationGroups[location][status][division][event][athleteKey] = [];
-                }
-                
-                locationGroups[location][status][division][event][athleteKey].push(record);
-            });
-            
-            // Generate HTML
-            const locationHTML = Object.entries(locationGroups)
-                .sort(([a], [b]) => a.localeCompare(b))
-                .map(([location, statusGroups]) => {
-                    const locationRecordCount = Object.values(statusGroups)
-                        .flatMap(divisionGroups => Object.values(divisionGroups))
-                        .flatMap(eventGroups => Object.values(eventGroups))
-                        .flatMap(athletes => Object.values(athletes))
-                        .flat().length;
-                    
-                    const statusHTML = Object.entries(statusGroups)
-                        .sort(([a], [b]) => a.localeCompare(b))
-                        .map(([status, divisionGroups]) => {
-                            const statusRecordCount = Object.values(divisionGroups)
-                                .flatMap(eventGroups => Object.values(eventGroups))
-                                .flatMap(athletes => Object.values(athletes))
-                                .flat().length;
-                            
-                            const divisionHTML = Object.entries(divisionGroups)
-                                .sort(([a], [b]) => a.localeCompare(b))
-                                .map(([division, eventGroups]) => {
-                                    const divisionRecordCount = Object.values(eventGroups)
-                                        .flatMap(athletes => Object.values(athletes))
-                                        .flat().length;
-                                    
-                                    const eventHTML = Object.entries(eventGroups)
-                                        .sort(([a], [b]) => a.localeCompare(b))
-                                        .map(([event, athletes]) => {
-                                            const eventRecordCount = Object.values(athletes).flat().length;
-                                            
-                                            const athleteHTML = Object.entries(athletes)
-                                                .sort(([a], [b]) => {
-                                                    const nameA = a.split('_')[0];
-                                                    const nameB = b.split('_')[0];
-                                                    return nameA.localeCompare(nameB);
-                                                })
-                                                .map(([athleteKey, records]) => {
-                                                    const athleteName = records[0].Name || 'Unknown';
-                                                    const athleteLocation = records[0].Location || 'Unknown';
-                                                    
-                                                    // Sort records by date (newest first)
-                                                    records.sort((a, b) => {
-                                                        const dateA = a.Date ? new Date(a.Date) : new Date(0);
-                                                        const dateB = b.Date ? new Date(b.Date) : new Date(0);
-                                                        return dateB - dateA;
-                                                    });
-                                                    
-                                                    const recordItems = records.map(record => {
-                                                        const statusClass = record.Status && record.Status.toLowerCase().includes('current') ? 'status-current' : 'status-superseded';
-                                                        const statusText = record.Status || 'N/A';
-                                                        
-                                                        return `
-                                                            <div class="record-item">
-                                                                <div class="record-stats">
-                                                                    <div class="record-stat-row">
-                                                                        <span class="status-badge ${statusClass}">${statusText}</span>
-                                                                    </div>
-                                                                    <div class="record-stat-row">
-                                                                        <span class="record-stat-value lift">${record.Lift || 'N/A'}</span>
-                                                                    </div>
-                                                                    <div class="record-stat-row">
-                                                                        <span class="record-stat-value">${record.Division || 'N/A'}</span>
-                                                                    </div>
-                                                                    <div class="record-stat-row">
-                                                                        <span class="record-stat-value">${record['Weight Class'] || 'N/A'}</span>
-                                                                    </div>
-                                                                    <div class="record-stat-row">
-                                                                        <span class="record-stat-value weight">
-                                                                            ${record.Kilos ? record.Kilos + ' kg' : 'N/A'}
-                                                                            ${record.Pounds ? '<span class="weight-lbs">(' + record.Pounds + ' lbs)</span>' : ''}
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="record-stat-row">
-                                                                        <span class="record-stat-value">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        `;
-                                                    }).join('');
-                                                    
-                                                    return `
-                                                        <div class="athlete-group">
-                                                            <div class="athlete-header">
-                                                                <div class="athlete-info">
-                                                                    <h3 class="athlete-name">${athleteName}</h3>
-                                                                    <p class="athlete-location">${athleteLocation}</p>
-                                                                </div>
-                                                                <div class="record-count">${records.length} record${records.length !== 1 ? 's' : ''}</div>
-                                                            </div>
-                                                            <div class="athlete-records">
-                                                                ${recordItems}
-                                                            </div>
-                                                        </div>
-                                                    `;
-                                                }).join('');
-                                            
-                                            return `
-                                                <div class="event-group">
-                                                    <div class="event-header">
-                                                        <h5>${event}</h5>
-                                                        <div class="event-subtitle">${eventRecordCount} record${eventRecordCount !== 1 ? 's' : ''}</div>
-                                                    </div>
-                                                    ${athleteHTML}
-                                                </div>
-                                            `;
-                                        }).join('');
-                                    
-                                    return `
-                                        <div class="division-group">
-                                            <div class="division-header">
-                                                <h4>${division}</h4>
-                                                <div class="division-subtitle">${divisionRecordCount} record${divisionRecordCount !== 1 ? 's' : ''}</div>
-                                            </div>
-                                            ${eventHTML}
-                                        </div>
-                                    `;
-                                }).join('');
-                            
-                            return `
-                                <div class="status-group">
-                                    <div class="status-header">
-                                        <h3>${status}</h3>
-                                        <div class="status-subtitle">${statusRecordCount} record${statusRecordCount !== 1 ? 's' : ''}</div>
-                                    </div>
-                                    ${divisionHTML}
-                                </div>
-                            `;
-                        }).join('');
-                    
-                    return `
-                        <div class="location-group">
-                            <div class="location-header">
-                                <h2>${location}</h2>
-                                <div class="location-subtitle">${locationRecordCount} record${locationRecordCount !== 1 ? 's' : ''}</div>
-                            </div>
-                            ${statusHTML}
-                        </div>
-                    `;
-                }).join('');
-            
-            results.innerHTML = locationHTML;
         }
         
         function clearSearch() {
@@ -1182,11 +1083,14 @@
             document.getElementById('lift').value = '';
             document.getElementById('location').value = '';
             
+            document.getElementById('statusAll').checked = true;
+            document.getElementById('statusTested').checked = false;
+            document.getElementById('statusNonTested').checked = false;
+            
             document.getElementById('results').innerHTML = '';
             document.getElementById('resultsHeader').style.display = 'none';
         }
         
-        // Allow Enter key to trigger search
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 searchRecords();
