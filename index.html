@@ -450,15 +450,16 @@
                     <label for="division">Division</label>
                     <select id="division">
                         <option value="">All Divisions</option>
-                        <option value="OPEN MEN">OPEN MEN</option>
-                        <option value="JUNIOR MEN">JUNIOR MEN</option>
-                        <option value="SUBMASTER MEN">SUBMASTER MEN</option>
-                        <option value="MASTER MEN">MASTER MEN</option>
-                        <option value="OPEN WOMEN">OPEN WOMEN</option>
-                        <option value="JUNIOR WOMEN">JUNIOR WOMEN</option>
-                        <option value="SUBMASTER WOMEN">SUBMASTER WOMEN</option>
-                        <option value="MASTER WOMEN">MASTER WOMEN</option>
+                        <option value="Open Men">Open Men</option>
+                        <option value="Junior Men">Junior Men</option>
+                        <option value="Submaster Men">Submaster Men</option>
+                        <option value="Master Men">Master Men</option>
+                        <option value="Open Women">Open Women</option>
+                        <option value="Junior Women">Junior Women</option>
+                        <option value="Submaster Women">Submaster Women</option>
+                        <option value="Master Women">Master Women</option>
                     </select>
+
                     
                     <div id="subDivisionField" style="display: none; margin-top: 15px;">
                         <label for="subDivision" style="font-weight: 700; margin-bottom: 10px; color: #f1f5f9; text-transform: uppercase; letter-spacing: 1px; font-size: 12px; display: block;">Sub Division</label>
@@ -629,53 +630,54 @@
             const subDivisionSelect = document.getElementById('subDivision');
             
             const subDivisions = {
-                'JUNIOR MEN': [
-                    'JUNIOR MEN 10 TO 12',
-                    'JUNIOR MEN 13 TO 15',
-                    'JUNIOR MEN 15 TO 19',
-                    'JUNIOR MEN 16 TO 17',
-                    'JUNIOR MEN 18 TO 19',
-                    'JUNIOR MEN 20 TO 23'
+                'Junior Men': [
+                    'Junior Men 10 to 12',
+                    'Junior Men 13 to 15',
+                    'Junior Men 15 to 19',
+                    'Junior Men 16 to 17',
+                    'Junior Men 18 to 19',
+                    'Junior Men 20 to 23'
                 ],
-                'SUBMASTER MEN': [
-                    'SUBMASTER MEN 35 TO 39'
+                'Submaster Men': [
+                    'Submaster Men 35 to 39'
                 ],
-                'MASTER MEN': [
-                    'MASTER MEN 40 TO 44',
-                    'MASTER MEN 45 TO 49',
-                    'MASTER MEN 50 TO 54',
-                    'MASTER MEN 55 TO 59',
-                    'MASTER MEN 60 TO 64',
-                    'MASTER MEN 65 TO 69',
-                    'MASTER MEN 70 TO 74',
-                    'MASTER MEN 75 TO 79',
-                    'MASTER MEN 80 TO 84',
-                    'MASTER MEN 85+'
+                'Master Men': [
+                    'Master Men 40 to 44',
+                    'Master Men 45 to 49',
+                    'Master Men 50 to 54',
+                    'Master Men 55 to 59',
+                    'Master Men 60 to 64',
+                    'Master Men 65 to 69',
+                    'Master Men 70 to 74',
+                    'Master Men 75 to 79',
+                    'Master Men 80 to 84',
+                    'Master Men 85+'
                 ],
-                'JUNIOR WOMEN': [
-                    'JUNIOR WOMEN 10 TO 12',
-                    'JUNIOR WOMEN 13 TO 15',
-                    'JUNIOR WOMEN 15 TO 19',
-                    'JUNIOR WOMEN 16 TO 17',
-                    'JUNIOR WOMEN 18 TO 19',
-                    'JUNIOR WOMEN 20 TO 23'
+                'Junior Women': [
+                    'Junior Women 10 to 12',
+                    'Junior Women 13 to 15',
+                    'Junior Women 15 to 19',
+                    'Junior Women 16 to 17',
+                    'Junior Women 18 to 19',
+                    'Junior Women 20 to 23'
                 ],
-                'SUBMASTER WOMEN': [
-                    'SUBMASTER WOMEN 35 TO 39'
+                'Submaster Women': [
+                    'Submaster Women 35 to 39'
                 ],
-                'MASTER WOMEN': [
-                    'MASTER WOMEN 40 TO 44',
-                    'MASTER WOMEN 45 TO 49',
-                    'MASTER WOMEN 50 TO 54',
-                    'MASTER WOMEN 55 TO 59',
-                    'MASTER WOMEN 60 TO 64',
-                    'MASTER WOMEN 65 TO 69',
-                    'MASTER WOMEN 70 TO 74',
-                    'MASTER WOMEN 75 TO 79',
-                    'MASTER WOMEN 80 TO 84',
-                    'MASTER WOMEN 85+'
+                'Master Women': [
+                    'Master Women 40 to 44',
+                    'Master Women 45 to 49',
+                    'Master Women 50 to 54',
+                    'Master Women 55 to 59',
+                    'Master Women 60 to 64',
+                    'Master Women 65 to 69',
+                    'Master Women 70 to 74',
+                    'Master Women 75 to 79',
+                    'Master Women 80 to 84',
+                    'Master Women 85+'
                 ]
             };
+
             
             divisionSelect.addEventListener('change', function() {
                 const selectedDivision = this.value;
