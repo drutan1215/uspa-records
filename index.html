@@ -764,7 +764,7 @@
                 
                 const event = document.getElementById('event').value;
                 if (event) {
-                    params.append('Event', `eq.${encodeURIComponent(event)}`);
+                    params.append('Event', `eq."${event}"`);
                 }
                 
                 const lift = document.getElementById('lift').value;
