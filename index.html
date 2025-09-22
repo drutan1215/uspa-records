@@ -1,264 +1,1012 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1221042435234029" crossorigin="anonymous"></script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>USPA Records Search</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #000000 100%);
-      min-height: 100vh;
-      padding: 20px;
-      color: #ffffff;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
-      border-radius: 20px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      overflow: hidden;
-      border: 1px solid #333;
-    }
-    .header {
-      background: linear-gradient(135deg, #dc2626, #991b1b, #7f1d1d);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .header h1 {
-      font-size: 3.5rem;
-      font-weight: 900;
-      margin-bottom: 15px;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-      position: relative;
-    }
-    .header p {
-      font-size: 1.3rem;
-      opacity: 0.95;
-      position: relative;
-      font-weight: 300;
-      letter-spacing: 0.5px;
-    }
-    .search-section {
-      padding: 50px;
-      background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
-    }
-    .search-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-bottom: 40px;
-    }
-    .search-field {
-      display: flex;
-      flex-direction: column;
-    }
-    .search-field label {
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #f1f5f9;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 12px;
-    }
-    .search-field input,
-    .search-field select {
-      padding: 16px 20px;
-      border: 2px solid #404040;
-      border-radius: 12px;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
-      color: #ffffff;
-      box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
-    }
-    .search-field input::placeholder {
-      color: #9ca3af;
-    }
-    .search-field input:focus,
-    .search-field select:focus {
-      outline: none;
-      border-color: #dc2626;
-      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2),
-        inset 2px 2px 5px rgba(0, 0, 0, 0.5);
-      transform: translateY(-2px);
-    }
-    .search-field select option {
-      background: #1a1a1a;
-      color: #ffffff;
-      padding: 8px;
-    }
-    .search-field select {
-      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      background-size: 16px;
-      padding-right: 40px;
-      appearance: none;
-    }
-    .checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .checkbox-option {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .checkbox-option input[type='checkbox'] {
-      width: 18px;
-      height: 18px;
-      accent-color: #dc2626;
-      cursor: pointer;
-    }
-    .checkbox-option label {
-      color: #f1f5f9;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      text-transform: none;
-      letter-spacing: normal;
-      margin: 0;
-    }
-    .search-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 40px;
-    }
-    .btn {
-      padding: 18px 40px;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #dc2626, #991b1b);
-      color: white;
-      box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
-    }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(220, 38, 38, 0.6);
-    }
-    .btn-secondary {
-      background: linear-gradient(145deg, #374151, #4b5563);
-      color: #f9fafb;
-    }
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    }
-    .results-section {
-      padding: 0 50px 50px;
-      background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
-    }
-    .results-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-      padding: 20px 0;
-      border-bottom: 2px solid #404040;
-    }
-    .results-count {
-      font-size: 20px;
-      color: #f1f5f9;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .loading {
-      text-align: center;
-      padding: 60px;
-      color: #9ca3af;
-      font-size: 20px;
-      font-weight: 600;
-    }
-    .no-results {
-      text-align: center;
-      padding: 80px 20px;
-      color: #9ca3af;
-    }
-    .no-results h3 {
-      font-size: 28px;
-      margin-bottom: 15px;
-      color: #f1f5f9;
-      font-weight: 700;
-    }
-    @media (max-width: 768px) {
-      .header h1 {
-        font-size: 2.5rem;
-      }
-      .search-section,
-      .results-section {
-        padding: 30px 20px;
-      }
-      .search-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .checkbox-group {
-        flex-direction: row;
-        gap: 15px;
-        flex-wrap: wrap;
-      }
-      .search-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      .btn {
-        width: 100%;
-        max-width: 300px;
-      }
-    }
-  </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1221042435234029"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USPA Records Search</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #000000 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #ffffff;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #dc2626, #991b1b, #7f1d1d);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            position: relative;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        .search-section {
+            padding: 50px;
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+        }
+        
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .search-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .search-field label {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #f1f5f9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+        
+        .search-field input, .search-field select {
+            padding: 16px 20px;
+            border: 2px solid #404040;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            color: #ffffff;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .search-field input::placeholder {
+            color: #9ca3af;
+        }
+        
+        .search-field input:focus, .search-field select:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2), inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .search-field select option {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 8px;
+        }
+        
+        .search-field select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+            appearance: none;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #dc2626;
+            cursor: pointer;
+        }
+        
+        .checkbox-option label {
+            color: #f1f5f9;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: none;
+            letter-spacing: normal;
+            margin: 0;
+        }
+        
+        .search-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.6);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(145deg, #374151, #4b5563);
+            color: #f9fafb;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .results-section {
+            padding: 0 50px 50px;
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid #404040;
+        }
+        
+        .results-count {
+            font-size: 20px;
+            color: #f1f5f9;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #9ca3af;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .location-group {
+            background: linear-gradient(145deg, #333, #2a2a2a);
+            border: 1px solid #555;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .location-header {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 20px 30px;
+        }
+        
+        .location-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+        }
+        
+        .location-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .status-group {
+            background: linear-gradient(145deg, #2d2d2d, #2a2a2a);
+            border-top: 1px solid #404040;
+        }
+        
+        .status-header {
+            background: linear-gradient(135deg, #4b5563, #374151);
+            color: #f1f5f9;
+            padding: 15px 30px;
+        }
+        
+        .status-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+        }
+        
+        .status-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .athlete-group {
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+            border-top: 1px solid #404040;
+            transition: all 0.4s ease;
+        }
+        
+        .athlete-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            border-bottom: 1px solid #404040;
+        }
+        
+        .athlete-info h3 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0 0 5px 0;
+        }
+        
+        .athlete-info p {
+            color: #9ca3af;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        .record-count {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .athlete-records {
+            padding: 20px 30px 30px;
+        }
+        
+        .record-item {
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .record-item:hover {
+            transform: translateX(10px);
+            border-color: #555;
+        }
+        
+        .record-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .record-stat-row {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 4px 0;
+        }
+        
+        .record-stat-value {
+            font-size: 14px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .record-stat-value.lift {
+            font-size: 18px;
+            color: #dc2626;
+            font-weight: 800;
+        }
+        
+        .record-stat-value.weight {
+            font-size: 16px;
+            color: #dc2626;
+            font-weight: 700;
+        }
+        
+        .weight-lbs {
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: 500;
+            display: block;
+            margin-top: 2px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .status-current {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+        }
+        
+        .status-superseded {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: #d1d5db;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            color: #9ca3af;
+        }
+        
+        .no-results h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .search-section, .results-section {
+                padding: 30px 20px;
+            }
+            
+            .search-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .checkbox-group {
+                flex-direction: row;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+            
+            .search-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>USPA RECORDS</h1>
-      <p>Searchable Database for All USPA Records</p>
-      <p>Updated Weekly</p>
+    <div class="container">
+        <div class="header">
+            <h1>USPA RECORDS</h1>
+            <p>Searchable Database for All USPA Records</p>
+            <p>Updated Weekly</p>
+            
+        </div>
+        
+        <div class="search-section">
+            <div class="search-grid">
+                <div class="search-field">
+                    <label for="name">Athlete Name</label>
+                    <input type="text" id="name" placeholder="Enter athlete name...">
+                </div>
+                
+                <div class="search-field">
+                    <label for="division">Division</label>
+                    <select id="division">
+                        <option value="">All Divisions</option>
+                        <option value="Open Men">Open Men</option>
+                        <option value="Junior Men">Junior Men</option>
+                        <option value="Submaster Men">Submaster Men</option>
+                        <option value="Master Men">Master Men</option>
+                        <option value="Open Women">Open Women</option>
+                        <option value="Junior Women">Junior Women</option>
+                        <option value="Submaster Women">Submaster Women</option>
+                        <option value="Master Women">Master Women</option>
+                    </select>
+
+                    
+                    <div id="subDivisionField" style="display: none; margin-top: 15px;">
+                        <label for="subDivision" style="font-weight: 700; margin-bottom: 10px; color: #f1f5f9; letter-spacing: 1px; font-size: 12px; display: block;">Sub Division</label>
+                        <select id="subDivision" style="padding: 16px 20px; border: 2px solid #404040; border-radius: 12px; font-size: 16px; transition: all 0.3s ease; background: linear-gradient(145deg, #1a1a1a, #2d2d2d); color: #ffffff; box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5); width: 100%; background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'white\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6,9 12,15 18,9\'%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; padding-right: 40px; appearance: none;">
+                            <option value="">All Sub Divisions</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="search-field">
+                    <label for="weightClass">Weight Class</label>
+                    <select id="weightClass">
+                        <option value="">All Weight Classes</option>
+                        <option value="44kg/97lb">44kg/97lb</option>
+                        <option value="48kg/105.7lb">48kg/105.7lb</option>
+                        <option value="52kg/114.5lb">52kg/114.5lb</option>
+                        <option value="56kg/123.5lb">56kg/123.5lb</option>
+                        <option value="60kg/132.2lb">60kg/132.2lb</option>
+                        <option value="67.5kg/148.7lb">67.5kg/148.7lb</option>
+                        <option value="75kg/165.2lb">75kg/165.2lb</option>
+                        <option value="82.5kg/181.7lb">82.5kg/181.7lb</option>
+                        <option value="90kg/198.2lb">90kg/198.2lb</option>
+                        <option value="100kg/220lb">100kg/220lb</option>
+                        <option value="110kg/242lb">110kg/242lb</option>
+                        <option value="110+kg">110+kg</option>
+                        <option value="125kg/275lb">125kg/275lb</option>
+                        <option value="140kg/308.5lb">140kg/308.5lb</option>
+                        <option value="140+kg/SHW">140+kg/SHW</option>
+                    </select>
+                </div>
+                
+                <div class="search-field">
+                    <label for="event">Event</label>
+                    <select id="event">
+                        <option value="">All Events</option>
+                        <option value="Raw Powerlifting">Raw Powerlifting</option>
+                        <option value="Classic Powerlifting">Classic Powerlifting</option>
+                        <option value="Raw Bench Only">Raw Bench Only</option>
+                        <option value="Raw Deadlift Only">Raw Deadlift Only</option>
+                        <option value="Single Ply Full Power">Single Ply Powerlifting</option>
+                        <option value="Single Ply Bench Only">Single Ply Bench Only</option>
+                        <option value="Single Ply Deadlift Only">Single Ply Deadlift Only</option>
+                        <option value="Multi Ply Full Power">Multi Ply Powerlifting</option>
+                        <option value="Multi Ply Deadlift Only">Multi Ply Deadlift only</option>
+                        <option value="Multi Ply Bench Only">Multi Ply Bench only</option>
+                    </select>
+                </div>
+                
+                <div class="search-field">
+                    <label for="lift">Lift</label>
+                    <select id="lift">
+                        <option value="">Total</option>
+                        <option value="Squat">Squat</option>
+                        <option value="Bench">Bench</option>
+                        <option value="Deadlift">Deadlift</option>
+                    </select>
+                </div>
+                
+                <div class="search-field">
+                    <label for="location">Location</label>
+                    <select id="location">
+                        <option value="">All Locations</option>
+                        <option value="National Records">National Records</option>
+                        <option value="Alabama">Alabama</option>
+                        <option value="Alaska">Alaska</option>
+                        <option value="Arizona">Arizona</option>
+                        <option value="Arkansas">Arkansas</option>
+                        <option value="California">California</option>
+                        <option value="Colorado">Colorado</option>
+                        <option value="Connecticut">Connecticut</option>
+                        <option value="Delaware">Delaware</option>
+                        <option value="Florida">Florida</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Hawaii">Hawaii</option>
+                        <option value="Idaho">Idaho</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="Indiana">Indiana</option>
+                        <option value="Iowa">Iowa</option>
+                        <option value="Kansas">Kansas</option>
+                        <option value="Kentucky">Kentucky</option>
+                        <option value="Louisiana">Louisiana</option>
+                        <option value="Maine">Maine</option>
+                        <option value="Maryland">Maryland</option>
+                        <option value="Massachusetts">Massachusetts</option>
+                        <option value="Michigan">Michigan</option>
+                        <option value="Minnesota">Minnesota</option>
+                        <option value="Mississippi">Mississippi</option>
+                        <option value="Missouri">Missouri</option>
+                        <option value="Montana">Montana</option>
+                        <option value="Nebraska">Nebraska</option>
+                        <option value="Nevada">Nevada</option>
+                        <option value="New Hampshire">New Hampshire</option>
+                        <option value="New Jersey">New Jersey</option>
+                        <option value="New Mexico">New Mexico</option>
+                        <option value="New York">New York</option>
+                        <option value="North Carolina">North Carolina</option>
+                        <option value="North Dakota">North Dakota</option>
+                        <option value="Ohio">Ohio</option>
+                        <option value="Oklahoma">Oklahoma</option>
+                        <option value="Oregon">Oregon</option>
+                        <option value="Pennsylvania">Pennsylvania</option>
+                        <option value="Rhode Island">Rhode Island</option>
+                        <option value="South Carolina">South Carolina</option>
+                        <option value="South Dakota">South Dakota</option>
+                        <option value="Tennessee">Tennessee</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Utah">Utah</option>
+                        <option value="Vermont">Vermont</option>
+                        <option value="Virginia">Virginia</option>
+                        <option value="Washington">Washington</option>
+                        <option value="West Virginia">West Virginia</option>
+                        <option value="Wisconsin">Wisconsin</option>
+                        <option value="Wyoming">Wyoming</option>
+                    </select>
+                </div>
+                
+                <div class="search-field">
+                    <label>Status</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="statusAll" value="all" checked>
+                            <label for="statusAll">All</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="statusTested" value="tested">
+                            <label for="statusTested">Tested</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="statusNonTested" value="non-tested">
+                            <label for="statusNonTested">Non Tested</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-buttons">
+                <button class="btn btn-primary" onclick="searchRecords()">Search Records</button>
+                <button class="btn btn-secondary" onclick="clearSearch()">Clear All</button>
+            </div>
+        </div>
+        
+        <div class="results-section">
+            <div class="results-header" id="resultsHeader" style="display: none;">
+                <div class="results-count" id="resultsCount"></div>
+            </div>
+            
+            <div id="loading" class="loading" style="display: none;">
+                Searching records...
+            </div>
+            
+            <div id="results" class="records-grid"></div>
+        </div>
     </div>
 
-    <!-- search form here -->
+    <script>
+        const SUPABASE_URL = 'https://xiqvvbqrojjuwkndsrgf.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpcXZ2YnFyb2pqdXdrbmRzcmdmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM5MDA1MjYsImV4cCI6MjA2OTQ3NjUyNn0.T1r1MrN3wb9fh0lXqdHVfhCj7L03G8p9ItxGmH71TjI';
+        
+        // Only essential JavaScript - no dropdown manipulation
+        document.addEventListener('DOMContentLoaded', function() {
+            setupStatusCheckboxes();
+            setupDivisionFilter();
+        });
+        
+        function setupDivisionFilter() {
+            const divisionSelect = document.getElementById('division');
+            const subDivisionField = document.getElementById('subDivisionField');
+            const subDivisionSelect = document.getElementById('subDivision');
+            
+            const subDivisions = {
+                    'Junior Men': [
+                        'Junior Men 10 To 12',
+                        'Junior Men 13 To 15',
+                        'Junior Men 15 To 19',
+                        'Junior Men 16 To 17',
+                        'Junior Men 18 To 19',
+                        'Junior Men 20 To 23'
+                    ],
+                    'Submaster Men': [
+                        'Submaster Men 35 To 39'
+                    ],
+                    'Master Men': [
+                        'Master Men 40 To 44',
+                        'Master Men 45 To 49',
+                        'Master Men 50 To 54',
+                        'Master Men 55 To 59',
+                        'Master Men 60 To 64',
+                        'Master Men 65 To 69',
+                        'Master Men 70 To 74',
+                        'Master Men 75 To 79',
+                        'Master Men 80 To 84',
+                        'Master Men 85+'
+                    ],
+                    'Junior Women': [
+                        'Junior Women 10 To 12',
+                        'Junior Women 13 To 15',
+                        'Junior Women 15 To 19',
+                        'Junior Women 16 To 17',
+                        'Junior Women 18 To 19',
+                        'Junior Women 20 To 23'
+                    ],
+                    'Submaster Women': [
+                        'Submaster Women 35 To 39'
+                    ],
+                    'Master Women': [
+                        'Master Women 40 To 44',
+                        'Master Women 45 To 49',
+                        'Master Women 50 To 54',
+                        'Master Women 55 To 59',
+                        'Master Women 60 To 64',
+                        'Master Women 65 To 69',
+                        'Master Women 70 To 74',
+                        'Master Women 75 To 79',
+                        'Master Women 80 To 84',
+                        'Master Women 85+'
+                    ]
 
-    <div class="results-section">
-      <div class="results-header" id="resultsHeader" style="display: none;">
-        <div class="results-count" id="resultsCount"></div>
-      </div>
-      <div id="loading" class="loading" style="display: none;">
-        Searching records...
-      </div>
-      <div id="results" class="records-grid"></div>
-    </div>
-  </div>
+            };
 
-  <script>
-    const SUPABASE_URL = 'https://xiqvvbqrojjuwkndsrgf.supabase.co';
-    const SUPABASE_KEY = 'YOUR_KEY';
-
-    // All your search JS goes here…
-    // (I cleaned your template strings: use backticks + ${} inside them)
-  </script>
+            
+            divisionSelect.addEventListener('change', function() {
+                const selectedDivision = this.value;
+                
+                if (selectedDivision && subDivisions[selectedDivision]) {
+                    // Show sub-division field and populate options
+                    subDivisionField.style.display = 'flex';
+                    subDivisionSelect.innerHTML = '<option value="">All Sub Divisions</option>';
+                    
+                    subDivisions[selectedDivision].forEach(subDiv => {
+                        const option = document.createElement('option');
+                        option.value = subDiv;
+                        option.textContent = subDiv;
+                        subDivisionSelect.appendChild(option);
+                    });
+                } else {
+                    // Hide sub-division field for OPEN divisions or when no division selected
+                    subDivisionField.style.display = 'none';
+                    subDivisionSelect.value = '';
+                }
+            });
+        }
+        
+        function setupStatusCheckboxes() {
+            const statusAll = document.getElementById('statusAll');
+            const statusTested = document.getElementById('statusTested');
+            const statusNonTested = document.getElementById('statusNonTested');
+            
+            statusAll.addEventListener('change', function() {
+                if (this.checked) {
+                    statusTested.checked = false;
+                    statusNonTested.checked = false;
+                }
+            });
+            
+            statusTested.addEventListener('change', function() {
+                if (this.checked) {
+                    statusAll.checked = false;
+                }
+            });
+            
+            statusNonTested.addEventListener('change', function() {
+                if (this.checked) {
+                    statusAll.checked = false;
+                }
+            });
+        }
+        
+        async function searchRecords() {
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('results');
+            const resultsHeader = document.getElementById('resultsHeader');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            loading.style.display = 'block';
+            results.innerHTML = '';
+            resultsHeader.style.display = 'none';
+            
+            try {
+                const params = new URLSearchParams();
+                params.append('apikey', SUPABASE_KEY);
+                params.append('select', '*');
+                params.append('limit', '100');
+                
+                const name = document.getElementById('name').value.trim();
+                if (name) {
+                    params.append('Name', `ilike.*${name}*`);
+                }
+                
+                const division = document.getElementById('division').value;
+                const subDivision = document.getElementById('subDivision').value;
+                
+                // Use sub-division if selected, otherwise use main division
+                const divisionToQuery = subDivision || division;
+                if (divisionToQuery) {
+                    params.append('Division', `eq.${divisionToQuery}`);
+                }
+                
+                const weightClass = document.getElementById('weightClass').value;
+                if (weightClass) {
+                    params.append('Weight Class', `eq.${weightClass}`);
+                }
+                
+                const event = document.getElementById('event').value;
+                if (event) {
+                    params.append('Event', `eq.${event}`);
+                }
+                
+                const lift = document.getElementById('lift').value;
+                if (lift) {
+                    params.append('Lift', `eq.${lift}`);
+                }
+                
+                const location = document.getElementById('location').value;
+                if (location === 'National Records') {
+                    params.append('Location', 'eq.National');
+                } else if (location && location !== '') {
+                    const queryLocation = location.replace(/\s+/g, '-');
+                    params.append('Location', `ilike.*${queryLocation}*`);
+                }
+                
+                const statusAll = document.getElementById('statusAll').checked;
+                const statusTested = document.getElementById('statusTested').checked;
+                const statusNonTested = document.getElementById('statusNonTested').checked;
+                
+                if (!statusAll && (statusTested || statusNonTested)) {
+                    const statusFilters = [];
+                    if (statusTested) {
+                        statusFilters.push('Tested');
+                    }
+                    if (statusNonTested) {
+                        statusFilters.push('Non Tested');
+                    }
+                    if (statusFilters.length > 0) {
+                        params.append('Status', `in.(${statusFilters.join(',')})`);
+                    }
+                }
+                
+                const url = `${SUPABASE_URL}/rest/v1/USPA%20Records?${params.toString()}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                loading.style.display = 'none';
+                displayResults(data);
+                
+                if (data.length > 0) {
+                    setTimeout(() => {
+                        const resultsSection = document.getElementById('resultsHeader');
+                        if (resultsSection) {
+                            resultsSection.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }, 100);
+                }
+                
+            } catch (error) {
+                loading.style.display = 'none';
+                console.error('Search error:', error);
+                results.innerHTML = '<div class="no-results"><h3>Error occurred while searching</h3><p>Please try again.</p></div>';
+            }
+        }
+        
+        function displayResults(data) {
+            const results = document.getElementById('results');
+            const resultsHeader = document.getElementById('resultsHeader');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            if (data.length === 0) {
+                results.innerHTML = '<div class="no-results"><h3>No records found</h3><p>Try adjusting your search criteria</p></div>';
+                resultsHeader.style.display = 'none';
+                return;
+            }
+            
+            const totalRecords = data.length;
+            const name = document.getElementById('name').value.trim();
+            
+            if (name) {
+                resultsCount.textContent = `Found ${totalRecords} record${totalRecords !== 1 ? 's' : ''} for "${name}"`;
+            } else {
+                const uniqueAthletes = [...new Set(data.map(record => 
+                    `${record.Name || 'Unknown'}_${record.Location ? record.Location.split(',').pop().trim() : 'Unknown'}`
+                ))].length;
+                resultsCount.textContent = `Found ${totalRecords} record${totalRecords !== 1 ? 's' : ''} from ${uniqueAthletes} athlete${uniqueAthletes !== 1 ? 's' : ''}`;
+            }
+            resultsHeader.style.display = 'flex';
+            
+            // Group by location and status for all searches
+            const locationGroups = {};
+            
+            data.forEach(record => {
+                const location = record.Location ? record.Location.split(',').pop().trim() : 'Unknown Location';
+                const status = record.Status || 'Unknown Status';
+                const athleteKey = `${record.Name || 'Unknown'}_${location}`;
+                
+                if (!locationGroups[location]) {
+                    locationGroups[location] = {};
+                }
+                if (!locationGroups[location][status]) {
+                    locationGroups[location][status] = {};
+                }
+                if (!locationGroups[location][status][athleteKey]) {
+                    locationGroups[location][status][athleteKey] = [];
+                }
+                locationGroups[location][status][athleteKey].push(record);
+            });
+            
+            const locationHTML = Object.entries(locationGroups)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([location, statusGroups]) => {
+                    const locationRecordCount = Object.values(statusGroups)
+                        .flatMap(athletes => Object.values(athletes))
+                        .flat().length;
+                    
+                    const statusHTML = Object.entries(statusGroups)
+                        .sort(([a], [b]) => a.localeCompare(b))
+                        .map(([status, athletes]) => {
+                            const statusRecordCount = Object.values(athletes).flat().length;
+                            
+                            const athleteHTML = Object.entries(athletes)
+                                .sort(([a], [b]) => {
+                                    const nameA = a.split('_')[0];
+                                    const nameB = b.split('_')[0];
+                                    return nameA.localeCompare(nameB);
+                                })
+                                .map(([athleteKey, records]) => {
+                                    const athleteName = records[0].Name || 'Unknown';
+                                    const athleteLocation = records[0].Location || 'Unknown';
+                                    
+                                    records.sort((a, b) => {
+                                        const divisionA = a.Division || 'ZZZ';
+                                        const divisionB = b.Division || 'ZZZ';
+                                        if (divisionA !== divisionB) {
+                                            return divisionA.localeCompare(divisionB);
+                                        }
+                                        
+                                        const eventA = a.Event || 'ZZZ';
+                                        const eventB = b.Event || 'ZZZ';
+                                        if (eventA !== eventB) {
+                                            return eventA.localeCompare(eventB);
+                                        }
+                                        
+                                        const dateA = a.Date ? new Date(a.Date) : new Date(0);
+                                        const dateB = b.Date ? new Date(b.Date) : new Date(0);
+                                        return dateB - dateA;
+                                    });
+                                    
+                                    const recordItems = records.map(record => {
+                                        const statusClass = record.Status && record.Status.toLowerCase().includes('current') ? 'status-current' : 'status-superseded';
+                                        const statusText = record.Status || 'N/A';
+                                        
+                                        return `
+                                            <div class="record-item">
+                                                <div class="record-stats">
+                                                    <div class="record-stat-row">
+                                                        <span class="status-badge ${statusClass}">${statusText}</span>
+                                                    </div>
+                                                    <div class="record-stat-row">
+                                                        <span class="record-stat-value lift">${record.Lift || 'N/A'}</span>
+                                                    </div>
+                                                    <div class="record-stat-row">
+                                                        <span class="record-stat-value">${record.Event || 'N/A'}</span>
+                                                    </div>
+                                                    <div class="record-stat-row">
+                                                        <span class="record-stat-value">${record.Division || 'N/A'}</span>
+                                                    </div>
+                                                    <div class="record-stat-row">
+                                                        <span class="record-stat-value">${record['Weight Class'] || 'N/A'}</span>
+                                                    </div>
+                                                    <div class="record-stat-row">
+                                                        <span class="record-stat-value weight">
+                                                            ${record.Kilos ? record.Kilos + ' kg' : 'N/A'}
+                                                            ${record.Pounds ? '<span class="weight-lbs">(' + record.Pounds + ' lbs)</span>' : ''}
+                                                        </span>
+                                                    </div>
+                                                    <div class="record-stat-row">
+                                                        <span class="record-stat-value">${record.Date ? new Date(record.Date).toLocaleDateString() : 'N/A'}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `;
+                                    }).join('');
+                                    
+                                    return `
+                                        <div class="athlete-group">
+                                            <div class="athlete-header">
+                                                <div class="athlete-info">
+                                                    <h3 class="athlete-name">${athleteName}</h3>
+                                                    <p class="athlete-location">${athleteLocation}</p>
+                                                </div>
+                                                <div class="record-count">${records.length} record${records.length !== 1 ? 's' : ''}</div>
+                                            </div>
+                                            <div class="athlete-records">
+                                                ${recordItems}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('');
+                            
+                            return `
+                                <div class="status-group">
+                                    <div class="status-header">
+                                        <h3>${status}</h3>
+                                        <div class="status-subtitle">${statusRecordCount} record${statusRecordCount !== 1 ? 's' : ''}</div>
+                                    </div>
+                                    ${athleteHTML}
+                                </div>
+                            `;
+                        }).join('');
+                    
+                    return `
+                        <div class="location-group">
+                            <div class="location-header">
+                                <h2>${location}</h2>
+                                <div class="location-subtitle">${locationRecordCount} record${locationRecordCount !== 1 ? 's' : ''}</div>
+                            </div>
+                            ${statusHTML}
+                        </div>
+                    `;
+                }).join('');
+            
+            results.innerHTML = locationHTML;
+        }
+        
+        function clearSearch() {
+            document.getElementById('name').value = '';
+            document.getElementById('division').value = '';
+            document.getElementById('subDivision').value = '';
+            document.getElementById('subDivisionField').style.display = 'none';
+            document.getElementById('weightClass').value = '';
+            document.getElementById('event').value = '';
+            document.getElementById('lift').value = '';
+            document.getElementById('location').value = '';
+            
+            document.getElementById('statusAll').checked = true;
+            document.getElementById('statusTested').checked = false;
+            document.getElementById('statusNonTested').checked = false;
+            
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('resultsHeader').style.display = 'none';
+        }
+        
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchRecords();
+            }
+        });
+    </script>
 </body>
 </html>
