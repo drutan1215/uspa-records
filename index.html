@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1221042435234029"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USPA Records Search</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #000000 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #dc2626, #991b1b, #7f1d1d);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            position: relative;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .header p.updated {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        .search-section {
+            padding: 50px;
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .search-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-field label {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #f1f5f9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+
+        .search-field input, .search-field select {
+            padding: 16px 20px;
+            border: 2px solid #404040;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            color: #ffffff;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-field input::placeholder {
+            color: #9ca3af;
+        }
+
+        .search-field input:focus, .search-field select:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2), inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .search-field select option {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 8px;
+        }
+
+        .search-field select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+            appearance: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #dc2626;
+            cursor: pointer;
+        }
+
+        .checkbox-option label {
+            color: #f1f5f9;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-transform: none;
+            letter-spacing: normal;
+            margin: 0;
+        }
+
+        .search-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(145deg, #374151, #4b5563);
+            color: #f9fafb;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .results-section {
+            padding: 0 50px 50px;
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 2px solid #404040;
+        }
+
+        .results-count {
+            font-size: 20px;
+            color: #f1f5f9;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #9ca3af;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #404040;
+            border-top-color: #dc2626;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .location-group {
+            background: linear-gradient(145deg, #333, #2a2a2a);
+            border: 1px solid #555;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .location-header {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .location-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 0 8px 0;
+        }
+
+        .location-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .status-group {
+            background: linear-gradient(145deg, #2d2d2d, #2a2a2a);
+            border-top: 1px solid #404040;
+        }
+
+        .status-header {
+            background: linear-gradient(135deg, #4b5563, #374151);
+            color: #f1f5f9;
+            padding: 15px 30px;
+        }
+
+        .status-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+        }
+
+        .status-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+
+        .athlete-group {
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+            border-top: 1px solid #404040;
+            transition: all 0.4s ease;
+        }
+
+        .athlete-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            border-bottom: 1px solid #404040;
+        }
+
+        .athlete-info h3 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0 0 5px 0;
+        }
+
+        .athlete-info p {
+            color: #9ca3af;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .record-count {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .athlete-records {
+            padding: 20px 30px 30px;
+        }
+
+        .record-item {
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .record-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .record-item:hover {
+            transform: translateX(6px);
+            border-color: #555;
+        }
+
+        .record-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .record-lift-weight {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .record-lift {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #dc2626;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .record-weight {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .record-weight-lbs {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+        .record-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .record-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .record-meta-label {
+            color: #6b7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        .record-meta-value {
+            color: #d1d5db;
+        }
+
+        .record-date {
+            font-size: 12px;
+            color: #6b7280;
+            white-space: nowrap;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            color: #9ca3af;
+        }
+
+        .no-results h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+            }
+
+            .search-section, .results-section {
+                padding: 30px 20px;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .checkbox-group {
+                flex-direction: row;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .search-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .athlete-header {
+                padding: 18px 20px;
+                gap: 12px;
+            }
+
+            .athlete-info h3 {
+                font-size: 1.3rem;
+            }
+
+            .athlete-records {
+                padding: 15px 20px 20px;
+            }
+
+            .location-header, .status-header {
+                padding: 15px 20px;
+            }
+
+            .location-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .record-item:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>USPA RECORDS</h1>
+            <p>Searchable Database for All USPA Records</p>
+            <p class="updated">Updated Weekly</p>
+        </div>
+
+        <div class="search-section">
+            <div class="search-grid">
+                <div class="search-field">
+                    <label for="name">Athlete Name</label>
+                    <input type="text" id="name" placeholder="Enter athlete name...">
+                </div>
+
+                <div class="search-field">
+                    <label for="division">Division</label>
+                    <select id="division">
+                        <option value="">All Divisions</option>
+                        <option value="Open Men">Open Men</option>
+                        <option value="Junior Men">Junior Men</option>
+                        <option value="Submaster Men">Submaster Men</option>
+                        <option value="Master Men">Master Men</option>
+                        <option value="Open Women">Open Women</option>
+                        <option value="Junior Women">Junior Women</option>
+                        <option value="Submaster Women">Submaster Women</option>
+                        <option value="Master Women">Master Women</option>
+                    </select>
+
+                    <div id="subDivisionField" style="display: none; margin-top: 15px;">
+                        <label for="subDivision" style="font-weight: 700; margin-bottom: 10px; color: #f1f5f9; letter-spacing: 1px; font-size: 12px; display: block; text-transform: uppercase;">Sub Division</label>
+                        <select id="subDivision" style="padding: 16px 20px; border: 2px solid #404040; border-radius: 12px; font-size: 16px; transition: all 0.3s ease; background: linear-gradient(145deg, #1a1a1a, #2d2d2d); color: #ffffff; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5); width: 100%; background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'white\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6,9 12,15 18,9\'%3e%3c/polyline%3e%3c/svg%3e'); background-repeat: no-repeat; background-position: right 12px center; background-size: 16px; padding-right: 40px; appearance: none;">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="weightClass">Weight Class</label>
+                    <select id="weightClass">
+                        <option value="">All Weight Classes</option>
+                        <optgroup label="Women's">
+                            <option value="44kg">44kg (97 lbs)</option>
+                            <option value="48kg">48kg (105.7 lbs)</option>
+                            <option value="52kg">52kg (114.6 lbs)</option>
+                            <option value="56kg">56kg (123.5 lbs)</option>
+                            <option value="60kg">60kg (132.3 lbs)</option>
+                            <option value="67.5kg">67.5kg (148.8 lbs)</option>
+                            <option value="75kg">75kg (165.3 lbs)</option>
+                            <option value="82.5kg">82.5kg (181.9 lbs)</option>
+                            <option value="90kg">90kg (198.4 lbs)</option>
+                            <option value="100kg">100kg (220.5 lbs)</option>
+                            <option value="110kg">110kg (242.5 lbs)</option>
+                            <option value="110+kg">110+kg (SHW)</option>
+                        </optgroup>
+                        <optgroup label="Men's">
+                            <option value="52kg">52kg (114.6 lbs)</option>
+                            <option value="56kg">56kg (123.5 lbs)</option>
+                            <option value="60kg">60kg (132.3 lbs)</option>
+                            <option value="67.5kg">67.5kg (148.8 lbs)</option>
+                            <option value="75kg">75kg (165.3 lbs)</option>
+                            <option value="82.5kg">82.5kg (181.9 lbs)</option>
+                            <option value="90kg">90kg (198.4 lbs)</option>
+                            <option value="100kg">100kg (220.5 lbs)</option>
+                            <option value="110kg">110kg (242.5 lbs)</option>
+                            <option value="125kg">125kg (275.6 lbs)</option>
+                            <option value="140kg">140kg (308.6 lbs)</option>
+                            <option value="140+kg">140+kg (SHW)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="search-field">
+                    <label for="event">Event</label>
+                    <select id="event">
+                        <option value="">All Events</option>
+                        <option value="raw-powerlifting">Raw Powerlifting</option>
+                        <option value="classic-powerlifting">Classic Powerlifting</option>
+                        <option value="raw-bench-only">Raw Bench Only</option>
+                        <option value="raw-deadlift-only">Raw Deadlift Only</option>
+                        <option value="single-ply-powerlifting">Single Ply Powerlifting</option>
+                        <option value="single-ply-bench-only">Single Ply Bench Only</option>
+                        <option value="single-ply-deadlift-only">Single Ply Deadlift Only</option>
+                        <option value="multi-ply-powerlifting">Multi Ply Powerlifting</option>
+                        <option value="multi-ply-bench-only">Multi Ply Bench Only</option>
+                        <option value="multi-ply-deadlift-only">Multi Ply Deadlift Only</option>
+                    </select>
+                </div>
+
+                <div class="search-field">
+                    <label for="lift">Lift</label>
+                    <select id="lift">
+                        <option value="">All Lifts</option>
+                        <option value="Squat">Squat</option>
+                        <option value="Bench">Bench</option>
+                        <option value="Deadlift">Deadlift</option>
+                        <option value="TOTAL">Total</option>
+                    </select>
+                </div>
+
+                <div class="search-field">
+                    <label for="location">Location</label>
+                    <select id="location">
+                        <option value="">All Locations</option>
+                        <option value="national">National Records</option>
+                        <option value="ipl-world">IPL World Records</option>
+                        <option value="alabama">Alabama</option>
+                        <option value="alaska">Alaska</option>
+                        <option value="arizona">Arizona</option>
+                        <option value="arkansas">Arkansas</option>
+                        <option value="california">California</option>
+                        <option value="colorado">Colorado</option>
+                        <option value="connecticut">Connecticut</option>
+                        <option value="delaware">Delaware</option>
+                        <option value="florida">Florida</option>
+                        <option value="georgia">Georgia</option>
+                        <option value="hawaii">Hawaii</option>
+                        <option value="idaho">Idaho</option>
+                        <option value="illinois">Illinois</option>
+                        <option value="indiana">Indiana</option>
+                        <option value="iowa">Iowa</option>
+                        <option value="kansas">Kansas</option>
+                        <option value="kentucky">Kentucky</option>
+                        <option value="louisiana">Louisiana</option>
+                        <option value="maine">Maine</option>
+                        <option value="maryland">Maryland</option>
+                        <option value="massachusetts">Massachusetts</option>
+                        <option value="michigan">Michigan</option>
+                        <option value="minnesota">Minnesota</option>
+                        <option value="mississippi">Mississippi</option>
+                        <option value="missouri">Missouri</option>
+                        <option value="montana">Montana</option>
+                        <option value="nebraska">Nebraska</option>
+                        <option value="nevada">Nevada</option>
+                        <option value="new-hampshire">New Hampshire</option>
+                        <option value="new-jersey">New Jersey</option>
+                        <option value="new-mexico">New Mexico</option>
+                        <option value="new-york">New York</option>
+                        <option value="north-carolina">North Carolina</option>
+                        <option value="north-dakota">North Dakota</option>
+                        <option value="ohio">Ohio</option>
+                        <option value="oklahoma">Oklahoma</option>
+                        <option value="oregon">Oregon</option>
+                        <option value="pennsylvania">Pennsylvania</option>
+                        <option value="rhode-island">Rhode Island</option>
+                        <option value="south-carolina">South Carolina</option>
+                        <option value="south-dakota">South Dakota</option>
+                        <option value="tennessee">Tennessee</option>
+                        <option value="texas">Texas</option>
+                        <option value="utah">Utah</option>
+                        <option value="vermont">Vermont</option>
+                        <option value="virginia">Virginia</option>
+                        <option value="washington">Washington</option>
+                        <option value="west-virginia">West Virginia</option>
+                        <option value="wisconsin">Wisconsin</option>
+                        <option value="wyoming">Wyoming</option>
+                    </select>
+                </div>
+
+                <div class="search-field">
+                    <label>Status</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="statusAll" value="all" checked>
+                            <label for="statusAll">All</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="statusTested" value="drug-tested">
+                            <label for="statusTested">Drug Tested</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="statusNonTested" value="non-tested">
+                            <label for="statusNonTested">Non-Tested</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-buttons">
+                <button class="btn btn-primary" onclick="searchRecords()">Search Records</button>
+                <button class="btn btn-secondary" onclick="clearSearch()">Clear All</button>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <div class="results-header" id="resultsHeader" style="display: none;">
+                <div class="results-count" id="resultsCount"></div>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                Searching records...
+            </div>
+
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script>
+        // ── Supabase config ────────────────────────────────────────────────────────
+        // Use the anon/public key from Supabase → Settings → API (NOT the service_role key)
+        const SUPABASE_URL = 'https://cywrtxdppsxkdwlrehxu.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_dNsDcx8n0FNfxqDNd3s1XA_msIEgra1';
+
+        const API_HEADERS = {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        };
+
+        // ── Sub-division map ───────────────────────────────────────────────────────
+        const SUB_DIVISIONS = {
+            'Junior Men': [
+                'Junior Men 10 To 12', 'Junior Men 13 To 15', 'Junior Men 15 To 19',
+                'Junior Men 16 To 17', 'Junior Men 18 To 19', 'Junior Men 20 To 23'
+            ],
+            'Submaster Men': ['Submaster Men 35 To 39'],
+            'Master Men': [
+                'Master Men 40 To 44', 'Master Men 45 To 49', 'Master Men 50 To 54',
+                'Master Men 55 To 59', 'Master Men 60 To 64', 'Master Men 65 To 69',
+                'Master Men 70 To 74', 'Master Men 75 To 79', 'Master Men 80 To 84',
+                'Master Men 85+'
+            ],
+            'Junior Women': [
+                'Junior Women 10 To 12', 'Junior Women 13 To 15', 'Junior Women 15 To 19',
+                'Junior Women 16 To 17', 'Junior Women 18 To 19', 'Junior Women 20 To 23'
+            ],
+            'Submaster Women': ['Submaster Women 35 To 39'],
+            'Master Women': [
+                'Master Women 40 To 44', 'Master Women 45 To 49', 'Master Women 50 To 54',
+                'Master Women 55 To 59', 'Master Women 60 To 64', 'Master Women 65 To 69',
+                'Master Women 70 To 74', 'Master Women 75 To 79', 'Master Women 80 To 84',
+                'Master Women 85+'
+            ]
+        };
+
+        // ── Format helpers ─────────────────────────────────────────────────────────
+        function formatEvent(val) {
+            if (!val) return 'N/A';
+            return val.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
+
+        function formatDivision(val) {
+            if (!val) return 'N/A';
+            return val.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
+
+        function formatLocation(val) {
+            if (!val) return 'Unknown';
+            if (val === 'ipl-world') return 'IPL World';
+            return val.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
+
+        function formatStatus(val) {
+            if (!val) return 'N/A';
+            if (val === 'drug-tested') return 'Drug Tested';
+            if (val === 'non-tested') return 'Non-Tested';
+            return val;
+        }
+
+        function formatLift(val) {
+            if (!val) return 'N/A';
+            if (val === 'TOTAL') return 'Total';
+            return val;
+        }
+
+        function formatDate(val) {
+            if (!val) return '';
+            const d = new Date(val);
+            if (isNaN(d)) return val;
+            return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        // ── Setup ──────────────────────────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            setupStatusCheckboxes();
+            setupDivisionFilter();
+        });
+
+        function setupDivisionFilter() {
+            const divisionSelect = document.getElementById('division');
+            const subDivisionField = document.getElementById('subDivisionField');
+            const subDivisionSelect = document.getElementById('subDivision');
+
+            divisionSelect.addEventListener('change', function () {
+                const selected = this.value;
+                if (selected && SUB_DIVISIONS[selected]) {
+                    subDivisionField.style.display = 'flex';
+                    subDivisionSelect.innerHTML = '<option value="">All Sub Divisions</option>';
+                    SUB_DIVISIONS[selected].forEach(sub => {
+                        const opt = document.createElement('option');
+                        opt.value = sub;
+                        opt.textContent = sub;
+                        subDivisionSelect.appendChild(opt);
+                    });
+                } else {
+                    subDivisionField.style.display = 'none';
+                    subDivisionSelect.value = '';
+                }
+            });
+        }
+
+        function setupStatusCheckboxes() {
+            const statusAll = document.getElementById('statusAll');
+            const statusTested = document.getElementById('statusTested');
+            const statusNonTested = document.getElementById('statusNonTested');
+
+            statusAll.addEventListener('change', function () {
+                if (this.checked) {
+                    statusTested.checked = false;
+                    statusNonTested.checked = false;
+                }
+            });
+            [statusTested, statusNonTested].forEach(cb => {
+                cb.addEventListener('change', function () {
+                    if (this.checked) statusAll.checked = false;
+                });
+            });
+        }
+
+        // ── Search ─────────────────────────────────────────────────────────────────
+        async function searchRecords() {
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('results');
+            const resultsHeader = document.getElementById('resultsHeader');
+
+            loading.style.display = 'block';
+            results.innerHTML = '';
+            resultsHeader.style.display = 'none';
+
+            try {
+                const params = new URLSearchParams();
+                params.append('select', '*');
+                params.append('limit', '1000');
+                params.append('has_record', 'eq.true'); // never show placeholder rows
+
+                // Name (case-insensitive partial match)
+                const name = document.getElementById('name').value.trim();
+                if (name) params.append('name', `ilike.*${name}*`);
+
+                // Division — ilike handles DB's ALL-CAPS format
+                const division = document.getElementById('division').value;
+                const subDivision = document.getElementById('subDivision').value;
+                if (subDivision) {
+                    params.append('division', `ilike.${subDivision}`);
+                } else if (division) {
+                    // Wildcard match catches all sub-divisions of the group too
+                    params.append('division', `ilike.*${division}*`);
+                }
+
+                // Weight class (exact match, DB stores "60kg" format)
+                const weightClass = document.getElementById('weightClass').value;
+                if (weightClass) params.append('weight_class', `eq.${weightClass}`);
+
+                // Event (values already in DB format: "raw-powerlifting")
+                const event = document.getElementById('event').value;
+                if (event) params.append('event', `eq.${event}`);
+
+                // Lift (ilike for case safety)
+                const lift = document.getElementById('lift').value;
+                if (lift) params.append('lift', `ilike.${lift}`);
+
+                // Location (values already in DB format: "ohio", "new-york")
+                const location = document.getElementById('location').value;
+                if (location) params.append('location', `eq.${location}`);
+
+                // Status
+                const statusTested = document.getElementById('statusTested').checked;
+                const statusNonTested = document.getElementById('statusNonTested').checked;
+                if (statusTested && !statusNonTested) {
+                    params.append('status', 'eq.drug-tested');
+                } else if (statusNonTested && !statusTested) {
+                    params.append('status', 'eq.non-tested');
+                }
+
+                const url = `${SUPABASE_URL}/rest/v1/uspa_records?${params.toString()}`;
+                const response = await fetch(url, { headers: API_HEADERS });
+
+                if (!response.ok) {
+                    throw new Error(`API error ${response.status}: ${await response.text()}`);
+                }
+
+                const data = await response.json();
+                loading.style.display = 'none';
+                displayResults(data);
+
+                if (data.length > 0) {
+                    setTimeout(() => {
+                        document.getElementById('resultsHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+
+            } catch (error) {
+                loading.style.display = 'none';
+                console.error('Search error:', error);
+                results.innerHTML = '<div class="no-results"><h3>Error searching records</h3><p>Please try again or check the console for details.</p></div>';
+            }
+        }
+
+        // ── Display ────────────────────────────────────────────────────────────────
+        function displayResults(data) {
+            const results = document.getElementById('results');
+            const resultsHeader = document.getElementById('resultsHeader');
+            const resultsCount = document.getElementById('resultsCount');
+
+            if (data.length === 0) {
+                results.innerHTML = '<div class="no-results"><h3>No records found</h3><p>Try adjusting your search criteria.</p></div>';
+                resultsHeader.style.display = 'none';
+                return;
+            }
+
+            const name = document.getElementById('name').value.trim();
+            const uniqueAthletes = new Set(data.map(r => r.name)).size;
+            if (name) {
+                resultsCount.textContent = `${data.length} record${data.length !== 1 ? 's' : ''} for "${name}"`;
+            } else {
+                resultsCount.textContent = `${data.length} record${data.length !== 1 ? 's' : ''} · ${uniqueAthletes} athlete${uniqueAthletes !== 1 ? 's' : ''}`;
+            }
+            resultsHeader.style.display = 'flex';
+
+            // Group: location → status → athlete
+            const locationGroups = {};
+            data.forEach(record => {
+                const loc = record.location || 'unknown';
+                const stat = record.status || 'unknown';
+                const athleteKey = record.name || 'Unknown';
+
+                if (!locationGroups[loc]) locationGroups[loc] = {};
+                if (!locationGroups[loc][stat]) locationGroups[loc][stat] = {};
+                if (!locationGroups[loc][stat][athleteKey]) locationGroups[loc][stat][athleteKey] = [];
+                locationGroups[loc][stat][athleteKey].push(record);
+            });
+
+            const html = Object.entries(locationGroups)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([loc, statusGroups]) => {
+                    const locTotal = Object.values(statusGroups).flatMap(a => Object.values(a)).flat().length;
+
+                    const statusHTML = Object.entries(statusGroups)
+                        .sort(([a], [b]) => a.localeCompare(b))
+                        .map(([stat, athletes]) => {
+                            const statTotal = Object.values(athletes).flat().length;
+
+                            const athleteHTML = Object.entries(athletes)
+                                .sort(([a], [b]) => a.localeCompare(b))
+                                .map(([athleteName, records]) => {
+                                    // Sort by division, then weight class, then lift
+                                    records.sort((a, b) => {
+                                        const da = (a.division || '').localeCompare(b.division || '');
+                                        if (da !== 0) return da;
+                                        const liftOrder = { Squat: 0, Bench: 1, Deadlift: 2, TOTAL: 3 };
+                                        return (liftOrder[a.lift] ?? 99) - (liftOrder[b.lift] ?? 99);
+                                    });
+
+                                    const recordItemsHTML = records.map(r => `
+                                        <div class="record-item">
+                                            <div class="record-top-row">
+                                                <div class="record-lift-weight">
+                                                    <span class="record-lift">${formatLift(r.lift)}</span>
+                                                    <span class="record-weight">
+                                                        ${r.kilos != null ? r.kilos + ' kg' : '—'}
+                                                        ${r.pounds != null ? `<span class="record-weight-lbs">(${r.pounds} lbs)</span>` : ''}
+                                                    </span>
+                                                </div>
+                                                <span class="record-date">${formatDate(r.date)}</span>
+                                            </div>
+                                            <div class="record-meta">
+                                                <div class="record-meta-item">
+                                                    <span class="record-meta-label">Division</span>
+                                                    <span class="record-meta-value">${formatDivision(r.division)}</span>
+                                                </div>
+                                                <div class="record-meta-item">
+                                                    <span class="record-meta-label">Class</span>
+                                                    <span class="record-meta-value">${r.weight_class || '—'}</span>
+                                                </div>
+                                                <div class="record-meta-item">
+                                                    <span class="record-meta-label">Event</span>
+                                                    <span class="record-meta-value">${formatEvent(r.event)}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('');
+
+                                    return `
+                                        <div class="athlete-group">
+                                            <div class="athlete-header">
+                                                <div class="athlete-info">
+                                                    <h3>${athleteName}</h3>
+                                                    <p>${formatLocation(loc)} · ${formatStatus(stat)}</p>
+                                                </div>
+                                                <div class="record-count">${records.length} record${records.length !== 1 ? 's' : ''}</div>
+                                            </div>
+                                            <div class="athlete-records">${recordItemsHTML}</div>
+                                        </div>
+                                    `;
+                                }).join('');
+
+                            return `
+                                <div class="status-group">
+                                    <div class="status-header">
+                                        <h3>${formatStatus(stat)}</h3>
+                                        <div class="status-subtitle">${statTotal} record${statTotal !== 1 ? 's' : ''}</div>
+                                    </div>
+                                    ${athleteHTML}
+                                </div>
+                            `;
+                        }).join('');
+
+                    return `
+                        <div class="location-group">
+                            <div class="location-header">
+                                <h2>${formatLocation(loc)}</h2>
+                                <div class="location-subtitle">${locTotal} record${locTotal !== 1 ? 's' : ''}</div>
+                            </div>
+                            ${statusHTML}
+                        </div>
+                    `;
+                }).join('');
+
+            results.innerHTML = html;
+        }
+
+        // ── Clear ──────────────────────────────────────────────────────────────────
+        function clearSearch() {
+            ['name', 'division', 'weightClass', 'event', 'lift', 'location'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            document.getElementById('subDivision').value = '';
+            document.getElementById('subDivisionField').style.display = 'none';
+            document.getElementById('statusAll').checked = true;
+            document.getElementById('statusTested').checked = false;
+            document.getElementById('statusNonTested').checked = false;
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('resultsHeader').style.display = 'none';
+        }
+
+        document.addEventListener('keypress', e => {
+            if (e.key === 'Enter') searchRecords();
+        });
+    </script>
+</body>
+</html>

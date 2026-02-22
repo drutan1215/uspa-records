@@ -1,0 +1,5 @@
+.env
+.claude/
+uspa_downloads/
+uspa_checkpoint.txt
+*.png
