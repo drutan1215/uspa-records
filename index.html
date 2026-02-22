@@ -575,64 +575,146 @@
             font-weight: 600;
         }
 
+        /* ── Table view ─────────────────────────────────────────────────────────── */
+        .records-table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #404040;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .records-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .records-table th {
+            background: linear-gradient(135deg, #374151, #1f2937);
+            color: #f1f5f9;
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            border-bottom: 1px solid #555;
+        }
+
+        .records-table th:hover { background: linear-gradient(135deg, #4b5563, #374151); }
+        .records-table th.sort-active { color: #fca5a5; }
+        .records-table .sort-arrow { margin-left: 4px; opacity: 0.4; }
+        .records-table th.sort-active .sort-arrow { opacity: 1; }
+
+        .records-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #2a2a2a;
+            color: #d1d5db;
+            vertical-align: middle;
+        }
+
+        .records-table tr:last-child td { border-bottom: none; }
+        .records-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+        .records-table .td-name { font-weight: 700; color: #ffffff; }
+        .records-table .td-lift { font-weight: 800; color: #dc2626; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+        .records-table .td-weight { font-weight: 700; color: #ffffff; white-space: nowrap; }
+        .records-table .td-weight-lbs { font-size: 11px; color: #6b7280; display: block; }
+        .records-table .td-date { font-size: 12px; color: #6b7280; white-space: nowrap; }
+
+        /* ── Athlete cards (name search mode) ───────────────────────────────────── */
+        .athlete-card {
+            background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+            border: 1px solid #404040;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .athlete-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #333;
+            background: linear-gradient(145deg, #2d2d2d, #222);
+        }
+
+        .athlete-card-name {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #ffffff;
+        }
+
+        .athlete-card-records {
+            padding: 16px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .athlete-record-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: linear-gradient(145deg, #1a1a1a, #222);
+            border: 1px solid #333;
+            border-radius: 10px;
+            flex-wrap: wrap;
+        }
+
+        .athlete-record-lift {
+            font-size: 11px;
+            font-weight: 800;
+            color: #dc2626;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 58px;
+        }
+
+        .athlete-record-weight {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .athlete-record-lbs { font-size: 12px; color: #6b7280; }
+
+        .athlete-record-meta {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .meta-sep { color: #404040; }
+
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
+            .header h1 { font-size: 2.2rem; }
+            .header p { font-size: 1.1rem; }
+            .search-section, .results-section { padding: 30px 20px; }
+            .search-grid { grid-template-columns: 1fr; gap: 20px; }
+            .checkbox-group { flex-direction: row; gap: 15px; flex-wrap: wrap; }
+            .search-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 300px; }
+            .location-header, .status-header { padding: 15px 20px; }
+            .location-header h2 { font-size: 1.4rem; }
 
-            .header p {
-                font-size: 1.1rem;
-            }
+            /* Hide lower-priority table columns on mobile */
+            .records-table th:nth-child(n+7),
+            .records-table td:nth-child(n+7) { display: none; }
 
-            .search-section, .results-section {
-                padding: 30px 20px;
-            }
-
-            .search-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .checkbox-group {
-                flex-direction: row;
-                gap: 15px;
-                flex-wrap: wrap;
-            }
-
-            .search-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .athlete-header {
-                padding: 18px 20px;
-                gap: 12px;
-            }
-
-            .athlete-info h3 {
-                font-size: 1.3rem;
-            }
-
-            .athlete-records {
-                padding: 15px 20px 20px;
-            }
-
-            .location-header, .status-header {
-                padding: 15px 20px;
-            }
-
-            .location-header h2 {
-                font-size: 1.4rem;
-            }
-
-            .record-item:hover {
-                transform: none;
-            }
+            .athlete-card-header { padding: 16px 18px; }
+            .athlete-card-records { padding: 12px 18px; }
+            .athlete-record-meta { margin-left: 0; width: 100%; }
         }
     </style>
 </head>
@@ -852,6 +934,11 @@
             'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
         };
 
+        // ── Table sort state ───────────────────────────────────────────────────────
+        let tableSortCol = 'division';
+        let tableSortDir = 1;
+        let _tableData = [];
+
         // ── Sub-division map ───────────────────────────────────────────────────────
         const SUB_DIVISIONS = {
             'Junior Men': [
@@ -1047,8 +1134,20 @@
             }
         }
 
-        // ── Display ────────────────────────────────────────────────────────────────
+        // ── Display router ─────────────────────────────────────────────────────────
         function displayResults(data) {
+            const name = document.getElementById('name').value.trim();
+            if (name) {
+                displayAthleteCards(data, name);
+            } else {
+                tableSortCol = 'division';
+                tableSortDir = 1;
+                displayTable(data);
+            }
+        }
+
+        // ── Athlete card view (when searching by name) ─────────────────────────────
+        function displayAthleteCards(data, name) {
             const results = document.getElementById('results');
             const resultsHeader = document.getElementById('resultsHeader');
             const resultsCount = document.getElementById('resultsCount');
@@ -1059,115 +1158,154 @@
                 return;
             }
 
-            const name = document.getElementById('name').value.trim();
-            const uniqueAthletes = new Set(data.map(r => r.name)).size;
-            if (name) {
-                resultsCount.textContent = `${data.length} record${data.length !== 1 ? 's' : ''} for "${name}"`;
-            } else {
-                resultsCount.textContent = `${data.length} record${data.length !== 1 ? 's' : ''} · ${uniqueAthletes} athlete${uniqueAthletes !== 1 ? 's' : ''}`;
-            }
+            resultsCount.textContent = `${data.length} record${data.length !== 1 ? 's' : ''} for "${name}"`;
             resultsHeader.style.display = 'flex';
 
-            // Group: location → status → athlete
-            const locationGroups = {};
-            data.forEach(record => {
-                const loc = record.location || 'unknown';
-                const stat = record.status || 'unknown';
-                const athleteKey = record.name || 'Unknown';
+            const liftOrder = { Squat: 0, Bench: 1, Deadlift: 2, TOTAL: 3 };
 
-                if (!locationGroups[loc]) locationGroups[loc] = {};
-                if (!locationGroups[loc][stat]) locationGroups[loc][stat] = {};
-                if (!locationGroups[loc][stat][athleteKey]) locationGroups[loc][stat][athleteKey] = [];
-                locationGroups[loc][stat][athleteKey].push(record);
+            const athletes = {};
+            data.forEach(r => {
+                const key = r.name || 'Unknown';
+                if (!athletes[key]) athletes[key] = [];
+                athletes[key].push(r);
             });
 
-            const html = Object.entries(locationGroups)
+            const html = Object.entries(athletes)
                 .sort(([a], [b]) => a.localeCompare(b))
-                .map(([loc, statusGroups]) => {
-                    const locTotal = Object.values(statusGroups).flatMap(a => Object.values(a)).flat().length;
+                .map(([athleteName, records]) => {
+                    records.sort((a, b) => {
+                        const da = (a.division || '').localeCompare(b.division || '');
+                        if (da !== 0) return da;
+                        const wa = parseWC(a.weight_class), wb = parseWC(b.weight_class);
+                        if (wa !== wb) return wa - wb;
+                        return (liftOrder[a.lift] ?? 99) - (liftOrder[b.lift] ?? 99);
+                    });
 
-                    const statusHTML = Object.entries(statusGroups)
-                        .sort(([a], [b]) => a.localeCompare(b))
-                        .map(([stat, athletes]) => {
-                            const statTotal = Object.values(athletes).flat().length;
-
-                            const athleteHTML = Object.entries(athletes)
-                                .sort(([a], [b]) => a.localeCompare(b))
-                                .map(([athleteName, records]) => {
-                                    // Sort by division, then weight class, then lift
-                                    records.sort((a, b) => {
-                                        const da = (a.division || '').localeCompare(b.division || '');
-                                        if (da !== 0) return da;
-                                        const liftOrder = { Squat: 0, Bench: 1, Deadlift: 2, TOTAL: 3 };
-                                        return (liftOrder[a.lift] ?? 99) - (liftOrder[b.lift] ?? 99);
-                                    });
-
-                                    const recordItemsHTML = records.map(r => `
-                                        <div class="record-item">
-                                            <div class="record-top-row">
-                                                <div class="record-lift-weight">
-                                                    <span class="record-lift">${formatLift(r.lift)}</span>
-                                                    <span class="record-weight">
-                                                        ${r.kilos != null ? r.kilos + ' kg' : '—'}
-                                                        ${r.pounds != null ? `<span class="record-weight-lbs">(${r.pounds} lbs)</span>` : ''}
-                                                    </span>
-                                                </div>
-                                                <span class="record-date">${formatDate(r.date)}</span>
-                                            </div>
-                                            <div class="record-meta">
-                                                <div class="record-meta-item">
-                                                    <span class="record-meta-label">Division</span>
-                                                    <span class="record-meta-value">${formatDivision(r.division)}</span>
-                                                </div>
-                                                <div class="record-meta-item">
-                                                    <span class="record-meta-label">Class</span>
-                                                    <span class="record-meta-value">${r.weight_class || '—'}</span>
-                                                </div>
-                                                <div class="record-meta-item">
-                                                    <span class="record-meta-label">Event</span>
-                                                    <span class="record-meta-value">${formatEvent(r.event)}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `).join('');
-
-                                    return `
-                                        <div class="athlete-group">
-                                            <div class="athlete-header">
-                                                <div class="athlete-info">
-                                                    <h3>${athleteName}</h3>
-                                                    <p>${formatLocation(loc)} · ${formatStatus(stat)}</p>
-                                                </div>
-                                                <div class="record-count">${records.length} record${records.length !== 1 ? 's' : ''}</div>
-                                            </div>
-                                            <div class="athlete-records">${recordItemsHTML}</div>
-                                        </div>
-                                    `;
-                                }).join('');
-
-                            return `
-                                <div class="status-group">
-                                    <div class="status-header">
-                                        <h3>${formatStatus(stat)}</h3>
-                                        <div class="status-subtitle">${statTotal} record${statTotal !== 1 ? 's' : ''}</div>
-                                    </div>
-                                    ${athleteHTML}
-                                </div>
-                            `;
-                        }).join('');
+                    const rowsHTML = records.map(r => `
+                        <div class="athlete-record-row">
+                            <span class="athlete-record-lift">${formatLift(r.lift)}</span>
+                            <span class="athlete-record-weight">${r.kilos != null ? r.kilos + ' kg' : '—'}</span>
+                            ${r.pounds != null ? `<span class="athlete-record-lbs">(${r.pounds} lbs)</span>` : ''}
+                            <div class="athlete-record-meta">
+                                <span>${formatDivision(r.division)}</span>
+                                <span class="meta-sep">·</span>
+                                <span>${r.weight_class || '—'}</span>
+                                <span class="meta-sep">·</span>
+                                <span>${formatEvent(r.event)}</span>
+                                <span class="meta-sep">·</span>
+                                <span>${formatLocation(r.location)}</span>
+                                <span class="meta-sep">·</span>
+                                <span>${formatStatus(r.status)}</span>
+                                ${r.date ? `<span class="meta-sep">·</span><span>${formatDate(r.date)}</span>` : ''}
+                            </div>
+                        </div>
+                    `).join('');
 
                     return `
-                        <div class="location-group">
-                            <div class="location-header">
-                                <h2>${formatLocation(loc)}</h2>
-                                <div class="location-subtitle">${locTotal} record${locTotal !== 1 ? 's' : ''}</div>
+                        <div class="athlete-card">
+                            <div class="athlete-card-header">
+                                <div class="athlete-card-name">${athleteName}</div>
+                                <div class="record-count">${records.length} record${records.length !== 1 ? 's' : ''}</div>
                             </div>
-                            ${statusHTML}
+                            <div class="athlete-card-records">${rowsHTML}</div>
                         </div>
                     `;
                 }).join('');
 
             results.innerHTML = html;
+        }
+
+        // ── Table view (when browsing without name filter) ─────────────────────────
+        function parseWC(wc) {
+            if (!wc) return 9999;
+            const kg = String(wc).replace('kg', '');
+            return kg.endsWith('+') ? parseFloat(kg) + 0.1 : (parseFloat(kg) || 9999);
+        }
+
+        const TABLE_COLS = [
+            { key: 'name',         label: 'Athlete' },
+            { key: 'division',     label: 'Division' },
+            { key: 'weight_class', label: 'Class',    sortFn: (a, b) => parseWC(a.weight_class) - parseWC(b.weight_class) },
+            { key: 'lift',         label: 'Lift',     sortFn: (a, b) => { const o = {Squat:0,Bench:1,Deadlift:2,TOTAL:3}; return (o[a.lift]??99)-(o[b.lift]??99); } },
+            { key: 'kilos',        label: 'Weight',   sortFn: (a, b) => (b.kilos ?? -1) - (a.kilos ?? -1) },
+            { key: 'date',         label: 'Date' },
+            { key: 'location',     label: 'Location' },
+            { key: 'status',       label: 'Status' },
+            { key: 'event',        label: 'Event' },
+        ];
+
+        function sortTableData(data) {
+            const col = TABLE_COLS.find(c => c.key === tableSortCol);
+            return [...data].sort((a, b) => {
+                const cmp = col?.sortFn
+                    ? col.sortFn(a, b)
+                    : String(a[tableSortCol] ?? '').toLowerCase().localeCompare(String(b[tableSortCol] ?? '').toLowerCase());
+                return cmp * tableSortDir;
+            });
+        }
+
+        function displayTable(data) {
+            const results = document.getElementById('results');
+            const resultsHeader = document.getElementById('resultsHeader');
+            const resultsCount = document.getElementById('resultsCount');
+
+            if (data.length === 0) {
+                results.innerHTML = '<div class="no-results"><h3>No records found</h3><p>Try adjusting your search criteria.</p></div>';
+                resultsHeader.style.display = 'none';
+                return;
+            }
+
+            _tableData = data;
+            const uniqueAthletes = new Set(data.map(r => r.name)).size;
+            resultsCount.textContent = `${data.length} record${data.length !== 1 ? 's' : ''} · ${uniqueAthletes} athlete${uniqueAthletes !== 1 ? 's' : ''}`;
+            resultsHeader.style.display = 'flex';
+
+            const sorted = sortTableData(data);
+
+            const headersHTML = TABLE_COLS.map(col => {
+                const active = col.key === tableSortCol;
+                const arrow = active ? (tableSortDir === 1 ? '▲' : '▼') : '▲';
+                return `<th class="${active ? 'sort-active' : ''}" data-col="${col.key}">${col.label}<span class="sort-arrow">${arrow}</span></th>`;
+            }).join('');
+
+            const rowsHTML = sorted.map(r => `
+                <tr>
+                    <td class="td-name">${r.name || '—'}</td>
+                    <td>${formatDivision(r.division)}</td>
+                    <td>${r.weight_class || '—'}</td>
+                    <td class="td-lift">${formatLift(r.lift)}</td>
+                    <td class="td-weight">
+                        ${r.kilos != null ? r.kilos + ' kg' : '—'}
+                        ${r.pounds != null ? `<span class="td-weight-lbs">${r.pounds} lbs</span>` : ''}
+                    </td>
+                    <td class="td-date">${formatDate(r.date)}</td>
+                    <td>${formatLocation(r.location)}</td>
+                    <td>${formatStatus(r.status)}</td>
+                    <td>${formatEvent(r.event)}</td>
+                </tr>
+            `).join('');
+
+            results.innerHTML = `
+                <div class="records-table-wrap">
+                    <table class="records-table">
+                        <thead><tr>${headersHTML}</tr></thead>
+                        <tbody>${rowsHTML}</tbody>
+                    </table>
+                </div>
+            `;
+
+            results.querySelectorAll('.records-table th').forEach(th => {
+                th.addEventListener('click', () => {
+                    const col = th.dataset.col;
+                    if (col === tableSortCol) {
+                        tableSortDir *= -1;
+                    } else {
+                        tableSortCol = col;
+                        tableSortDir = 1;
+                    }
+                    displayTable(_tableData);
+                });
+            });
         }
 
         // ── Vacancies display ──────────────────────────────────────────────────────
