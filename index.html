@@ -116,6 +116,13 @@
             padding: 8px;
         }
 
+        .search-field select optgroup {
+            background: #2d2d2d;
+            color: #9ca3af;
+            font-weight: 700;
+            font-size: 11px;
+        }
+
         .search-field select {
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
             background-repeat: no-repeat;
@@ -437,6 +444,137 @@
             font-weight: 700;
         }
 
+        /* Vacancy toggle */
+        .vacancy-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .vacancy-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        .vacancy-toggle-track {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: #404040;
+            border-radius: 12px;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .vacancy-toggle input:checked ~ .vacancy-toggle-track {
+            background: #dc2626;
+        }
+
+        .vacancy-toggle-thumb {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 18px;
+            height: 18px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .vacancy-toggle input:checked ~ .vacancy-toggle-track .vacancy-toggle-thumb {
+            transform: translateX(20px);
+        }
+
+        .vacancy-toggle-label {
+            font-size: 14px;
+            color: #d1d5db;
+            font-weight: 500;
+        }
+
+        /* Vacancy results */
+        .vacancy-group {
+            background: linear-gradient(145deg, #333, #2a2a2a);
+            border: 1px solid #555;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .vacancy-group-header {
+            background: linear-gradient(135deg, #374151, #1f2937);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .vacancy-group-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+
+        .vacancy-group-sub {
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: 500;
+        }
+
+        .vacancy-count-badge {
+            background: #dc2626;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .vacancy-rows {
+            padding: 12px 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .vacancy-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: rgba(220, 38, 38, 0.06);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+
+        .vacancy-wc {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            min-width: 70px;
+        }
+
+        .vacancy-lift-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .vacancy-lift-tag {
+            background: rgba(220, 38, 38, 0.15);
+            border: 1px solid rgba(220, 38, 38, 0.4);
+            color: #fca5a5;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.2rem;
@@ -538,34 +676,32 @@
                     <label for="weightClass">Weight Class</label>
                     <select id="weightClass">
                         <option value="">All Weight Classes</option>
-                        <optgroup label="Women's">
-                            <option value="44kg">44kg (97 lbs)</option>
-                            <option value="48kg">48kg (105.7 lbs)</option>
-                            <option value="52kg">52kg (114.6 lbs)</option>
-                            <option value="56kg">56kg (123.5 lbs)</option>
-                            <option value="60kg">60kg (132.3 lbs)</option>
-                            <option value="67.5kg">67.5kg (148.8 lbs)</option>
-                            <option value="75kg">75kg (165.3 lbs)</option>
-                            <option value="82.5kg">82.5kg (181.9 lbs)</option>
-                            <option value="90kg">90kg (198.4 lbs)</option>
-                            <option value="100kg">100kg (220.5 lbs)</option>
-                            <option value="110kg">110kg (242.5 lbs)</option>
-                            <option value="110+kg">110+kg (SHW)</option>
-                        </optgroup>
-                        <optgroup label="Men's">
-                            <option value="52kg">52kg (114.6 lbs)</option>
-                            <option value="56kg">56kg (123.5 lbs)</option>
-                            <option value="60kg">60kg (132.3 lbs)</option>
-                            <option value="67.5kg">67.5kg (148.8 lbs)</option>
-                            <option value="75kg">75kg (165.3 lbs)</option>
-                            <option value="82.5kg">82.5kg (181.9 lbs)</option>
-                            <option value="90kg">90kg (198.4 lbs)</option>
-                            <option value="100kg">100kg (220.5 lbs)</option>
-                            <option value="110kg">110kg (242.5 lbs)</option>
-                            <option value="125kg">125kg (275.6 lbs)</option>
-                            <option value="140kg">140kg (308.6 lbs)</option>
-                            <option value="140+kg">140+kg (SHW)</option>
-                        </optgroup>
+                        <option disabled>── Women's ──</option>
+                        <option value="44kg">44kg (97 lbs)</option>
+                        <option value="48kg">48kg (105.7 lbs)</option>
+                        <option value="52kg">52kg (114.6 lbs)</option>
+                        <option value="56kg">56kg (123.5 lbs)</option>
+                        <option value="60kg">60kg (132.3 lbs)</option>
+                        <option value="67.5kg">67.5kg (148.8 lbs)</option>
+                        <option value="75kg">75kg (165.3 lbs)</option>
+                        <option value="82.5kg">82.5kg (181.9 lbs)</option>
+                        <option value="90kg">90kg (198.4 lbs)</option>
+                        <option value="100kg">100kg (220.5 lbs)</option>
+                        <option value="110kg">110kg (242.5 lbs)</option>
+                        <option value="110+kg">110+kg (SHW)</option>
+                        <option disabled>── Men's ──</option>
+                        <option value="52kg">52kg (114.6 lbs)</option>
+                        <option value="56kg">56kg (123.5 lbs)</option>
+                        <option value="60kg">60kg (132.3 lbs)</option>
+                        <option value="67.5kg">67.5kg (148.8 lbs)</option>
+                        <option value="75kg">75kg (165.3 lbs)</option>
+                        <option value="82.5kg">82.5kg (181.9 lbs)</option>
+                        <option value="90kg">90kg (198.4 lbs)</option>
+                        <option value="100kg">100kg (220.5 lbs)</option>
+                        <option value="110kg">110kg (242.5 lbs)</option>
+                        <option value="125kg">125kg (275.6 lbs)</option>
+                        <option value="140kg">140kg (308.6 lbs)</option>
+                        <option value="140+kg">140+kg (SHW)</option>
                     </select>
                 </div>
 
@@ -673,6 +809,16 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+                <label class="vacancy-toggle">
+                    <input type="checkbox" id="vacanciesOnly">
+                    <span class="vacancy-toggle-track">
+                        <span class="vacancy-toggle-thumb"></span>
+                    </span>
+                    <span class="vacancy-toggle-label">Vacancies Only — show where no record exists</span>
+                </label>
             </div>
 
             <div class="search-buttons">
@@ -828,13 +974,15 @@
 
             try {
                 const params = new URLSearchParams();
+                const vacanciesOnly = document.getElementById('vacanciesOnly').checked;
+
                 params.append('select', '*');
                 params.append('limit', '1000');
-                params.append('has_record', 'eq.true'); // never show placeholder rows
+                params.append('has_record', vacanciesOnly ? 'eq.false' : 'eq.true');
 
-                // Name (case-insensitive partial match)
+                // Name — not applicable in vacancies mode
                 const name = document.getElementById('name').value.trim();
-                if (name) params.append('name', `ilike.*${name}*`);
+                if (name && !vacanciesOnly) params.append('name', `ilike.*${name}*`);
 
                 // Division — ilike handles DB's ALL-CAPS format
                 const division = document.getElementById('division').value;
@@ -880,7 +1028,11 @@
 
                 const data = await response.json();
                 loading.style.display = 'none';
-                displayResults(data);
+                if (vacanciesOnly) {
+                    displayVacancies(data);
+                } else {
+                    displayResults(data);
+                }
 
                 if (data.length > 0) {
                     setTimeout(() => {
@@ -1018,6 +1170,76 @@
             results.innerHTML = html;
         }
 
+        // ── Vacancies display ──────────────────────────────────────────────────────
+        function displayVacancies(data) {
+            const results = document.getElementById('results');
+            const resultsHeader = document.getElementById('resultsHeader');
+            const resultsCount = document.getElementById('resultsCount');
+
+            if (data.length === 0) {
+                results.innerHTML = '<div class="no-results"><h3>No vacancies found</h3><p>All weight classes have records for this combination.</p></div>';
+                resultsHeader.style.display = 'none';
+                return;
+            }
+
+            resultsCount.textContent = `${data.length} vacant record slot${data.length !== 1 ? 's' : ''}`;
+            resultsHeader.style.display = 'flex';
+
+            // Group: location → status → event → division → weight_class → [lifts]
+            const groups = {};
+            data.forEach(r => {
+                const loc = r.location || 'unknown';
+                const stat = r.status || 'unknown';
+                const evt = r.event || 'unknown';
+                const div = r.division || 'unknown';
+                const wc = r.weight_class || 'unknown';
+                const lift = r.lift || 'unknown';
+
+                const key = `${loc}|||${stat}|||${evt}|||${div}`;
+                if (!groups[key]) groups[key] = { loc, stat, evt, div, slots: {} };
+                if (!groups[key].slots[wc]) groups[key].slots[wc] = [];
+                groups[key].slots[wc].push(lift);
+            });
+
+            const liftOrder = { Squat: 0, Bench: 1, Deadlift: 2, TOTAL: 3 };
+
+            const html = Object.values(groups)
+                .sort((a, b) => a.loc.localeCompare(b.loc) || a.div.localeCompare(b.div))
+                .map(({ loc, stat, evt, div, slots }) => {
+                    const slotCount = Object.values(slots).flat().length;
+
+                    const rowsHTML = Object.entries(slots)
+                        .sort(([a], [b]) => {
+                            const numA = parseFloat(a.replace('+', '.1').replace('kg', ''));
+                            const numB = parseFloat(b.replace('+', '.1').replace('kg', ''));
+                            return numA - numB;
+                        })
+                        .map(([wc, lifts]) => {
+                            const sortedLifts = lifts.sort((a, b) => (liftOrder[a] ?? 99) - (liftOrder[b] ?? 99));
+                            const tags = sortedLifts.map(l => `<span class="vacancy-lift-tag">${formatLift(l)}</span>`).join('');
+                            return `
+                                <div class="vacancy-row">
+                                    <span class="vacancy-wc">${wc}</span>
+                                    <div class="vacancy-lift-tags">${tags}</div>
+                                </div>`;
+                        }).join('');
+
+                    return `
+                        <div class="vacancy-group">
+                            <div class="vacancy-group-header">
+                                <div>
+                                    <div class="vacancy-group-title">${formatDivision(div)}</div>
+                                    <div class="vacancy-group-sub">${formatLocation(loc)} · ${formatEvent(evt)} · ${formatStatus(stat)}</div>
+                                </div>
+                                <span class="vacancy-count-badge">${slotCount} vacant</span>
+                            </div>
+                            <div class="vacancy-rows">${rowsHTML}</div>
+                        </div>`;
+                }).join('');
+
+            results.innerHTML = html;
+        }
+
         // ── Clear ──────────────────────────────────────────────────────────────────
         function clearSearch() {
             ['name', 'division', 'weightClass', 'event', 'lift', 'location'].forEach(id => {
@@ -1028,6 +1250,7 @@
             document.getElementById('statusAll').checked = true;
             document.getElementById('statusTested').checked = false;
             document.getElementById('statusNonTested').checked = false;
+            document.getElementById('vacanciesOnly').checked = false;
             document.getElementById('results').innerHTML = '';
             document.getElementById('resultsHeader').style.display = 'none';
         }
