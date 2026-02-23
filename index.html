@@ -1188,6 +1188,14 @@
             resultsHeader.style.display = 'flex';
 
             const liftOrder = { Squat: 0, Bench: 1, Deadlift: 2, TOTAL: 3 };
+            const divCategoryOrder = d => {
+                const u = (d || '').toUpperCase();
+                if (u.startsWith('JUNIOR'))    return 0;
+                if (u.startsWith('OPEN'))      return 1;
+                if (u.startsWith('SUBMASTER')) return 2;
+                if (u.startsWith('MASTER'))    return 3;
+                return 4;
+            };
 
             const athletes = {};
             data.forEach(r => {
@@ -1200,6 +1208,8 @@
                 .sort(([a], [b]) => a.localeCompare(b))
                 .map(([athleteName, records]) => {
                     records.sort((a, b) => {
+                        const dc = divCategoryOrder(a.division) - divCategoryOrder(b.division);
+                        if (dc !== 0) return dc;
                         const da = (a.division || '').localeCompare(b.division || '');
                         if (da !== 0) return da;
                         const wa = parseWC(a.weight_class), wb = parseWC(b.weight_class);
