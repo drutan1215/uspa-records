@@ -697,6 +697,26 @@
 
         .meta-sep { color: #404040; }
 
+        .location-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .location-badge-national {
+            background: rgba(234, 179, 8, 0.15);
+            border: 1px solid rgba(234, 179, 8, 0.5);
+            color: #fbbf24;
+        }
+        .location-badge-ipl {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.5);
+            color: #a78bfa;
+        }
+
         @media (max-width: 768px) {
             .header h1 { font-size: 2.2rem; }
             .header p { font-size: 1.1rem; }
@@ -982,6 +1002,12 @@
             return val.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
         }
 
+        function formatLocationDisplay(val) {
+            if (val === 'national') return '<span class="location-badge location-badge-national">National</span>';
+            if (val === 'ipl-world') return '<span class="location-badge location-badge-ipl">IPL World</span>';
+            return formatLocation(val);
+        }
+
         function formatStatus(val) {
             if (!val) return 'N/A';
             if (val === 'drug-tested') return 'Drug Tested';
@@ -1193,7 +1219,7 @@
                                 <span class="meta-sep">·</span>
                                 <span>${formatEvent(r.event)}</span>
                                 <span class="meta-sep">·</span>
-                                <span>${formatLocation(r.location)}</span>
+                                <span>${formatLocationDisplay(r.location)}</span>
                                 <span class="meta-sep">·</span>
                                 <span>${formatStatus(r.status)}</span>
                                 ${r.date ? `<span class="meta-sep">·</span><span>${formatDate(r.date)}</span>` : ''}
@@ -1279,7 +1305,7 @@
                         ${r.pounds != null ? `<span class="td-weight-lbs">${r.pounds} lbs</span>` : ''}
                     </td>
                     <td class="td-date">${formatDate(r.date)}</td>
-                    <td>${formatLocation(r.location)}</td>
+                    <td>${formatLocationDisplay(r.location)}</td>
                     <td>${formatStatus(r.status)}</td>
                     <td>${formatEvent(r.event)}</td>
                 </tr>

@@ -52,7 +52,7 @@ print(f"Loaded {len(records)} rows")
 
 # === Clear existing data ===
 print("Clearing existing table data...")
-supabase.table(TABLE_NAME).delete().neq("id", -1).execute()
+supabase.rpc("truncate_uspa_records").execute()
 
 # === Upload in batches ===
 total_batches = math.ceil(len(records) / BATCH_SIZE)
