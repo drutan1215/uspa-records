@@ -2,4 +2,5 @@
 .claude/
 uspa_downloads/
 uspa_checkpoint.txt
+uspa_all_records.csv
 *.png
