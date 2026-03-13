@@ -697,6 +697,28 @@
 
         .meta-sep { color: #404040; }
 
+        .athlete-status-section { margin-top: 4px; }
+
+        .athlete-status-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0 6px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6b7280;
+        }
+        .athlete-status-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #333;
+        }
+        .athlete-status-header.drug-tested { color: #22c55e; }
+        .athlete-status-header.non-tested  { color: #f59e0b; }
+
         .location-badge {
             display: inline-block;
             padding: 2px 8px;
@@ -1204,38 +1226,54 @@
                 athletes[key].push(r);
             });
 
+            const sortRecords = records => records.sort((a, b) => {
+                const dc = divCategoryOrder(a.division) - divCategoryOrder(b.division);
+                if (dc !== 0) return dc;
+                const da = (a.division || '').localeCompare(b.division || '');
+                if (da !== 0) return da;
+                const wa = parseWC(a.weight_class), wb = parseWC(b.weight_class);
+                if (wa !== wb) return wa - wb;
+                return (liftOrder[a.lift] ?? 99) - (liftOrder[b.lift] ?? 99);
+            });
+
+            const makeRows = records => records.map(r => `
+                <div class="athlete-record-row">
+                    <span class="athlete-record-lift">${formatLift(r.lift)}</span>
+                    <span class="athlete-record-weight">${r.kilos != null ? r.kilos + ' kg' : '—'}</span>
+                    ${r.pounds != null ? `<span class="athlete-record-lbs">(${r.pounds} lbs)</span>` : ''}
+                    <div class="athlete-record-meta">
+                        <span>${formatDivision(r.division)}</span>
+                        <span class="meta-sep">·</span>
+                        <span>${r.weight_class || '—'}</span>
+                        <span class="meta-sep">·</span>
+                        <span>${formatEvent(r.event)}</span>
+                        <span class="meta-sep">·</span>
+                        <span>${formatLocationDisplay(r.location)}</span>
+                        ${r.date ? `<span class="meta-sep">·</span><span>${formatDate(r.date)}</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+
             const html = Object.entries(athletes)
                 .sort(([a], [b]) => a.localeCompare(b))
                 .map(([athleteName, records]) => {
-                    records.sort((a, b) => {
-                        const dc = divCategoryOrder(a.division) - divCategoryOrder(b.division);
-                        if (dc !== 0) return dc;
-                        const da = (a.division || '').localeCompare(b.division || '');
-                        if (da !== 0) return da;
-                        const wa = parseWC(a.weight_class), wb = parseWC(b.weight_class);
-                        if (wa !== wb) return wa - wb;
-                        return (liftOrder[a.lift] ?? 99) - (liftOrder[b.lift] ?? 99);
-                    });
+                    const drugTested = sortRecords(records.filter(r => r.status === 'drug-tested'));
+                    const nonTested  = sortRecords(records.filter(r => r.status === 'non-tested'));
+                    const other      = sortRecords(records.filter(r => r.status !== 'drug-tested' && r.status !== 'non-tested'));
 
-                    const rowsHTML = records.map(r => `
-                        <div class="athlete-record-row">
-                            <span class="athlete-record-lift">${formatLift(r.lift)}</span>
-                            <span class="athlete-record-weight">${r.kilos != null ? r.kilos + ' kg' : '—'}</span>
-                            ${r.pounds != null ? `<span class="athlete-record-lbs">(${r.pounds} lbs)</span>` : ''}
-                            <div class="athlete-record-meta">
-                                <span>${formatDivision(r.division)}</span>
-                                <span class="meta-sep">·</span>
-                                <span>${r.weight_class || '—'}</span>
-                                <span class="meta-sep">·</span>
-                                <span>${formatEvent(r.event)}</span>
-                                <span class="meta-sep">·</span>
-                                <span>${formatLocationDisplay(r.location)}</span>
-                                <span class="meta-sep">·</span>
-                                <span>${formatStatus(r.status)}</span>
-                                ${r.date ? `<span class="meta-sep">·</span><span>${formatDate(r.date)}</span>` : ''}
-                            </div>
-                        </div>
-                    `).join('');
+                    const sectionsHTML = [
+                        drugTested.length ? `
+                            <div class="athlete-status-section">
+                                <div class="athlete-status-header drug-tested">Drug Tested</div>
+                                ${makeRows(drugTested)}
+                            </div>` : '',
+                        nonTested.length ? `
+                            <div class="athlete-status-section">
+                                <div class="athlete-status-header non-tested">Non-Tested</div>
+                                ${makeRows(nonTested)}
+                            </div>` : '',
+                        other.length ? makeRows(other) : '',
+                    ].join('');
 
                     return `
                         <div class="athlete-card">
@@ -1243,7 +1281,7 @@
                                 <div class="athlete-card-name">${athleteName}</div>
                                 <div class="record-count">${records.length} record${records.length !== 1 ? 's' : ''}</div>
                             </div>
-                            <div class="athlete-card-records">${rowsHTML}</div>
+                            <div class="athlete-card-records">${sectionsHTML}</div>
                         </div>
                     `;
                 }).join('');
