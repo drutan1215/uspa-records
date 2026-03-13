@@ -19,7 +19,7 @@ CHECKPOINT_FILE = Path(os.getcwd()) / "uspa_checkpoint.txt"
 OUTPUT_FILE = Path(os.getcwd()) / "uspa_all_records.csv"
 DOWNLOAD_DIR.mkdir(exist_ok=True)
 
-WORKER_COUNT = 12  # number of parallel Chrome instances
+WORKER_COUNT = 8  # number of parallel Chrome instances
 
 # === USPA weight classes (kg portion only, matching CSV format before the "/") ===
 MENS_WEIGHT_CLASSES = [
