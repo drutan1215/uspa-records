@@ -719,6 +719,49 @@
         .athlete-status-header.drug-tested { color: #22c55e; }
         .athlete-status-header.non-tested  { color: #f59e0b; }
 
+        .athlete-location-group { margin-top: 8px; }
+        .athlete-location-header {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #252525;
+            border: 1px solid #3d3d3d;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #d1d5db;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+        }
+        .athlete-division-group { margin-top: 8px; }
+        .athlete-division-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 3px 0;
+            font-size: 10px;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .athlete-division-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #2a2a2a;
+        }
+        .athlete-wc-group { margin-bottom: 6px; }
+        .athlete-wc-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 0 3px 2px;
+        }
+
         .location-badge {
             display: inline-block;
             padding: 2px 8px;
@@ -1226,53 +1269,87 @@
                 athletes[key].push(r);
             });
 
-            const sortRecords = records => records.sort((a, b) => {
-                const dc = divCategoryOrder(a.division) - divCategoryOrder(b.division);
-                if (dc !== 0) return dc;
-                const da = (a.division || '').localeCompare(b.division || '');
-                if (da !== 0) return da;
-                const wa = parseWC(a.weight_class), wb = parseWC(b.weight_class);
-                if (wa !== wb) return wa - wb;
-                return (liftOrder[a.lift] ?? 99) - (liftOrder[b.lift] ?? 99);
-            });
-
+            // Rows show only lift, weight, event, date — state/division/wc are now headers
             const makeRows = records => records.map(r => `
                 <div class="athlete-record-row">
                     <span class="athlete-record-lift">${formatLift(r.lift)}</span>
                     <span class="athlete-record-weight">${r.kilos != null ? r.kilos + ' kg' : '—'}</span>
                     ${r.pounds != null ? `<span class="athlete-record-lbs">(${r.pounds} lbs)</span>` : ''}
                     <div class="athlete-record-meta">
-                        <span>${formatDivision(r.division)}</span>
-                        <span class="meta-sep">·</span>
-                        <span>${r.weight_class || '—'}</span>
-                        <span class="meta-sep">·</span>
                         <span>${formatEvent(r.event)}</span>
-                        <span class="meta-sep">·</span>
-                        <span>${formatLocationDisplay(r.location)}</span>
                         ${r.date ? `<span class="meta-sep">·</span><span>${formatDate(r.date)}</span>` : ''}
                     </div>
                 </div>
             `).join('');
 
+            // Build nested: location → division → weight class → rows
+            const buildNestedHTML = statusRecords => {
+                const byLocation = {};
+                statusRecords.forEach(r => {
+                    const loc = r.location || 'unknown';
+                    const div = (r.division || 'unknown').toUpperCase();
+                    const wc  = r.weight_class || 'unknown';
+                    if (!byLocation[loc]) byLocation[loc] = {};
+                    if (!byLocation[loc][div]) byLocation[loc][div] = {};
+                    if (!byLocation[loc][div][wc]) byLocation[loc][div][wc] = [];
+                    byLocation[loc][div][wc].push(r);
+                });
+
+                const multiLoc = Object.keys(byLocation).length > 1;
+
+                return Object.entries(byLocation)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([loc, divisions]) => {
+                        const divisionsHTML = Object.entries(divisions)
+                            .sort(([a], [b]) => divCategoryOrder(a) - divCategoryOrder(b) || a.localeCompare(b))
+                            .map(([div, weightClasses]) => {
+                                const wcHTML = Object.entries(weightClasses)
+                                    .sort(([a], [b]) => parseWC(a) - parseWC(b))
+                                    .map(([wc, recs]) => {
+                                        const sorted = [...recs].sort((a, b) => (liftOrder[a.lift] ?? 99) - (liftOrder[b.lift] ?? 99));
+                                        return `
+                                            <div class="athlete-wc-group">
+                                                <div class="athlete-wc-label">${wc}</div>
+                                                ${makeRows(sorted)}
+                                            </div>`;
+                                    }).join('');
+                                return `
+                                    <div class="athlete-division-group">
+                                        <div class="athlete-division-header">${formatDivision(div)}</div>
+                                        ${wcHTML}
+                                    </div>`;
+                            }).join('');
+
+                        if (multiLoc) {
+                            return `
+                                <div class="athlete-location-group">
+                                    <div class="athlete-location-header">${formatLocation(loc)}</div>
+                                    ${divisionsHTML}
+                                </div>`;
+                        }
+                        return divisionsHTML;
+                    }).join('');
+            };
+
             const html = Object.entries(athletes)
                 .sort(([a], [b]) => a.localeCompare(b))
                 .map(([athleteName, records]) => {
-                    const drugTested = sortRecords(records.filter(r => r.status === 'drug-tested'));
-                    const nonTested  = sortRecords(records.filter(r => r.status === 'non-tested'));
-                    const other      = sortRecords(records.filter(r => r.status !== 'drug-tested' && r.status !== 'non-tested'));
+                    const drugTested = records.filter(r => r.status === 'drug-tested');
+                    const nonTested  = records.filter(r => r.status === 'non-tested');
+                    const other      = records.filter(r => r.status !== 'drug-tested' && r.status !== 'non-tested');
 
                     const sectionsHTML = [
                         drugTested.length ? `
                             <div class="athlete-status-section">
                                 <div class="athlete-status-header drug-tested">Drug Tested</div>
-                                ${makeRows(drugTested)}
+                                ${buildNestedHTML(drugTested)}
                             </div>` : '',
                         nonTested.length ? `
                             <div class="athlete-status-section">
                                 <div class="athlete-status-header non-tested">Non-Tested</div>
-                                ${makeRows(nonTested)}
+                                ${buildNestedHTML(nonTested)}
                             </div>` : '',
-                        other.length ? makeRows(other) : '',
+                        other.length ? buildNestedHTML(other) : '',
                     ].join('');
 
                     return `
