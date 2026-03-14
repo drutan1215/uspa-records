@@ -13,7 +13,7 @@ load_dotenv(Path(__file__).parent / ".env")
 SUPABASE_URL = os.environ["SUPABASE_URL"]
 SUPABASE_KEY = os.environ["SUPABASE_KEY"]  # service_role key
 TABLE_NAME = "uspa_records"
-INPUT_FILE = "uspa_all_records.csv"
+INPUT_FILE = Path(__file__).parent / "uspa_all_records.csv"
 BATCH_SIZE = 2000
 WORKERS = 2
 
@@ -57,6 +57,10 @@ print(f"Loaded {len(records)} rows")
 # === Clear existing data ===
 print("Clearing existing table data...")
 supabase.rpc("truncate_uspa_records").execute()
+count_after = supabase.table(TABLE_NAME).select("id", count="exact").execute().count
+if count_after != 0:
+    raise RuntimeError(f"Truncate failed — {count_after} rows still in table.")
+print("Table cleared.")
 
 # === Upload in batches (parallel) ===
 batches = [records[i * BATCH_SIZE : (i + 1) * BATCH_SIZE] for i in range(math.ceil(len(records) / BATCH_SIZE))]
@@ -83,4 +87,6 @@ with ThreadPoolExecutor(max_workers=WORKERS) as executor:
         completed += count
         print(f"  Batch {i}/{total_batches} done — {completed}/{len(records)} rows uploaded")
 
+from datetime import datetime
+(Path(__file__).parent / "last_updated.txt").write_text(datetime.now().strftime("%B %d, %Y"))
 print(f"\nDone — {len(records)} rows written to '{TABLE_NAME}'.")

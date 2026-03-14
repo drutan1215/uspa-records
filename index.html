@@ -75,21 +75,22 @@
         }
 
         .header-events-link {
-            display: inline-block;
-            margin-top: 16px;
-            padding: 8px 20px;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.35);
-            border-radius: 20px;
-            color: white;
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            padding: 5px 12px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 14px;
+            color: rgba(255,255,255,0.85);
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
             transition: background 0.2s;
         }
         .header-events-link:hover {
-            background: rgba(255,255,255,0.28);
+            background: rgba(255,255,255,0.24);
         }
 
         .search-section {
@@ -849,7 +850,7 @@
         <div class="header">
             <h1>USPA RECORDS</h1>
             <p>Searchable Database for All USPA Records</p>
-            <p class="updated">Updated Weekly</p>
+            <p class="updated" id="last-updated">Loading...</p>
             <a class="header-events-link" href="https://uspa.net/upcoming-events/" target="_blank" rel="noopener">Upcoming USPA Events ↗</a>
         </div>
 
@@ -1051,6 +1052,15 @@
     </div>
 
     <script>
+        // Load last updated date from file written by uspaupload.py
+        fetch('last_updated.txt').then(r => r.text()).then(t => {
+            const el = document.getElementById('last-updated');
+            if (el) el.textContent = 'Last Updated: ' + t.trim();
+        }).catch(() => {
+            const el = document.getElementById('last-updated');
+            if (el) el.textContent = 'Updated Weekly';
+        });
+
         // ── Supabase config ────────────────────────────────────────────────────────
         // Use the anon/public key from Supabase → Settings → API (NOT the service_role key)
         const SUPABASE_URL = 'https://cywrtxdppsxkdwlrehxu.supabase.co';
