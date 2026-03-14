@@ -5,7 +5,19 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USPA Records Search</title>
+    <title>USPA Records — Searchable Powerlifting Database</title>
+    <meta name="description" content="Search all USPA powerlifting records by athlete name, division, weight class, and state. Includes drug tested and non-tested records. Updated weekly.">
+    <meta name="keywords" content="USPA records, USPA powerlifting records, powerlifting records search, drug tested powerlifting, USPA squat record, USPA bench record, USPA deadlift record, USPA total record">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://drutan1215.github.io/uspa-records/">
+    <meta property="og:title" content="USPA Records — Searchable Powerlifting Database">
+    <meta property="og:description" content="Search all USPA powerlifting records by athlete, division, weight class, and state. Updated weekly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://drutan1215.github.io/uspa-records/">
+    <meta property="og:image" content="uspa medal.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="USPA Records — Searchable Powerlifting Database">
+    <meta name="twitter:description" content="Search all USPA powerlifting records by athlete, division, weight class, and state. Updated weekly.">
     <style>  
         * {
             margin: 0;
@@ -1627,6 +1639,20 @@
         document.addEventListener('keypress', e => {
             if (e.key === 'Enter') searchRecords();
         });
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "USPA Records",
+      "url": "https://drutan1215.github.io/uspa-records/",
+      "description": "Searchable database of all USPA powerlifting records by athlete, division, weight class, and state.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://drutan1215.github.io/uspa-records/?name={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
     </script>
 </body>
 </html>
