@@ -88,5 +88,13 @@ with ThreadPoolExecutor(max_workers=WORKERS) as executor:
         print(f"  Batch {i}/{total_batches} done — {completed}/{len(records)} rows uploaded")
 
 from datetime import datetime
-(Path(__file__).parent / "last_updated.txt").write_text(datetime.now().strftime("%B %d, %Y"))
+import subprocess as _sp
+date_str = datetime.now().strftime("%B %d, %Y")
+(Path(__file__).parent / "last_updated.txt").write_text(date_str)
 print(f"\nDone — {len(records)} rows written to '{TABLE_NAME}'.")
+
+# Push last_updated.txt to GitHub so the site reflects the new date
+_sp.run(["git", "add", "last_updated.txt"], cwd=str(Path(__file__).parent), check=True)
+_sp.run(["git", "commit", "-m", f"Update last_updated to {date_str}"], cwd=str(Path(__file__).parent), check=True)
+_sp.run(["git", "push"], cwd=str(Path(__file__).parent), check=True)
+print("last_updated.txt pushed to GitHub.")
