@@ -14,9 +14,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 import itertools
 
 # === Paths ===
-DOWNLOAD_DIR = Path(os.getcwd()) / "uspa_downloads"
-CHECKPOINT_FILE = Path(os.getcwd()) / "uspa_checkpoint.txt"
-OUTPUT_FILE = Path(os.getcwd()) / "uspa_all_records.csv"
+SCRIPT_DIR = Path(__file__).parent
+DOWNLOAD_DIR = SCRIPT_DIR / "uspa_downloads"
+OUTPUT_FILE = SCRIPT_DIR / "uspa_all_records.csv"
 DOWNLOAD_DIR.mkdir(exist_ok=True)
 
 WORKER_COUNT = 8  # number of parallel Chrome instances
@@ -113,14 +113,10 @@ urls = [
 
 print(f"\nTotal record pages to check: {len(urls)}")
 
-# === Load checkpoint (skip already-completed URLs) ===
-completed_urls = set()
-if CHECKPOINT_FILE.exists():
-    completed_urls = set(CHECKPOINT_FILE.read_text().splitlines())
-    print(f"Resuming — {len(completed_urls)} URLs already completed.")
-
-remaining_urls = [u for u in urls if u not in completed_urls]
-print(f"URLs remaining: {len(remaining_urls)}")
+# Always start fresh — clear any existing output
+if OUTPUT_FILE.exists():
+    OUTPUT_FILE.unlink()
+    print("Cleared existing output file.")
 
 
 def wait_for_download(download_dir: Path, timeout: int = 15) -> Path | None:
@@ -307,13 +303,11 @@ def scrape_url(driver, url: str, download_dir: Path) -> pd.DataFrame | None:
     status_value = params["status"][0]
     event_value = params.get("event", [""])[0]
 
-    def no_record_row() -> pd.DataFrame:
-        return pd.DataFrame([{
-            "Division": None, "Weight Class": None, "Lift": None,
-            "Name": None, "Kilos": float("nan"), "Pounds": float("nan"), "Date": None,
-            "Location": location_value, "Event": event_value, "Status": status_value,
-            "HasRecord": False,
-        }])
+    def all_vacancies() -> pd.DataFrame:
+        """Return full placeholder rows for every division × weight class × lift."""
+        empty = pd.DataFrame(columns=["Division", "Weight Class", "Lift", "Name", "Kilos", "Pounds", "Date", "Location", "Event", "Status", "HasRecord"])
+        empty["HasRecord"] = empty["HasRecord"].astype(bool)
+        return fill_all_vacancies(empty, location_value, event_value, status_value)
 
     driver.get(url)
 
@@ -329,8 +323,8 @@ def scrape_url(driver, url: str, download_dir: Path) -> pd.DataFrame | None:
                 EC.presence_of_element_located((By.XPATH, "//button[text()='Download CSV']"))
             )
         except TimeoutException:
-            print("  No records for this combination")
-            return no_record_row()
+            print("  No records for this combination — filling vacancies")
+            return all_vacancies()
 
         driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", button)
         WebDriverWait(driver, 5).until(EC.element_to_be_clickable(button)).click()
@@ -338,21 +332,18 @@ def scrape_url(driver, url: str, download_dir: Path) -> pd.DataFrame | None:
 
         csv_path = wait_for_download(download_dir)
         if csv_path is None:
-            print("  CSV download timed out")
-            return no_record_row()
+            print("  CSV download timed out — filling vacancies")
+            return all_vacancies()
 
         df = _read_csv_robust(csv_path)
-        if df is None:
-            print("  CSV was empty — no records")
-            return no_record_row()
+        if df is None or df.empty:
+            print("  CSV was empty — filling vacancies")
+            return all_vacancies()
+
         df["Location"] = location_value
         df["Event"] = event_value
         df["Status"] = status_value
         df["HasRecord"] = True
-
-        if df.empty:
-            print("  CSV was empty — no records")
-            return no_record_row()
 
         df = fill_all_vacancies(df, location_value, event_value, status_value)
         added = len(df[df["HasRecord"] == False])
@@ -371,13 +362,7 @@ def scrape_url(driver, url: str, download_dir: Path) -> pd.DataFrame | None:
 
 # === Main scrape loop ===
 lock = threading.Lock()
-
-# On resume, the existing OUTPUT_FILE already contains prior rows — no need to reload it.
-if OUTPUT_FILE.exists() and completed_urls:
-    prior_rows = sum(1 for _ in open(OUTPUT_FILE)) - 1  # subtract header
-    print(f"Resuming — {prior_rows} rows already in output file.")
-
-total = len(remaining_urls)
+total = len(urls)
 rows_written = 0
 
 def process_url(args: tuple) -> None:
@@ -392,15 +377,12 @@ def process_url(args: tuple) -> None:
         df = None
     with lock:
         if df is not None:
-            # Append-only: write header only when creating the file for the first time
             write_header = not OUTPUT_FILE.exists()
             df.to_csv(OUTPUT_FILE, mode="a", header=write_header, index=False)
             rows_written += len(df)
-        with open(CHECKPOINT_FILE, "a") as f:
-            f.write(url + "\n")
 
 try:
-    args = [(i, url) for i, url in enumerate(remaining_urls, 1)]
+    args = [(i, url) for i, url in enumerate(urls, 1)]
     with ThreadPoolExecutor(max_workers=WORKER_COUNT) as executor:
         futures = [executor.submit(process_url, a) for a in args]
         for future in as_completed(futures):
@@ -417,10 +399,17 @@ finally:
 
 # === Final output ===
 if OUTPUT_FILE.exists():
-    print(f"\nAll records saved to: {OUTPUT_FILE}  ({rows_written} new rows written this run)")
-    CHECKPOINT_FILE.unlink(missing_ok=True)
+    print(f"\nAll records saved to: {OUTPUT_FILE}  ({rows_written} rows written)")
+    print("\nStarting upload...")
+    import subprocess, sys
+    result = subprocess.run(
+        [sys.executable, str(Path(__file__).parent / "uspaupload.py")],
+        cwd=str(Path(__file__).parent),
+    )
+    if result.returncode != 0:
+        print("Upload failed — check uspaupload.py output above.")
 else:
-    print("\nNo CSVs were collected.")
+    print("\nNo CSVs were collected — skipping upload.")
 
 # === Cleanup download folder ===
 shutil.rmtree(DOWNLOAD_DIR, ignore_errors=True)

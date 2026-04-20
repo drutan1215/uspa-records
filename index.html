@@ -1132,9 +1132,13 @@
             return val;
         }
 
-        function formatLift(val) {
+        function formatLift(val, event) {
             if (!val) return 'N/A';
             if (val === 'TOTAL') return 'Total';
+            if (event) {
+                if (event.includes('deadlift-only') && val === 'Deadlift') return 'Deadlift Only';
+                if (event.includes('bench-only') && val === 'Bench') return 'Bench Only';
+            }
             return val;
         }
 
@@ -1324,7 +1328,7 @@
             // Rows show only lift, weight, event, date — state/division/wc are now headers
             const makeRows = records => records.map(r => `
                 <div class="athlete-record-row">
-                    <span class="athlete-record-lift">${formatLift(r.lift)}</span>
+                    <span class="athlete-record-lift">${formatLift(r.lift, r.event)}</span>
                     <span class="athlete-record-weight">${r.kilos != null ? r.kilos + ' kg' : '—'}</span>
                     ${r.pounds != null ? `<span class="athlete-record-lbs">(${r.pounds} lbs)</span>` : ''}
                     <div class="athlete-record-meta">
@@ -1526,7 +1530,7 @@
                     <td class="td-name">${r.name || '—'}</td>
                     <td>${formatDivision(r.division)}</td>
                     <td>${r.weight_class || '—'}</td>
-                    <td class="td-lift">${formatLift(r.lift)}</td>
+                    <td class="td-lift">${formatLift(r.lift, r.event)}</td>
                     <td class="td-weight">
                         ${r.kilos != null ? r.kilos + ' kg' : '—'}
                         ${r.pounds != null ? `<span class="td-weight-lbs">${r.pounds} lbs</span>` : ''}
@@ -1607,7 +1611,7 @@
                         })
                         .map(([wc, lifts]) => {
                             const sortedLifts = lifts.sort((a, b) => (liftOrder[a] ?? 99) - (liftOrder[b] ?? 99));
-                            const tags = sortedLifts.map(l => `<span class="vacancy-lift-tag">${formatLift(l)}</span>`).join('');
+                            const tags = sortedLifts.map(l => `<span class="vacancy-lift-tag">${formatLift(l, evt)}</span>`).join('');
                             return `
                                 <div class="vacancy-row">
                                     <span class="vacancy-wc">${wc}</span>
