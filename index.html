@@ -5,19 +5,22 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USPA Records — Searchable Powerlifting Database</title>
-    <meta name="description" content="Search all USPA powerlifting records by athlete name, division, weight class, and state. Includes drug tested and non-tested records. Updated weekly.">
-    <meta name="keywords" content="USPA records, USPA powerlifting records, powerlifting records search, drug tested powerlifting, USPA squat record, USPA bench record, USPA deadlift record, USPA total record">
+    <title>USPA Powerlifting Records | Search All State & National Records</title>
+    <meta name="description" content="Search every USPA powerlifting record — squat, bench, deadlift, and total — across all 50 states, national, and IPL world records. Filter by division, weight class, drug-tested status, and event. Updated weekly.">
+    <meta name="keywords" content="USPA records, USPA powerlifting records, USPA state records, USPA national records, powerlifting records search, drug tested powerlifting records, raw powerlifting records, classic powerlifting records, single ply powerlifting records, multi ply powerlifting records, USPA squat record, USPA bench record, USPA deadlift record, USPA total record, IPL world records, powerlifting divisions, open powerlifting, master powerlifting records">
     <meta name="robots" content="index, follow">
+    <meta name="author" content="USPA Records Database">
     <link rel="canonical" href="https://drutan1215.github.io/uspa-records/">
-    <meta property="og:title" content="USPA Records — Searchable Powerlifting Database">
-    <meta property="og:description" content="Search all USPA powerlifting records by athlete, division, weight class, and state. Updated weekly.">
+    <link rel="preconnect" href="https://cywrtxdppsxkdwlrehxu.supabase.co">
+    <meta property="og:title" content="USPA Powerlifting Records | Search All State & National Records">
+    <meta property="og:description" content="Search every USPA powerlifting record — squat, bench, deadlift, and total — across all 50 states, national, and IPL world records. Updated weekly.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://drutan1215.github.io/uspa-records/">
-    <meta property="og:image" content="uspa medal.png">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="USPA Records — Searchable Powerlifting Database">
-    <meta name="twitter:description" content="Search all USPA powerlifting records by athlete, division, weight class, and state. Updated weekly.">
+    <meta property="og:image" content="https://drutan1215.github.io/uspa-records/uspa medal.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="USPA Powerlifting Records | Search All State & National Records">
+    <meta name="twitter:description" content="Search every USPA powerlifting record — squat, bench, deadlift, and total — across all 50 states, national, and IPL world records. Updated weekly.">
+    <meta name="twitter:image" content="https://drutan1215.github.io/uspa-records/uspa medal.png">
     <style>  
         * {
             margin: 0;
@@ -854,6 +857,10 @@
             <a class="header-events-link" href="https://uspa.net/upcoming-events/" target="_blank" rel="noopener">Upcoming USPA Events ↗</a>
         </div>
 
+<div style="background:#181818;border-bottom:1px solid #2a2a2a;padding:20px 50px;font-size:14px;color:#9ca3af;line-height:1.7;text-align:center;">
+    The most complete searchable database of <strong style="color:#d1d5db;">USPA powerlifting records</strong> — covering all 50 states, national records, and IPL world records. Browse <strong style="color:#d1d5db;">squat, bench press, deadlift, and total</strong> records across every division and weight class for both <strong style="color:#d1d5db;">drug-tested</strong> and <strong style="color:#d1d5db;">non-tested</strong> lifters in raw, classic, single-ply, and multi-ply events. Updated weekly from official USPA data.
+</div>
+
 <div class="search-section">
             <div class="search-grid">
                 <div class="search-field">
@@ -1655,18 +1662,101 @@
         });
     </script>
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "USPA Records",
-      "url": "https://drutan1215.github.io/uspa-records/",
-      "description": "Searchable database of all USPA powerlifting records by athlete, division, weight class, and state.",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://drutan1215.github.io/uspa-records/?name={search_term_string}",
-        "query-input": "required name=search_term_string"
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "USPA Powerlifting Records",
+        "url": "https://drutan1215.github.io/uspa-records/",
+        "description": "Searchable database of all USPA powerlifting records by athlete, division, weight class, and state.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://drutan1215.github.io/uspa-records/?name={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "USPA Powerlifting Records Database",
+        "description": "Complete database of all USPA powerlifting records including state, national, and IPL world records across all divisions, weight classes, and events. Covers raw, classic, single-ply, and multi-ply powerlifting for both drug-tested and non-tested lifters.",
+        "url": "https://drutan1215.github.io/uspa-records/",
+        "keywords": ["USPA", "powerlifting", "records", "squat", "bench press", "deadlift", "total", "drug-tested", "raw powerlifting", "state records", "national records"],
+        "creator": {
+          "@type": "Organization",
+          "name": "USPA Records Database"
+        },
+        "spatialCoverage": {
+          "@type": "Place",
+          "name": "United States"
+        },
+        "updateFrequency": "Weekly",
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "SportsOrganization",
+        "name": "United States Powerlifting Association",
+        "alternateName": "USPA",
+        "sport": "Powerlifting",
+        "url": "https://uspa.net",
+        "sameAs": "https://uspa.net"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is USPA powerlifting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "USPA (United States Powerlifting Association) is one of the largest powerlifting federations in the US, sanctioning competitions in raw, classic, single-ply, and multi-ply powerlifting across all 50 states. Athletes compete in squat, bench press, and deadlift for a combined total."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between drug-tested and non-tested USPA records?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Drug-tested USPA records are set at competitions where athletes are subject to anti-doping testing. Non-tested records are set at open competitions with no drug testing. Both are official USPA records but are tracked and displayed separately."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How often are USPA records updated on this site?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This database is updated weekly, pulling the latest official records directly from the USPA records portal covering all divisions, weight classes, and locations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What weight classes does USPA use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Men's USPA weight classes are: 52kg, 56kg, 60kg, 67.5kg, 75kg, 82.5kg, 90kg, 100kg, 110kg, 125kg, 140kg, and 140+kg. Women's weight classes are: 44kg, 48kg, 52kg, 56kg, 60kg, 67.5kg, 75kg, 82.5kg, 90kg, 100kg, 110kg, and 110+kg."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What USPA divisions are tracked?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This database tracks all USPA divisions including Open, Junior (13-15, 16-17, 18-19, 20-23), Submaster (35-39), and Masters (40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80-84) for both men and women."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What events does USPA sanction?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "USPA sanctions raw powerlifting, classic powerlifting, single-ply powerlifting, multi-ply powerlifting, as well as bench-only and deadlift-only variations of each equipment category."
+            }
+          }
+        ]
       }
-    }
+    ]
     </script>
 </body>
 </html>
