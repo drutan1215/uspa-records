@@ -1,0 +1,47 @@
+name: Scrape & Upload USPA Records
+
+on:
+  schedule:
+    - cron: '0 8 * * 0'  # every Sunday at 8am UTC
+  workflow_dispatch:       # allow manual runs
+
+jobs:
+  scrape-and-upload:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # needed for git push in uspaupload.py
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Chrome
+        run: |
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update -q
+          sudo apt-get install -y google-chrome-stable
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pandas selenium webdriver-manager "supabase==2.15.2" python-dotenv
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Scrape records
+        env:
+          WORKER_COUNT: 4
+        run: python usparecordsscrape.py
+
+      - name: Upload to Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python uspaupload.py
