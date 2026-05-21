@@ -400,16 +400,10 @@ finally:
 # === Final output ===
 if OUTPUT_FILE.exists():
     print(f"\nAll records saved to: {OUTPUT_FILE}  ({rows_written} rows written)")
-    print("\nStarting upload...")
-    import subprocess, sys
-    result = subprocess.run(
-        [sys.executable, str(Path(__file__).parent / "uspaupload.py")],
-        cwd=str(Path(__file__).parent),
-    )
-    if result.returncode != 0:
-        print("Upload failed — check uspaupload.py output above.")
 else:
-    print("\nNo CSVs were collected — skipping upload.")
+    import sys
+    print("\nNo CSVs were collected — aborting.")
+    sys.exit(1)
 
 # === Cleanup download folder ===
 shutil.rmtree(DOWNLOAD_DIR, ignore_errors=True)
