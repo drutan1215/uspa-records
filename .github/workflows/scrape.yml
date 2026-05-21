@@ -36,6 +36,7 @@ jobs:
       - name: Scrape records
         env:
           WORKER_COUNT: 4
+          MAX_URLS: 20
         run: python usparecordsscrape.py
 
       - name: Upload to Supabase

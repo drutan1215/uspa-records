@@ -111,6 +111,10 @@ urls = [
     for location, status, event in itertools.product(locations, statuses, events)
 ]
 
+max_urls = int(os.environ.get("MAX_URLS", 0))
+if max_urls:
+    urls = urls[:max_urls]
+
 print(f"\nTotal record pages to check: {len(urls)}")
 
 # Always start fresh — clear any existing output
