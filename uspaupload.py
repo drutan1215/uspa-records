@@ -119,7 +119,12 @@ date_str = datetime.now().strftime("%B %d, %Y")
 print(f"\nDone — {len(records)} rows written to '{TABLE_NAME}'.")
 
 # Push last_updated.txt to GitHub so the site reflects the new date
-_sp.run(["git", "add", "last_updated.txt"], cwd=str(Path(__file__).parent), check=True)
-_sp.run(["git", "commit", "-m", f"Update last_updated to {date_str}"], cwd=str(Path(__file__).parent), check=True)
-_sp.run(["git", "push"], cwd=str(Path(__file__).parent), check=True)
-print("last_updated.txt pushed to GitHub.")
+last_updated_file = Path(__file__).parent / "last_updated.txt"
+if not last_updated_file.exists() or last_updated_file.read_text().strip() != date_str:
+    last_updated_file.write_text(date_str)
+    _sp.run(["git", "add", "last_updated.txt"], cwd=str(Path(__file__).parent), check=True)
+    _sp.run(["git", "commit", "-m", f"Update last_updated to {date_str}"], cwd=str(Path(__file__).parent), check=True)
+    _sp.run(["git", "push"], cwd=str(Path(__file__).parent), check=True)
+    print("last_updated.txt pushed to GitHub.")
+else:
+    print("last_updated.txt already up to date — skipping commit.")
