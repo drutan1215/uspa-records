@@ -42,4 +42,5 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          USPA_UPLOAD_WORKERS: 1
         run: python uspaupload.py

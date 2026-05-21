@@ -2,10 +2,12 @@ import os
 import math
 import json
 import time
+import threading
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import pandas as pd
-from supabase import create_client
+from postgrest.types import ReturnMethod
+from supabase import ClientOptions, create_client
 from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).parent / ".env")
@@ -14,10 +16,26 @@ SUPABASE_URL = os.environ["SUPABASE_URL"]
 SUPABASE_KEY = os.environ["SUPABASE_KEY"]  # service_role key
 TABLE_NAME = "uspa_records"
 INPUT_FILE = Path(__file__).parent / "uspa_all_records.csv"
-BATCH_SIZE = 2000
-WORKERS = 2
+BATCH_SIZE = int(os.getenv("USPA_UPLOAD_BATCH_SIZE", "1000"))
+WORKERS = int(os.getenv("USPA_UPLOAD_WORKERS", "2"))
+POSTGREST_TIMEOUT = int(os.getenv("USPA_UPLOAD_TIMEOUT", "60"))
 
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+def new_client():
+    return create_client(
+        SUPABASE_URL,
+        SUPABASE_KEY,
+        options=ClientOptions(postgrest_client_timeout=POSTGREST_TIMEOUT),
+    )
+
+
+supabase = new_client()
+thread_local = threading.local()
+
+
+def upload_client():
+    if not hasattr(thread_local, "client"):
+        thread_local.client = new_client()
+    return thread_local.client
 
 # === Load CSV ===
 print(f"Reading {INPUT_FILE}...")
@@ -71,14 +89,21 @@ completed = 0
 
 def upload_batch(args):
     i, batch = args
+    client = upload_client()
     for attempt in range(3):
         try:
-            supabase.table(TABLE_NAME).insert(batch).execute()
+            print(f"  Batch {i}/{total_batches} starting attempt {attempt + 1} ({len(batch)} rows)", flush=True)
+            client.table(TABLE_NAME).insert(batch, returning=ReturnMethod.minimal).execute()
             return i, len(batch)
-        except Exception:
+        except Exception as exc:
             if attempt == 2:
                 raise
-            time.sleep(2 ** attempt)  # 1s, 2s backoff
+            # Discard broken connection so next attempt gets a fresh one
+            if hasattr(thread_local, "client"):
+                del thread_local.client
+            wait = 2 ** attempt
+            print(f"  Batch {i}/{total_batches} failed attempt {attempt + 1}: {exc}; retrying in {wait}s", flush=True)
+            time.sleep(wait)  # 1s, 2s backoff
 
 with ThreadPoolExecutor(max_workers=WORKERS) as executor:
     futures = [executor.submit(upload_batch, (i + 1, batch)) for i, batch in enumerate(batches)]
