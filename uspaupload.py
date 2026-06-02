@@ -115,7 +115,6 @@ with ThreadPoolExecutor(max_workers=WORKERS) as executor:
 from datetime import datetime
 import subprocess as _sp
 date_str = datetime.now().strftime("%B %d, %Y")
-(Path(__file__).parent / "last_updated.txt").write_text(date_str)
 print(f"\nDone — {len(records)} rows written to '{TABLE_NAME}'.")
 
 # Push last_updated.txt to GitHub so the site reflects the new date
