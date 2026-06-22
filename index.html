@@ -11,6 +11,7 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="USPA Records Database">
     <link rel="canonical" href="https://www.usparecords.com">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     <link rel="preconnect" href="https://cywrtxdppsxkdwlrehxu.supabase.co">
     <meta property="og:title" content="USPA Powerlifting Records | Search All State & National Records">
     <meta property="og:description" content="Search every USPA powerlifting record — squat, bench, deadlift, and total — across all 50 states, national, and IPL world records. Updated weekly.">
@@ -835,6 +836,13 @@
             .athlete-card-records { padding: 12px 18px; }
             .athlete-record-meta { margin-left: 0; width: 100%; }
         }
+
+        /* ── SEO: location browse links ──────────────────────────────────────── */
+        .state-link { color: #9ca3af; text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; white-space: nowrap; }
+        .state-link:hover { color: #f1f5f9; text-decoration: underline; }
+        .state-link-special { color: #fca5a5; font-weight: 700; }
+        .state-link-special:hover { color: #ffffff; }
+        @media (max-width: 768px) { .state-browse { padding: 14px 20px 18px !important; } }
     </style>
     <link rel="icon" type="image/png" href="uspa medal.png">
     <script async defer src="https://app.visitortracking.com/assets/js/tracer.js" > </script>
@@ -860,6 +868,65 @@
 <div style="background:#181818;border-bottom:1px solid #2a2a2a;padding:20px 50px;font-size:14px;color:#9ca3af;line-height:1.7;text-align:center;">
     The most complete searchable database of <strong style="color:#d1d5db;">USPA powerlifting records</strong> — covering all 50 states, national records, and IPL world records. Browse <strong style="color:#d1d5db;">squat, bench press, deadlift, and total</strong> records across every division and weight class for both <strong style="color:#d1d5db;">drug-tested</strong> and <strong style="color:#d1d5db;">non-tested</strong> lifters in raw, classic, single-ply, and multi-ply events. Updated weekly from official USPA data.
 </div>
+
+<nav class="state-browse" aria-label="Browse records by location" style="background:#0f0f0f;border-bottom:1px solid #252525;padding:16px 50px 20px;">
+    <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#4b5563;margin-bottom:12px;">Browse by Location</p>
+    <div style="display:flex;flex-wrap:wrap;gap:5px 10px;align-items:center;">
+        <a href="/?location=national" onclick="quickSearch('national');return false;" class="state-link state-link-special">National</a>
+        <a href="/?location=ipl-world" onclick="quickSearch('ipl-world');return false;" class="state-link state-link-special">IPL World</a>
+        <span style="color:#2a2a2a;font-size:16px;margin:0 2px;">|</span>
+        <a href="/?location=alabama" onclick="quickSearch('alabama');return false;" class="state-link">Alabama</a>
+        <a href="/?location=alaska" onclick="quickSearch('alaska');return false;" class="state-link">Alaska</a>
+        <a href="/?location=arizona" onclick="quickSearch('arizona');return false;" class="state-link">Arizona</a>
+        <a href="/?location=arkansas" onclick="quickSearch('arkansas');return false;" class="state-link">Arkansas</a>
+        <a href="/?location=california" onclick="quickSearch('california');return false;" class="state-link">California</a>
+        <a href="/?location=colorado" onclick="quickSearch('colorado');return false;" class="state-link">Colorado</a>
+        <a href="/?location=connecticut" onclick="quickSearch('connecticut');return false;" class="state-link">Connecticut</a>
+        <a href="/?location=delaware" onclick="quickSearch('delaware');return false;" class="state-link">Delaware</a>
+        <a href="/?location=florida" onclick="quickSearch('florida');return false;" class="state-link">Florida</a>
+        <a href="/?location=georgia" onclick="quickSearch('georgia');return false;" class="state-link">Georgia</a>
+        <a href="/?location=hawaii" onclick="quickSearch('hawaii');return false;" class="state-link">Hawaii</a>
+        <a href="/?location=idaho" onclick="quickSearch('idaho');return false;" class="state-link">Idaho</a>
+        <a href="/?location=illinois" onclick="quickSearch('illinois');return false;" class="state-link">Illinois</a>
+        <a href="/?location=indiana" onclick="quickSearch('indiana');return false;" class="state-link">Indiana</a>
+        <a href="/?location=iowa" onclick="quickSearch('iowa');return false;" class="state-link">Iowa</a>
+        <a href="/?location=kansas" onclick="quickSearch('kansas');return false;" class="state-link">Kansas</a>
+        <a href="/?location=kentucky" onclick="quickSearch('kentucky');return false;" class="state-link">Kentucky</a>
+        <a href="/?location=louisiana" onclick="quickSearch('louisiana');return false;" class="state-link">Louisiana</a>
+        <a href="/?location=maine" onclick="quickSearch('maine');return false;" class="state-link">Maine</a>
+        <a href="/?location=maryland" onclick="quickSearch('maryland');return false;" class="state-link">Maryland</a>
+        <a href="/?location=massachusetts" onclick="quickSearch('massachusetts');return false;" class="state-link">Massachusetts</a>
+        <a href="/?location=michigan" onclick="quickSearch('michigan');return false;" class="state-link">Michigan</a>
+        <a href="/?location=minnesota" onclick="quickSearch('minnesota');return false;" class="state-link">Minnesota</a>
+        <a href="/?location=mississippi" onclick="quickSearch('mississippi');return false;" class="state-link">Mississippi</a>
+        <a href="/?location=missouri" onclick="quickSearch('missouri');return false;" class="state-link">Missouri</a>
+        <a href="/?location=montana" onclick="quickSearch('montana');return false;" class="state-link">Montana</a>
+        <a href="/?location=nebraska" onclick="quickSearch('nebraska');return false;" class="state-link">Nebraska</a>
+        <a href="/?location=nevada" onclick="quickSearch('nevada');return false;" class="state-link">Nevada</a>
+        <a href="/?location=new-hampshire" onclick="quickSearch('new-hampshire');return false;" class="state-link">New Hampshire</a>
+        <a href="/?location=new-jersey" onclick="quickSearch('new-jersey');return false;" class="state-link">New Jersey</a>
+        <a href="/?location=new-mexico" onclick="quickSearch('new-mexico');return false;" class="state-link">New Mexico</a>
+        <a href="/?location=new-york" onclick="quickSearch('new-york');return false;" class="state-link">New York</a>
+        <a href="/?location=north-carolina" onclick="quickSearch('north-carolina');return false;" class="state-link">North Carolina</a>
+        <a href="/?location=north-dakota" onclick="quickSearch('north-dakota');return false;" class="state-link">North Dakota</a>
+        <a href="/?location=ohio" onclick="quickSearch('ohio');return false;" class="state-link">Ohio</a>
+        <a href="/?location=oklahoma" onclick="quickSearch('oklahoma');return false;" class="state-link">Oklahoma</a>
+        <a href="/?location=oregon" onclick="quickSearch('oregon');return false;" class="state-link">Oregon</a>
+        <a href="/?location=pennsylvania" onclick="quickSearch('pennsylvania');return false;" class="state-link">Pennsylvania</a>
+        <a href="/?location=rhode-island" onclick="quickSearch('rhode-island');return false;" class="state-link">Rhode Island</a>
+        <a href="/?location=south-carolina" onclick="quickSearch('south-carolina');return false;" class="state-link">South Carolina</a>
+        <a href="/?location=south-dakota" onclick="quickSearch('south-dakota');return false;" class="state-link">South Dakota</a>
+        <a href="/?location=tennessee" onclick="quickSearch('tennessee');return false;" class="state-link">Tennessee</a>
+        <a href="/?location=texas" onclick="quickSearch('texas');return false;" class="state-link">Texas</a>
+        <a href="/?location=utah" onclick="quickSearch('utah');return false;" class="state-link">Utah</a>
+        <a href="/?location=vermont" onclick="quickSearch('vermont');return false;" class="state-link">Vermont</a>
+        <a href="/?location=virginia" onclick="quickSearch('virginia');return false;" class="state-link">Virginia</a>
+        <a href="/?location=washington" onclick="quickSearch('washington');return false;" class="state-link">Washington</a>
+        <a href="/?location=west-virginia" onclick="quickSearch('west-virginia');return false;" class="state-link">West Virginia</a>
+        <a href="/?location=wisconsin" onclick="quickSearch('wisconsin');return false;" class="state-link">Wisconsin</a>
+        <a href="/?location=wyoming" onclick="quickSearch('wyoming');return false;" class="state-link">Wyoming</a>
+    </div>
+</nav>
 
 <div class="search-section">
             <div class="search-grid">
@@ -1156,10 +1223,97 @@
             return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
         }
 
+        // ── SEO: URL / title / meta helpers ───────────────────────────────────────
+        function locLabel(loc) {
+            if (!loc) return '';
+            if (loc === 'national') return 'National';
+            if (loc === 'ipl-world') return 'IPL World';
+            return loc.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+        }
+
+        function generateTitle(params) {
+            const loc    = params.get('location');
+            const status = params.get('status');
+            const evt    = params.get('event');
+            const name   = params.get('name');
+            if (name) return `${name} — USPA Powerlifting Records`;
+            const parts = [];
+            if (loc)    parts.push(locLabel(loc));
+            if (status === 'drug-tested') parts.push('Drug Tested');
+            else if (status === 'non-tested') parts.push('Non-Tested');
+            if (evt)    parts.push(evt.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' '));
+            if (!parts.length) return 'USPA Powerlifting Records | Search All State & National Records';
+            return parts.join(' ') + ' USPA Powerlifting Records';
+        }
+
+        function generateDescription(params) {
+            const loc    = params.get('location');
+            const status = params.get('status');
+            const evt    = params.get('event');
+            const locStr = loc ? locLabel(loc) : 'all 50 states, national, and IPL world';
+            const stStr  = status === 'drug-tested' ? ' drug-tested' : status === 'non-tested' ? ' non-tested' : '';
+            const evtStr = evt ? ' ' + evt.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ').toLowerCase() : ' powerlifting';
+            return `Browse${stStr}${evtStr} USPA records for ${locStr} — squat, bench, deadlift, and total across all divisions and weight classes. Updated weekly.`;
+        }
+
+        function updatePageMeta(params) {
+            window.history.pushState({}, '', params.toString() ? `?${params}` : window.location.pathname);
+            document.title = generateTitle(params);
+            document.querySelector('meta[name="description"]').setAttribute('content', generateDescription(params));
+        }
+
+        function loadFromURLParams() {
+            const p = new URLSearchParams(window.location.search);
+            if (!p.toString()) return;
+            const loc  = p.get('location');
+            const evt  = p.get('event');
+            const div  = p.get('division');
+            const lift = p.get('lift');
+            const wc   = p.get('wc');
+            const name = p.get('name');
+            const stat = p.get('status');
+            const vac  = p.get('vacancies');
+            if (loc)  document.getElementById('location').value = loc;
+            if (evt)  document.getElementById('event').value = evt;
+            if (lift) document.getElementById('lift').value = lift;
+            if (wc)   document.getElementById('weightClass').value = wc;
+            if (name) document.getElementById('name').value = name;
+            if (vac)  document.getElementById('vacanciesOnly').checked = true;
+            if (div) {
+                const topMatch = Object.keys(SUB_DIVISIONS).find(k => div.toUpperCase().includes(k.toUpperCase()));
+                if (topMatch) {
+                    document.getElementById('division').value = topMatch;
+                    document.getElementById('division').dispatchEvent(new Event('change'));
+                    setTimeout(() => { document.getElementById('subDivision').value = div; }, 0);
+                } else {
+                    document.getElementById('division').value = div;
+                }
+            }
+            if (stat === 'drug-tested') {
+                document.getElementById('statusAll').checked = false;
+                document.getElementById('statusTested').checked = true;
+            } else if (stat === 'non-tested') {
+                document.getElementById('statusAll').checked = false;
+                document.getElementById('statusNonTested').checked = true;
+            }
+            document.title = generateTitle(p);
+            document.querySelector('meta[name="description"]').setAttribute('content', generateDescription(p));
+            searchRecords();
+        }
+
+        function quickSearch(loc) {
+            document.getElementById('location').value = loc;
+            document.getElementById('statusAll').checked = true;
+            document.getElementById('statusTested').checked = false;
+            document.getElementById('statusNonTested').checked = false;
+            searchRecords();
+        }
+
         // ── Setup ──────────────────────────────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', () => {
             setupStatusCheckboxes();
             setupDivisionFilter();
+            loadFromURLParams();
         });
 
         function setupDivisionFilter() {
@@ -1259,6 +1413,20 @@
                 } else if (statusNonTested && !statusTested) {
                     params.append('status', 'eq.non-tested');
                 }
+
+                // Update URL and page meta for SEO / shareability
+                const urlParams = new URLSearchParams();
+                if (location) urlParams.set('location', location);
+                if (event) urlParams.set('event', event);
+                if (subDivision) urlParams.set('division', subDivision);
+                else if (division) urlParams.set('division', division);
+                if (lift) urlParams.set('lift', lift);
+                if (weightClass) urlParams.set('wc', weightClass);
+                if (name && !vacanciesOnly) urlParams.set('name', name);
+                if (statusTested && !statusNonTested) urlParams.set('status', 'drug-tested');
+                else if (statusNonTested && !statusTested) urlParams.set('status', 'non-tested');
+                if (vacanciesOnly) urlParams.set('vacancies', '1');
+                updatePageMeta(urlParams);
 
                 const url = `${SUPABASE_URL}/rest/v1/uspa_records?${params.toString()}`;
                 const response = await fetch(url, { headers: API_HEADERS });
@@ -1655,6 +1823,9 @@
             document.getElementById('vacanciesOnly').checked = false;
             document.getElementById('results').innerHTML = '';
             document.getElementById('resultsHeader').style.display = 'none';
+            window.history.pushState({}, '', window.location.pathname);
+            document.title = 'USPA Powerlifting Records | Search All State & National Records';
+            document.querySelector('meta[name="description"]').setAttribute('content', 'Search every USPA powerlifting record — squat, bench, deadlift, and total — across all 50 states, national, and IPL world records. Filter by division, weight class, drug-tested status, and event. Updated weekly.');
         }
 
         document.addEventListener('keypress', e => {
