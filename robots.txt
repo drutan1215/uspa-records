@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://drutan1215.github.io/uspa-records/sitemap.xml
+Sitemap: https://www.usparecords.com/sitemap.xml
