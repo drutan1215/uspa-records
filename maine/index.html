@@ -5,22 +5,22 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USPA Powerlifting Records | Search All State & National Records</title>
-    <meta name="description" content="Search every USPA powerlifting record — squat, bench, deadlift, and total — across all 50 states, national, and IPL world records. Filter by division, weight class, drug-tested status, and event. Updated weekly.">
+    <title>Maine USPA Powerlifting Records | State Records Database</title>
+    <meta name="description" content="Browse all Maine USPA powerlifting state records — squat, bench, deadlift, and total across every division and weight class for drug-tested and non-tested lifters. Updated weekly.">
     <meta name="keywords" content="USPA records, USPA powerlifting records, USPA state records, USPA national records, powerlifting records search, drug tested powerlifting records, raw powerlifting records, classic powerlifting records, single ply powerlifting records, multi ply powerlifting records, USPA squat record, USPA bench record, USPA deadlift record, USPA total record, IPL world records, powerlifting divisions, open powerlifting, master powerlifting records">
     <meta name="robots" content="index, follow">
     <meta name="author" content="USPA Records Database">
-    <link rel="canonical" href="https://www.usparecords.com">
+    <link rel="canonical" href="https://www.usparecords.com/maine/">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
     <link rel="preconnect" href="https://cywrtxdppsxkdwlrehxu.supabase.co">
-    <meta property="og:title" content="USPA Powerlifting Records | Search All State & National Records">
-    <meta property="og:description" content="Search every USPA powerlifting record — squat, bench, deadlift, and total — across all 50 states, national, and IPL world records. Updated weekly.">
+    <meta property="og:title" content="Maine USPA Powerlifting Records | State Records Database">
+    <meta property="og:description" content="Browse all Maine USPA powerlifting state records — squat, bench, deadlift, and total across every division and weight class for drug-tested and non-tested lifters. Updated weekly.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.usparecords.com">
+    <meta property="og:url" content="https://www.usparecords.com/maine/">
     <meta property="og:image" content="https://www.usparecords.com/uspa medal.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="USPA Powerlifting Records | Search All State & National Records">
-    <meta name="twitter:description" content="Search every USPA powerlifting record — squat, bench, deadlift, and total — across all 50 states, national, and IPL world records. Updated weekly.">
+    <meta name="twitter:title" content="Maine USPA Powerlifting Records | State Records Database">
+    <meta name="twitter:description" content="Browse all Maine USPA powerlifting state records — squat, bench, deadlift, and total across every division and weight class for drug-tested and non-tested lifters. Updated weekly.">
     <meta name="twitter:image" content="https://www.usparecords.com/uspa medal.png">
     <style>  
         * {
@@ -844,7 +844,7 @@
         .state-link-special:hover { color: #ffffff; }
         @media (max-width: 768px) { .state-browse { padding: 14px 20px 18px !important; } }
     </style>
-    <link rel="icon" type="image/png" href="uspa medal.png">
+    <link rel="icon" type="image/png" href="/uspa medal.png">
     <script async defer src="https://app.visitortracking.com/assets/js/tracer.js" > </script>
     <script>
       function init_tracer() {
@@ -855,6 +855,7 @@
         });
       }
     </script>
+    <script>window._PRELOAD_LOCATION = "maine";</script>
 </head>
 <body>
     <div class="container">
@@ -1127,7 +1128,7 @@
 
     <script>
         // Load last updated date from file written by uspaupload.py
-        fetch('last_updated.txt').then(r => r.text()).then(t => {
+        fetch('/last_updated.txt').then(r => r.text()).then(t => {
             const el = document.getElementById('last-updated');
             if (el) el.textContent = 'Last Updated: ' + t.trim();
         }).catch(() => {
